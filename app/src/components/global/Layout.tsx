@@ -4,6 +4,7 @@ import { useCart } from '@/hooks/useCart';
 import AnnouncementBar from './AnnouncementBar';
 import Header from './Header';
 import CartDrawer from './CartDrawer';
+import ScrollProgress from '@/components/ScrollProgress';
 
 interface CartContextType {
   addItem: (productId: string, quantity: number, subscription: boolean) => void;
@@ -41,6 +42,7 @@ export default function Layout() {
       }}
     >
       <AnnouncementBar />
+      <ScrollProgress />
       <Header cartCount={cart.itemCount} onOpenCart={cart.openCart} />
       <CartDrawer
         isOpen={cart.isOpen}

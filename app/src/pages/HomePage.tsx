@@ -55,7 +55,7 @@ function CategoryPitchSection() {
             className="font-display mb-8"
             style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
           >
-            The world's first daily<br />foundational <em style={{ fontStyle: 'italic' }}>peptides.</em>
+            The world's first daily<br />foundational <span style={{ fontWeight: 600 }}>peptides.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -100,7 +100,7 @@ function DailyStackSection() {
             className="font-display mb-5"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
           >
-            Two peptides. One <em style={{ fontStyle: 'italic' }}>morning ritual.</em>
+            Two peptides. One <span style={{ fontWeight: 600 }}>morning ritual.</span>
           </h2>
           <p className="font-body max-w-xl mx-auto" style={{ fontSize: '16px', lineHeight: 1.65, color: 'var(--color-text-muted)' }}>
             Circulation and recovery — the two compounds your body uses every day to stay
@@ -229,7 +229,7 @@ function HeroSection() {
             </div>
 
             <h1 className="font-display mb-6" style={{ fontSize: 'clamp(2.75rem, 6vw, 4.5rem)', lineHeight: 1.05, letterSpacing: '-0.02em', color: 'var(--color-text)' }}>
-              Peptides.<br /><em style={{ fontStyle: 'italic', fontWeight: 600 }}>Now daily.</em>
+              Peptides.<br /><span style={{ fontWeight: 700 }}>Now daily.</span>
             </h1>
 
             <p className="font-body mb-8 max-w-md" style={{ fontSize: '17px', lineHeight: 1.6, color: 'var(--color-text-muted)' }}>

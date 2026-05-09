@@ -19,6 +19,8 @@ import {
 import StarRating from '@/components/StarRating';
 import ReviewCard from '@/components/ReviewCard';
 import COAModal from '@/components/COAModal';
+import Marquee from '@/components/Marquee';
+import AnimatedCounter from '@/components/AnimatedCounter';
 import Footer from '@/components/global/Footer';
 
 interface ProductDetailPageProps {
@@ -102,6 +104,57 @@ function buildBundles(price: number): Bundle[] {
     },
   ];
 }
+
+// Hero marquee — rolling claims/badges under hero. SpoiledChild + AG1 pattern.
+const MARQUEE_ITEMS: Record<string, string[]> = {
+  nattokinase: [
+    '10,800 FU CLINICAL DOSE',
+    '3RD-PARTY TESTED',
+    '99.9% PURITY',
+    'NSK-SD STRAIN',
+    '60-DAY GUARANTEE',
+    'MADE IN USA',
+    'SHIPS IN 24 HOURS',
+    'cGMP CERTIFIED',
+  ],
+  'bpc-157': [
+    '500 MCG ARGININE-BONDED',
+    'BIOPERINE ENHANCED',
+    '99.9% BIOAVAILABLE',
+    '3RD-PARTY TESTED',
+    '60-DAY GUARANTEE',
+    'MADE IN USA',
+    'SHIPS IN 24 HOURS',
+    'cGMP CERTIFIED',
+  ],
+};
+
+// Manifesto / signature claim — full-bleed color-flood section with one bold statement.
+// AG1 calls it "The next generation of foundational nutrition." Pattern is universal.
+const MANIFESTO: Record<string, { kicker: string; headline: string; emphasis: string; body: string; stats: { value: number; suffix: string; label: string }[] }> = {
+  nattokinase: {
+    kicker: 'The MEHR difference',
+    headline: 'Built for daily protection.',
+    emphasis: 'Not a one-time fix.',
+    body: "Most cardiovascular supplements are reactive — taken when something already feels wrong. MEHR Nattokinase is engineered for foundational, daily defense. The clinical dose. The right strain. The receipts to prove it.",
+    stats: [
+      { value: 10800, suffix: ' FU', label: 'Clinical dose per serving' },
+      { value: 4, suffix: 'x', label: 'Stronger than standard nattokinase' },
+      { value: 99.9, suffix: '%', label: 'Purity verified, every batch' },
+    ],
+  },
+  'bpc-157': {
+    kicker: 'The MEHR difference',
+    headline: 'Daily repair.',
+    emphasis: 'No needles. No clinic.',
+    body: 'Until now, BPC-157 meant injections from a peptide clinic. We engineered an oral form with arginine-salt bonding and BioPerine — a daily capsule with the bioavailability of an injection. Foundational recovery, made convenient.',
+    stats: [
+      { value: 500, suffix: ' mcg', label: 'Pharmaceutical-grade dose' },
+      { value: 99.9, suffix: '%', label: 'Bioavailability vs. injection' },
+      { value: 0, suffix: '', label: 'Needles required' },
+    ],
+  },
+};
 
 // "The hidden killer" / problem agitation — drives urgency before product info.
 type ChainStep = { n: string; title: string; body: string };
@@ -360,7 +413,7 @@ function Hero({
           <div>
             <div
               className="rounded-2xl overflow-hidden mb-4"
-              style={{ aspectRatio: '4/5', backgroundColor: 'var(--color-surface)' }}
+              style={{ aspectRatio: '1/1', backgroundColor: 'var(--color-surface)' }}
             >
               <img
                 src={product.gallery[selectedImg]}
@@ -479,7 +532,7 @@ function Hero({
                           )}
                         </div>
                         <div className="text-right">
-                          <p className="font-display tabular-nums" style={{ fontSize: '20px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
+                          <p className="font-display tabular-nums" style={{ fontSize: '20px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
                             ${displayPerBottle}
                           </p>
                           <p className="font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
@@ -520,7 +573,7 @@ function Hero({
               <button
                 onClick={handleAdd}
                 disabled={adding}
-                className="w-full py-4 px-6 rounded-lg font-body text-[15px] font-semibold uppercase tracking-[0.08em] transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3 mb-3"
+                className="btn-premium w-full py-4 px-6 rounded-lg font-body text-[15px] font-semibold uppercase tracking-[0.08em] transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3 mb-3"
                 style={{ backgroundColor: 'var(--color-text-strong)', color: 'var(--color-text-inverse)' }}
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -591,6 +644,131 @@ function Hero({
 }
 
 /* ─────────────────────────────────────────
+   1.5 Hero marquee — rolling claims ticker
+   ───────────────────────────────────────── */
+
+function HeroMarquee({ product, accent }: { product: Product; accent: { hex: string; soft: string; deep: string } }) {
+  const items = MARQUEE_ITEMS[product.slug] || [];
+  return (
+    <div
+      className="py-6 md:py-7 border-y"
+      style={{ backgroundColor: accent.deep, borderColor: 'rgba(255,255,255,0.08)' }}
+    >
+      <Marquee
+        speed={45}
+        items={items.map((label) => (
+          <span
+            key={label}
+            className="font-body font-semibold uppercase tracking-[0.18em] text-white"
+            style={{ fontSize: 'clamp(13px, 1.2vw, 15px)' }}
+          >
+            {label}
+          </span>
+        ))}
+        separator={
+          <span
+            className="inline-block w-1.5 h-1.5 rounded-full"
+            style={{ backgroundColor: accent.hex }}
+          />
+        }
+      />
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────
+   1.7 Manifesto — full-bleed signature claim
+   ───────────────────────────────────────── */
+
+function Manifesto({ product, accent }: { product: Product; accent: { hex: string; soft: string; deep: string } }) {
+  const data = MANIFESTO[product.slug];
+  if (!data) return null;
+
+  return (
+    <section
+      className="section-padding relative overflow-hidden"
+      style={{ backgroundColor: accent.hex, color: '#fff' }}
+    >
+      {/* Giant outline numeral as bg art */}
+      <div
+        className="absolute inset-0 pointer-events-none flex items-center justify-end opacity-[0.08]"
+        aria-hidden
+      >
+        <span
+          className="font-display text-outline pr-[4vw]"
+          style={{
+            fontSize: 'clamp(20rem, 50vw, 50rem)',
+            fontWeight: 700,
+            letterSpacing: '-0.05em',
+            lineHeight: 0.8,
+            color: '#fff',
+            WebkitTextStroke: '2px #fff',
+          }}
+        >
+          {product.slug === 'nattokinase' ? 'M' : 'M'}
+        </span>
+      </div>
+
+      <div className="container-main relative">
+        <Reveal>
+          <p className="font-body text-[11px] font-semibold uppercase tracking-[0.2em] mb-6 inline-flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-white" />
+            {data.kicker}
+          </p>
+          <h2
+            className="font-display max-w-4xl mb-8 text-balance"
+            style={{
+              fontSize: 'clamp(2.5rem, 5.5vw, 4.75rem)',
+              letterSpacing: '-0.035em',
+              lineHeight: 0.98,
+              fontWeight: 700,
+              color: '#fff',
+            }}
+          >
+            {data.headline}{' '}
+            <span style={{ opacity: 0.55 }}>{data.emphasis}</span>
+          </h2>
+          <p className="font-body max-w-2xl mb-12 md:mb-16" style={{ fontSize: 'clamp(15px, 1.3vw, 17px)', lineHeight: 1.65, color: 'rgba(255,255,255,0.85)' }}>
+            {data.body}
+          </p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 pt-10" style={{ borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+          {data.stats.map((stat, i) => (
+            <Reveal key={i} delay={i * 0.12}>
+              <div>
+                <p
+                  className="font-display tabular mb-2"
+                  style={{
+                    fontSize: 'clamp(3rem, 6vw, 5rem)',
+                    fontWeight: 700,
+                    letterSpacing: '-0.04em',
+                    lineHeight: 0.95,
+                    color: '#fff',
+                  }}
+                >
+                  <AnimatedCounter
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    decimals={Number.isInteger(stat.value) ? 0 : 1}
+                  />
+                </p>
+                <p
+                  className="font-body uppercase tracking-[0.15em]"
+                  style={{ fontSize: '11px', fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
    2. Problem agitation — chain reaction
    ───────────────────────────────────────── */
 
@@ -612,7 +790,7 @@ function ProblemAgitation({ product, accent }: { product: Product; accent: { hex
               style={{ fontSize: 'clamp(2rem, 4.2vw, 3.25rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
             >
               {data.headline}{' '}
-              <em style={{ fontStyle: 'italic', color: accent.hex }}>{data.emphasis}</em>
+              <span style={{ color: accent.hex, fontWeight: 600 }}>{data.emphasis}</span>
             </h2>
             <p className="font-body" style={{ fontSize: '17px', lineHeight: 1.65, color: 'var(--color-text-secondary)' }}>
               {data.body}
@@ -636,7 +814,7 @@ function ProblemAgitation({ product, accent }: { product: Product; accent: { hex
                     >
                       {step.n}
                     </span>
-                    <span className="flex-1 font-display" style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', fontWeight: 500, color: isOpen ? accent.hex : 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                    <span className="flex-1 font-display" style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', fontWeight: 600, color: isOpen ? accent.hex : 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
                       {step.title}
                     </span>
                     <span className="flex-shrink-0 mt-1.5">
@@ -698,11 +876,11 @@ function ClinicalEffects({ product, accent }: { product: Product; accent: { hex:
                 className="font-display"
                 style={{ fontSize: 'clamp(1.875rem, 3.8vw, 3rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
               >
-                What {product.name} <em style={{ fontStyle: 'italic' }}>does.</em>
+                What {product.name} <span style={{ fontWeight: 600 }}>does.</span>
               </h2>
             </div>
             <p className="font-body text-[12px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--color-text-muted)' }}>
-              <span className="font-display tabular-nums" style={{ fontSize: '32px', color: 'var(--color-text-strong)', marginRight: '12px', fontWeight: 500 }}>06</span>
+              <span className="font-display tabular-nums" style={{ fontSize: '32px', color: 'var(--color-text-strong)', marginRight: '12px', fontWeight: 600 }}>06</span>
               Clinical effects
             </p>
           </div>
@@ -725,7 +903,7 @@ function ClinicalEffects({ product, accent }: { product: Product; accent: { hex:
                     {eff.category}
                   </span>
                 </div>
-                <h3 className="font-display mb-3" style={{ fontSize: '22px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                <h3 className="font-display mb-3" style={{ fontSize: '22px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
                   {eff.title}
                 </h3>
                 <p className="font-body text-[14px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.65 }}>
@@ -749,80 +927,92 @@ function Mechanism({ product, accent }: { product: Product; accent: { hex: strin
   if (!data) return null;
 
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="container-main">
-        <Reveal className="max-w-3xl mb-12 md:mb-16">
-          <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: accent.hex }}>
+    <section
+      className="section-padding relative overflow-hidden"
+      style={{ backgroundColor: accent.deep, color: '#fff' }}
+    >
+      {/* Radial backlight */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse at 20% 20%, ${accent.hex}40 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, ${accent.hex}25 0%, transparent 50%)`,
+        }}
+      />
+
+      <div className="container-main relative">
+        <Reveal className="max-w-3xl mb-14 md:mb-20">
+          <p className="font-body text-[11px] font-semibold uppercase tracking-[0.2em] mb-5 inline-flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-white" />
             {data.eyebrow}
           </p>
           <h2
-            className="font-display mb-5"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
+            className="font-display mb-6 text-balance"
+            style={{
+              fontSize: 'clamp(2.25rem, 5vw, 4rem)',
+              letterSpacing: '-0.035em',
+              lineHeight: 0.98,
+              fontWeight: 700,
+              color: '#fff',
+            }}
           >
             {data.headline}{' '}
-            <em style={{ fontStyle: 'italic', color: accent.hex }}>{data.emphasis}</em>
+            <span style={{ opacity: 0.6 }}>{data.emphasis}</span>
           </h2>
-          <p className="font-body" style={{ fontSize: '17px', lineHeight: 1.65, color: 'var(--color-text-secondary)' }}>
+          <p className="font-body" style={{ fontSize: 'clamp(15px, 1.3vw, 17px)', lineHeight: 1.65, color: 'rgba(255,255,255,0.85)', maxWidth: '52ch' }}>
             {data.body}
           </p>
         </Reveal>
 
-        <div className="space-y-12 md:space-y-20">
+        <div className="space-y-20 md:space-y-32">
           {data.events.map((ev, i) => (
             <Reveal key={ev.n} delay={i * 0.1}>
-              <div className={`grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center`}>
-                {/* Visual block — big number on accent-deep background */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+                {/* Big outline numeral as art */}
                 <div className={`md:col-span-5 ${i % 2 === 1 ? 'md:order-2' : ''}`}>
-                  <div
-                    className="rounded-2xl flex flex-col justify-end p-7 md:p-9 relative overflow-hidden"
-                    style={{ aspectRatio: '4/5', backgroundColor: accent.deep, color: '#fff' }}
-                  >
-                    {/* radial backlight effect */}
-                    <div
-                      className="absolute inset-0"
+                  <div className="relative">
+                    <span
+                      className="font-display block text-outline"
                       style={{
-                        background: `radial-gradient(ellipse at 50% 30%, ${accent.hex}55 0%, transparent 65%)`,
+                        fontSize: 'clamp(12rem, 28vw, 24rem)',
+                        fontWeight: 700,
+                        letterSpacing: '-0.05em',
+                        lineHeight: 0.85,
+                        WebkitTextStroke: '2px rgba(255,255,255,0.5)',
+                        color: 'transparent',
                       }}
-                    />
-                    <div className="relative">
-                      <span
-                        className="font-display block"
-                        style={{
-                          fontSize: 'clamp(5rem, 10vw, 9rem)',
-                          fontWeight: 300,
-                          letterSpacing: '-0.04em',
-                          lineHeight: 0.85,
-                          color: '#fff',
-                          opacity: 0.95,
-                        }}
-                      >
-                        {ev.n}
-                      </span>
-                      <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mt-6 opacity-70">
-                        Fig {ev.n} · {product.slug === 'nattokinase' ? 'Restored arterial flow' : 'Tissue repair signal'}
-                      </p>
-                    </div>
+                    >
+                      {ev.n}
+                    </span>
+                    <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] -mt-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                      Fig {ev.n} · {product.slug === 'nattokinase' ? 'Restored arterial flow' : 'Tissue repair signal'}
+                    </p>
                   </div>
                 </div>
 
                 {/* Copy block */}
                 <div className={`md:col-span-7 ${i % 2 === 1 ? 'md:order-1' : ''}`}>
-                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-4 inline-flex items-center gap-2" style={{ color: accent.hex }}>
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accent.hex }} />
+                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.2em] mb-5 inline-flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
+                    <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#fff' }} />
                     {ev.when}
                   </p>
                   <h3
-                    className="font-display mb-5"
-                    style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.5rem)', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.02em', lineHeight: 1.1 }}
+                    className="font-display mb-6 text-balance"
+                    style={{
+                      fontSize: 'clamp(1.75rem, 3.2vw, 2.75rem)',
+                      fontWeight: 700,
+                      letterSpacing: '-0.02em',
+                      lineHeight: 1.05,
+                      color: '#fff',
+                    }}
                   >
                     {ev.title}{' '}
-                    <em style={{ fontStyle: 'italic', color: accent.hex }}>{ev.emphasis}</em>
+                    <span style={{ opacity: 0.55 }}>{ev.emphasis}</span>
                   </h3>
-                  <p className="font-body mb-5" style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
+                  <p className="font-body mb-6" style={{ fontSize: '16px', lineHeight: 1.7, color: 'rgba(255,255,255,0.85)', maxWidth: '52ch' }}>
                     {ev.body}
                   </p>
-                  <p className="font-body text-[12px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.55 }}>
-                    <span className="font-semibold" style={{ color: 'var(--color-text)' }}>Source:</span> {ev.source}
+                  <p className="font-body text-[12px]" style={{ color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, maxWidth: '52ch' }}>
+                    <span className="font-semibold" style={{ color: 'rgba(255,255,255,0.9)' }}>Source:</span> {ev.source}
                   </p>
                 </div>
               </div>
@@ -861,7 +1051,7 @@ function Transformation({ product, accent }: { product: Product; accent: { hex: 
             style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
           >
             {data.headline}{' '}
-            <em style={{ fontStyle: 'italic', color: accent.hex }}>{data.emphasis}</em>
+            <span style={{ color: accent.hex, fontWeight: 600 }}>{data.emphasis}</span>
           </h2>
           <p className="font-body" style={{ fontSize: '16px', lineHeight: 1.65, color: 'var(--color-text-muted)' }}>
             {data.body}
@@ -890,7 +1080,7 @@ function Transformation({ product, accent }: { product: Product; accent: { hex: 
                   <div className="p-7 md:p-8 flex-1 flex flex-col">
                     <h3
                       className="font-display mb-5"
-                      style={{ fontSize: '24px', fontWeight: 500, color: stage.state === 'healed' ? accent.hex : 'var(--color-text-strong)', letterSpacing: '-0.01em' }}
+                      style={{ fontSize: '24px', fontWeight: 600, color: stage.state === 'healed' ? accent.hex : 'var(--color-text-strong)', letterSpacing: '-0.01em' }}
                     >
                       {stage.title}
                     </h3>
@@ -950,7 +1140,7 @@ function ClinicalOutcomes({ product, accent }: { product: Product; accent: { hex
             style={{ fontSize: 'clamp(2rem, 4.2vw, 3.25rem)', letterSpacing: '-0.025em', lineHeight: 1.05, color: 'var(--color-text-strong)' }}
           >
             {data.headline}{' '}
-            <em style={{ fontStyle: 'italic', color: accent.hex }}>{data.emphasis}</em>
+            <span style={{ color: accent.hex, fontWeight: 600 }}>{data.emphasis}</span>
           </h2>
           <p className="font-body" style={{ fontSize: '16px', lineHeight: 1.65, color: 'var(--color-text-secondary)' }}>
             {data.body}
@@ -969,20 +1159,24 @@ function ClinicalOutcomes({ product, accent }: { product: Product; accent: { hex
                 style={{ background: `radial-gradient(ellipse at 30% 20%, ${accent.hex}55 0%, transparent 70%)` }}
               />
               <div className="relative">
-                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-6 opacity-70 inline-flex items-center gap-2">
+                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-6 inline-flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.7)' }}>
                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#fff' }} />
                   Lead outcome
                 </p>
                 <p
-                  className="font-display tabular-nums mb-3"
-                  style={{ fontSize: 'clamp(4rem, 9vw, 7.5rem)', fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 0.9 }}
+                  className="font-display tabular mb-3"
+                  style={{ fontSize: 'clamp(4rem, 9vw, 7.5rem)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 0.9, color: '#fff' }}
                 >
-                  {data.lead.percent}
+                  <AnimatedCounter
+                    value={parseFloat(data.lead.percent)}
+                    suffix={data.lead.percent.replace(/[\d.]/g, '')}
+                    decimals={data.lead.percent.includes('.') ? 1 : 0}
+                  />
                 </p>
-                <h3 className="font-display mb-4" style={{ fontSize: '24px', fontWeight: 500, letterSpacing: '-0.01em' }}>
+                <h3 className="font-display mb-4" style={{ fontSize: '24px', fontWeight: 600, letterSpacing: '-0.01em', color: '#fff' }}>
                   {data.lead.label}
                 </h3>
-                <p className="font-body max-w-md" style={{ fontSize: '14px', lineHeight: 1.65, opacity: 0.85 }}>
+                <p className="font-body max-w-md" style={{ fontSize: '14px', lineHeight: 1.65, color: 'rgba(255,255,255,0.85)' }}>
                   {data.lead.body}
                 </p>
               </div>
@@ -996,17 +1190,21 @@ function ClinicalOutcomes({ product, accent }: { product: Product; accent: { hex
                 <div className="p-7 rounded-xl h-full flex" style={{ backgroundColor: 'var(--color-bg-soft)', border: '1px solid var(--color-border)' }}>
                   <div className="flex-shrink-0 mr-5">
                     <p
-                      className="font-display tabular-nums"
-                      style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 500, color: accent.hex, letterSpacing: '-0.02em', lineHeight: 1 }}
+                      className="font-display tabular"
+                      style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 700, color: accent.hex, letterSpacing: '-0.02em', lineHeight: 1 }}
                     >
-                      {s.percent}
+                      <AnimatedCounter
+                        value={parseFloat(s.percent)}
+                        suffix={s.percent.replace(/[\d.]/g, '')}
+                        decimals={s.percent.includes('.') ? 1 : 0}
+                      />
                     </p>
                   </div>
                   <div className="flex-1">
                     <p className="font-body text-[11px] font-semibold tabular-nums mb-1" style={{ color: 'var(--color-text-subtle)' }}>
                       Outcome {s.n}
                     </p>
-                    <h4 className="font-display mb-2" style={{ fontSize: '17px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                    <h4 className="font-display mb-2" style={{ fontSize: '17px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
                       {s.title}
                     </h4>
                     <p className="font-body text-[13px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.55 }}>
@@ -1041,7 +1239,7 @@ function Ingredients({ product, accent }: { product: Product; accent: { hex: str
             className="font-display"
             style={{ fontSize: 'clamp(1.875rem, 3.8vw, 3rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
           >
-            Nothing you didn't <em style={{ fontStyle: 'italic' }}>ask for.</em>
+            Nothing you didn't <span style={{ fontWeight: 600 }}>ask for.</span>
           </h2>
         </Reveal>
 
@@ -1049,7 +1247,7 @@ function Ingredients({ product, accent }: { product: Product; accent: { hex: str
           <Reveal>
             <div className="p-7 md:p-9 rounded-xl h-full" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
               <div className="h-1 w-12 mb-5" style={{ backgroundColor: accent.hex }} />
-              <h3 className="font-display mb-1" style={{ fontSize: '22px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
+              <h3 className="font-display mb-1" style={{ fontSize: '22px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
                 {primary.name}
               </h3>
               <p className="font-body text-[13px] mb-5" style={{ color: 'var(--color-text-muted)' }}>
@@ -1146,7 +1344,7 @@ function Receipts({ product, accent }: { product: Product; accent: { hex: string
             The receipts
           </p>
           <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', letterSpacing: '-0.02em', lineHeight: 1.15, color: 'var(--color-text-strong)' }}>
-            Nothing to <em style={{ fontStyle: 'italic' }}>hide.</em>
+            Nothing to <span style={{ fontWeight: 600 }}>hide.</span>
           </h2>
         </Reveal>
 
@@ -1155,7 +1353,7 @@ function Receipts({ product, accent }: { product: Product; accent: { hex: string
             <Reveal key={item.title} delay={idx * 0.08}>
               <div className="p-7 rounded-xl h-full" style={{ backgroundColor: 'var(--color-bg-soft)', border: '1px solid var(--color-border)' }}>
                 <div className="h-1 w-10 mb-5" style={{ backgroundColor: accent.hex }} />
-                <h3 className="font-display mb-3" style={{ fontSize: '19px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
+                <h3 className="font-display mb-3" style={{ fontSize: '19px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
                   {item.title}
                 </h3>
                 <p className="font-body text-[14px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.65 }}>
@@ -1199,7 +1397,7 @@ function Directions({ product, accent }: { product: Product; accent: { hex: stri
             className="font-display mb-8"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
           >
-            {dosePhrase} With breakfast. <em style={{ fontStyle: 'italic' }}>Daily.</em>
+            {dosePhrase} With breakfast. <span style={{ fontWeight: 600 }}>Daily.</span>
           </h2>
           <p className="font-body" style={{ fontSize: '16px', lineHeight: 1.65, color: 'var(--color-text-muted)' }}>
             {product.howToUse}
@@ -1223,7 +1421,7 @@ function Comparison({ product, accent }: { product: Product; accent: { hex: stri
             How we compare
           </p>
           <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', letterSpacing: '-0.02em', lineHeight: 1.15, color: 'var(--color-text-strong)' }}>
-            MEHR vs. <em style={{ fontStyle: 'italic' }}>everything else.</em>
+            MEHR vs. <span style={{ fontWeight: 600 }}>everything else.</span>
           </h2>
         </Reveal>
 
@@ -1287,21 +1485,21 @@ function Guarantee({ accent }: { accent: { hex: string; soft: string; deep: stri
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-7">
             <Reveal>
-              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 opacity-70 inline-flex items-center gap-2">
+              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 inline-flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#fff' }} />
                 Our promise · 60-day guarantee
               </p>
               <h2
                 className="font-display mb-6"
-                style={{ fontSize: 'clamp(2rem, 4.4vw, 3.5rem)', letterSpacing: '-0.025em', lineHeight: 1.1 }}
+                style={{ fontSize: 'clamp(2rem, 4.4vw, 3.5rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: '#fff' }}
               >
                 Your purchase is protected by our{' '}
-                <em style={{ fontStyle: 'italic', backgroundColor: accent.hex, padding: '0 0.25em', borderRadius: '4px' }}>60-day money-back guarantee</em>.
+                <span style={{ backgroundColor: accent.hex, padding: '0.05em 0.3em', borderRadius: '4px', fontWeight: 600 }}>60-day money-back guarantee</span>.
               </h2>
-              <p className="font-body mb-3" style={{ fontSize: '17px', lineHeight: 1.7, opacity: 0.85 }}>
+              <p className="font-body mb-3" style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.85)' }}>
                 If you don't feel a measurable change in your blood pressure, your energy, or your peace of mind in 60 days — send the bottle back. <strong style={{ color: '#fff' }}>Even if it's empty.</strong>
               </p>
-              <p className="font-body" style={{ fontSize: '15px', lineHeight: 1.7, opacity: 0.7 }}>
+              <p className="font-body" style={{ fontSize: '15px', lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
                 We'll refund every dollar. No forms. No phone calls you don't want to make. No proving-you-tried-it questions.
               </p>
             </Reveal>
@@ -1319,12 +1517,12 @@ function Guarantee({ accent }: { accent: { hex: string; soft: string; deep: stri
                   className="rounded-xl p-5 md:p-6 flex items-start gap-4"
                   style={{ backgroundColor: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
                 >
-                  <span className="font-body text-[12px] font-semibold tabular-nums opacity-60 mt-0.5">{c.n}</span>
+                  <span className="font-body text-[12px] font-semibold tabular-nums mt-0.5" style={{ color: 'rgba(255,255,255,0.6)' }}>{c.n}</span>
                   <div>
                     <p className="font-body text-[11px] font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: '#fff' }}>
                       {c.kicker}
                     </p>
-                    <p className="font-body text-[14px]" style={{ opacity: 0.8, lineHeight: 1.55 }}>
+                    <p className="font-body text-[14px]" style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.55 }}>
                       {c.body}
                     </p>
                   </div>
@@ -1354,12 +1552,12 @@ function Reviews({ product }: { product: Product }) {
           </p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <h2 className="font-display" style={{ fontSize: 'clamp(1.875rem, 3.8vw, 3rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}>
-              It helps. Hear from <em style={{ fontStyle: 'italic' }}>real users.</em>
+              It helps. Hear from <span style={{ fontWeight: 600 }}>real users.</span>
             </h2>
             <div className="flex items-baseline gap-3">
               <span
                 className="font-display tabular-nums"
-                style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.02em', lineHeight: 1 }}
+                style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.02em', lineHeight: 1 }}
               >
                 {avg.toFixed(1)}
               </span>
@@ -1402,7 +1600,7 @@ function FAQ({ product, accent }: { product: Product; accent: { hex: string; sof
             Common questions
           </p>
           <h2 className="font-display" style={{ fontSize: 'clamp(1.875rem, 3.8vw, 3rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}>
-            Frequently <em style={{ fontStyle: 'italic' }}>asked.</em>
+            Frequently <span style={{ fontWeight: 600 }}>asked.</span>
           </h2>
         </Reveal>
 
@@ -1471,7 +1669,7 @@ function Related({ product }: { product: Product }) {
             The full ritual
           </p>
           <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', letterSpacing: '-0.025em', lineHeight: 1.15, color: 'var(--color-text-strong)' }}>
-            Complete your daily <em style={{ fontStyle: 'italic' }}>stack.</em>
+            Complete your daily <span style={{ fontWeight: 600 }}>stack.</span>
           </h2>
         </Reveal>
 
@@ -1481,19 +1679,19 @@ function Related({ product }: { product: Product }) {
             className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-10 p-6 md:p-10 rounded-2xl items-center transition-all hover:shadow-md"
             style={{ backgroundColor: relatedAccent.soft, border: `1px solid ${relatedAccent.hex}20` }}
           >
-            <div className="md:col-span-2 rounded-xl overflow-hidden" style={{ aspectRatio: '4/5', backgroundColor: 'var(--color-surface)' }}>
+            <div className="md:col-span-2 rounded-xl overflow-hidden" style={{ aspectRatio: '1/1', backgroundColor: 'var(--color-surface)' }}>
               <img src={related.image} alt={related.name} className="w-full h-full object-cover" />
             </div>
             <div className="md:col-span-3">
               <div className="h-1 w-12 mb-4" style={{ backgroundColor: relatedAccent.hex }} />
-              <h3 className="font-display mb-2" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.15 }}>
+              <h3 className="font-display mb-2" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.15 }}>
                 {related.name}
               </h3>
               <p className="font-body text-[15px] mb-5" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
                 {related.tagline}
               </p>
               <div className="flex items-center gap-4">
-                <span className="font-display" style={{ fontSize: '20px', fontWeight: 500, color: 'var(--color-text-strong)' }}>
+                <span className="font-display" style={{ fontSize: '20px', fontWeight: 600, color: 'var(--color-text-strong)' }}>
                   ${related.price}
                 </span>
                 <span className="inline-flex items-center gap-1.5 font-body text-[13px] font-medium" style={{ color: relatedAccent.hex }}>
@@ -1523,7 +1721,7 @@ function StickyMobileBar({ product, onAddToCart }: { product: Product; onAddToCa
       <div className="flex items-center gap-3">
         <div className="flex-1">
           <p className="font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>{product.name}</p>
-          <p className="font-display" style={{ fontSize: '18px', fontWeight: 500, color: 'var(--color-text-strong)' }}>${product.price}</p>
+          <p className="font-display" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--color-text-strong)' }}>${product.price}</p>
         </div>
         <button
           onClick={() => {
@@ -1566,8 +1764,10 @@ export default function ProductDetailPage({ onAddToCart }: ProductDetailPageProp
   return (
     <div className="pb-24 lg:pb-0">
       <Hero product={product} accent={accent} onAddToCart={onAddToCart} />
+      <HeroMarquee product={product} accent={accent} />
       <ProblemAgitation product={product} accent={accent} />
       <ClinicalEffects product={product} accent={accent} />
+      <Manifesto product={product} accent={accent} />
       <Mechanism product={product} accent={accent} />
       <Transformation product={product} accent={accent} />
       <ClinicalOutcomes product={product} accent={accent} />

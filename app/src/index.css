@@ -34,7 +34,7 @@
     --color-product-bpc-soft: #F2F4FA;
 
     /* ── Font Tokens ─────────────────────────────────────────── */
-    --font-display: 'Fraunces', 'Georgia', serif;
+    --font-display: 'Space Grotesk', 'Inter', sans-serif;
     --font-body: 'Inter', 'Helvetica Neue', sans-serif;
 
     /* ── Radius Tokens ───────────────────────────────────────── */
@@ -101,9 +101,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
     color: var(--color-text);
   }
 
@@ -263,5 +263,84 @@
 @layer utilities {
   .transition-smooth {
     transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ── Marquee ticker — used by Marquee component ─────────── */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+
+  /* ── Magnetic / premium CTA ────────────────────────────── */
+  .btn-premium {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: -1;
+  }
+  .btn-premium:hover::before {
+    transform: translateY(0);
+  }
+
+  /* ── Scroll progress bar — fixed top ───────────────────── */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--color-accent);
+    z-index: 100;
+    transition: width 0.05s linear;
+    pointer-events: none;
+  }
+
+  /* ── Outline / "ghost" giant numerals — AG1 backdrop trick ─ */
+  .text-outline {
+    -webkit-text-stroke: 1.5px currentColor;
+    color: transparent;
+  }
+
+  /* ── Premium link underline that grows on hover ────────── */
+  .link-grow {
+    position: relative;
+    display: inline-block;
+  }
+  .link-grow::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-grow:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* ── Subtle text-balance for headlines ──────────────────── */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* ── Tabular nums for stats ─────────────────────────────── */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
   }
 }

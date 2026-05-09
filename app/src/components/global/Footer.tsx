@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="mb-16 md:mb-20 pb-16 md:pb-20" style={{ borderBottom: '1px solid var(--color-border)' }}>
           <div className="max-w-2xl mx-auto text-center">
             <p
-              className="font-display italic mb-6"
+              className="font-display mb-6"
               style={{ fontSize: 'clamp(1.125rem, 2vw, 1.375rem)', lineHeight: 1.5, color: 'var(--color-text)' }}
             >
               &ldquo;{site.founderStoryShort}&rdquo;
@@ -58,7 +58,7 @@ export default function Footer() {
             style={{ filter: 'brightness(0)' }}
             draggable={false}
           />
-          <p className="font-body italic" style={{ fontSize: '14px', color: 'var(--color-text-muted)', maxWidth: '420px' }}>
+          <p className="font-body" style={{ fontSize: '14px', color: 'var(--color-text-muted)', maxWidth: '420px' }}>
             {site.brand.tagline}
           </p>
         </div>
