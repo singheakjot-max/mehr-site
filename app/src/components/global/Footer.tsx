@@ -53,7 +53,7 @@ export default function Footer() {
         <div className="mb-12 pb-12" style={{ borderBottom: '1px solid var(--color-border)' }}>
           <img
             src="/images/logo/mehr-logo.png"
-            alt="mehr"
+            alt="MEHR"
             className="h-8 md:h-10 w-auto select-none mb-3"
             style={{ filter: 'brightness(0)' }}
             draggable={false}

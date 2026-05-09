@@ -135,7 +135,7 @@ function DailyStackSection() {
                       {role}
                     </p>
                     <h3 className="font-display mb-1" style={{ fontSize: '20px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-                      {product.name.replace('mehr ', '')}
+                      {product.name.replace('MEHR ', '')}
                     </h3>
                     <p className="font-display mb-3" style={{ fontSize: '24px', fontWeight: 500, color: accent, letterSpacing: '-0.01em' }}>
                       {stat}
@@ -266,13 +266,13 @@ function HeroSection() {
               >
                 <img
                   src="/images/bpc/bpc_front_bottle.webp"
-                  alt="mehr BPC-157 — premium frosted blue glass bottle with silver foil label, hero product photography"
+                  alt="MEHR BPC-157 — premium frosted blue glass bottle with silver foil label, hero product photography"
                   className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
               <div className="mt-4 text-center">
                 <p className="font-display" style={{ fontSize: '16px', color: 'var(--color-text)' }}>
-                  mehr BPC-157
+                  MEHR BPC-157
                 </p>
                 <p className="font-body" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>
                   From $74.00/mo
@@ -328,7 +328,7 @@ function WhyUsSection() {
   return (
     <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
       <div className="container-main">
-        <SectionLabel label="Why mehr" />
+        <SectionLabel label="Why MEHR" />
         <motion.div
           className="grid md:grid-cols-3 gap-8 md:gap-12"
           variants={staggerContainer}

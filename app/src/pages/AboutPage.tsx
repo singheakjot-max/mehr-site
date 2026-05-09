@@ -101,12 +101,12 @@ export default function AboutPage() {
             </div>
             <div>
               <p className="font-body mb-4" style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
-                mehr was started by a founder who refused to accept that peptides
+                MEHR was started by a founder who refused to accept that peptides
                 — among the most-studied compounds in modern human biology — should remain locked
                 behind biohacker forums and sketchy international suppliers.
               </p>
               <p className="font-body" style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
-                Today, mehr is on a mission to put pharmaceutical-grade peptides next to the multivitamin —
+                Today, MEHR is on a mission to put pharmaceutical-grade peptides next to the multivitamin —
                 clinically dosed, third-party tested, manufactured in the USA, and shipped within 24 hours.
                 Every formula starts with the literature. Every batch is verified. Every label prints the truth.
               </p>

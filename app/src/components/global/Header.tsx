@@ -55,7 +55,7 @@ export default function Header({ cartCount, onOpenCart }: HeaderProps) {
         >
           <img
             src="/images/logo/mehr-logo.png"
-            alt="mehr"
+            alt="MEHR"
             className="h-5 md:h-6 w-auto select-none"
             style={{ filter: 'brightness(0)' }}
             draggable={false}

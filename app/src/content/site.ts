@@ -2,7 +2,7 @@ import type { SiteConfig } from '@/types';
 
 export const site: SiteConfig = {
   brand: {
-    name: 'mehr',
+    name: 'MEHR',
     tagline: 'Daily peptides. Foundational health.',
     founderName: 'Sahej K.',
     founderTitle: 'Founder',
@@ -69,15 +69,15 @@ export const site: SiteConfig = {
   ],
 
   founderStoryShort:
-    'I started mehr because peptides shouldn\'t be locked behind a biohacker subreddit. They should be on every kitchen counter, next to the multivitamin. We make pharmaceutical-grade peptides as easy to take as a daily vitamin — clinically dosed, lab-tested, and shipped from the USA in 24 hours. No proprietary blends. No marketing fluff. Just the foundational compounds your body actually uses, delivered with the same rigor as a prescription.',
+    'I started MEHR because peptides shouldn\'t be locked behind a biohacker subreddit. They should be on every kitchen counter, next to the multivitamin. We make pharmaceutical-grade peptides as easy to take as a daily vitamin — clinically dosed, lab-tested, and shipped from the USA in 24 hours. No proprietary blends. No marketing fluff. Just the foundational compounds your body actually uses, delivered with the same rigor as a prescription.',
 
-  founderStory: `I started mehr because peptides shouldn't be locked behind a biohacker subreddit. They should be on every kitchen counter, next to the multivitamin.
+  founderStory: `I started MEHR because peptides shouldn't be locked behind a biohacker subreddit. They should be on every kitchen counter, next to the multivitamin.
 
 For decades, peptides have been stuck in two worlds: research labs and underground biohacking forums. The science was overwhelming. The dosing was guesswork. The sourcing was suspect. To get them, you either had to know somebody, or trust a sketchy website that shipped from a country you'd never heard of.
 
 That's not how foundational health works. Vitamins didn't become a daily ritual because they were exclusive — they became a daily ritual because somebody made them simple, safe, and accessible.
 
-mehr is that for peptides.
+MEHR is that for peptides.
 
 Every formula starts with one question: what does the human body actually need to repair, recover, and stay resilient? Not what's trending. Not what's marketable. What's foundational.
 
@@ -89,13 +89,13 @@ We make peptides for people who take their health seriously enough to read the l
 
 If you want to ask me anything — about a formula, an ingredient, a study, an order — my email is below. I read every message.
 
-Welcome to mehr.`,
+Welcome to MEHR.`,
 
   products: [
     {
       id: 'nattokinase',
       slug: 'nattokinase',
-      name: 'mehr Nattokinase',
+      name: 'MEHR Nattokinase',
       tagline: 'Foundational circulatory support, made daily.',
       description:
         'A clinical-dose nattokinase capsule for daily cardiovascular foundation. Fermented from non-GMO soybeans, standardized to 10,800 FU per serving — over 5x the dose of typical supplements. Built to support healthy circulation, blood pressure, and the kind of cardiovascular resilience that compounds over decades.',
@@ -180,7 +180,7 @@ Welcome to mehr.`,
           rating: 5,
           date: 'February 9, 2026',
           title: 'The dose is the difference',
-          body: 'I tried two other nattokinase brands before this — both 2,000 FU. Felt nothing. Tried mehr at 10,800 FU and within 3 weeks I felt different — less afternoon fatigue, less heaviness in legs at the end of long days. The dose actually matters.',
+          body: 'I tried two other nattokinase brands before this — both 2,000 FU. Felt nothing. Tried MEHR at 10,800 FU and within 3 weeks I felt different — less afternoon fatigue, less heaviness in legs at the end of long days. The dose actually matters.',
           verified: true,
           helpful: 156,
           productSlug: 'nattokinase',
@@ -224,7 +224,7 @@ Welcome to mehr.`,
       ],
       relatedSlugs: ['bpc-157'],
       faqIds: ['shipping-1', 'returns-1', 'natto-1', 'natto-2', 'natto-3', 'sub-1', 'sub-2'],
-      metaTitle: 'mehr Nattokinase — 10,800 FU Clinical Dose for Daily Circulation',
+      metaTitle: 'MEHR Nattokinase — 10,800 FU Clinical Dose for Daily Circulation',
       metaDescription:
         'Foundational circulatory support, made daily. 10,800 FU per serving — over 5x the dose of typical brands. Made in USA, lab tested, 60-day guarantee.',
       schemaSku: 'MEHR-NATTO-60',
@@ -233,7 +233,7 @@ Welcome to mehr.`,
     {
       id: 'bpc-157',
       slug: 'bpc-157',
-      name: 'mehr BPC-157',
+      name: 'MEHR BPC-157',
       tagline: "World's first daily foundational recovery oral peptide.",
       description:
         'A pharmaceutical-grade BPC-157 oral capsule, BioPerine-enhanced for absorption. Designed to deliver the recovery benefits peptides are known for — gut lining repair, joint resilience, tissue healing — without the needles, the cold chain, or the sketchy sourcing. 500mcg per capsule. 99.9% purity. Made in the USA.',
@@ -316,7 +316,7 @@ Welcome to mehr.`,
           rating: 5,
           date: 'March 8, 2026',
           title: 'Healed my gut after a year of misery',
-          body: 'I had a flare of gastritis last year that turned into a year of bloating, food sensitivities, and constant low-grade nausea. Tried elimination diets, PPIs, probiotics. After 4 weeks on mehr BPC-157 the symptoms started fading. Eight weeks in I\'m eating normally for the first time in a year. I\'m not exaggerating, this changed my life.',
+          body: 'I had a flare of gastritis last year that turned into a year of bloating, food sensitivities, and constant low-grade nausea. Tried elimination diets, PPIs, probiotics. After 4 weeks on MEHR BPC-157 the symptoms started fading. Eight weeks in I\'m eating normally for the first time in a year. I\'m not exaggerating, this changed my life.',
           verified: true,
           helpful: 567,
           productSlug: 'bpc-157',
@@ -340,7 +340,7 @@ Welcome to mehr.`,
           rating: 5,
           date: 'February 5, 2026',
           title: 'Post-surgery recovery, doctor was impressed',
-          body: 'I had ACL reconstruction in November. Asked my surgeon about peptides for recovery. He was skeptical but said BPC-157 was the one with the most legit research. Started mehr 3 weeks post-op. My PT has commented multiple times that my range of motion is ahead of schedule. Anecdotal but I\'m sticking with it.',
+          body: 'I had ACL reconstruction in November. Asked my surgeon about peptides for recovery. He was skeptical but said BPC-157 was the one with the most legit research. Started MEHR 3 weeks post-op. My PT has commented multiple times that my range of motion is ahead of schedule. Anecdotal but I\'m sticking with it.',
           verified: true,
           helpful: 234,
           productSlug: 'bpc-157',
@@ -388,7 +388,7 @@ Welcome to mehr.`,
           rating: 5,
           date: 'December 19, 2025',
           title: 'Beats the injectable for most people',
-          body: 'I\'ve done injectable BPC in the past with a clinic. The oral mehr version isn\'t identical but at this dose it\'s about 80% as effective for joint stuff and arguably better for gut. No needles, no refrigeration, no sketchy peptide site. Worth it.',
+          body: 'I\'ve done injectable BPC in the past with a clinic. The oral MEHR version isn\'t identical but at this dose it\'s about 80% as effective for joint stuff and arguably better for gut. No needles, no refrigeration, no sketchy peptide site. Worth it.',
           verified: true,
           helpful: 276,
           productSlug: 'bpc-157',
@@ -396,7 +396,7 @@ Welcome to mehr.`,
       ],
       relatedSlugs: ['nattokinase'],
       faqIds: ['shipping-1', 'returns-1', 'bpc-1', 'bpc-2', 'bpc-3', 'bpc-4', 'sub-1', 'sub-2'],
-      metaTitle: 'mehr BPC-157 — Pharmaceutical-Grade Oral Peptide for Daily Recovery',
+      metaTitle: 'MEHR BPC-157 — Pharmaceutical-Grade Oral Peptide for Daily Recovery',
       metaDescription:
         'World\'s first daily foundational recovery oral peptide. 500mcg BPC-157, BioPerine-enhanced for absorption. cGMP USA-made, lab tested, 60-day guarantee.',
       schemaSku: 'MEHR-BPC-60',
@@ -537,7 +537,7 @@ Welcome to mehr.`,
     },
     {
       id: 'natto-1',
-      question: 'Why is mehr Nattokinase 10,800 FU when other brands are 2,000?',
+      question: 'Why is MEHR Nattokinase 10,800 FU when other brands are 2,000?',
       answer:
         "10,800 FU is the dose used in the most rigorous clinical studies — the dose that actually moved blood pressure and circulation markers. 2,000 FU sells well because it's cheap to manufacture, but the human evidence at that dose is weak. We chose to dose for results, not for margin.",
       category: 'Nattokinase',
@@ -558,7 +558,7 @@ Welcome to mehr.`,
     },
     {
       id: 'bpc-1',
-      question: 'How is mehr BPC-157 different from injectable BPC-157?',
+      question: 'How is MEHR BPC-157 different from injectable BPC-157?',
       answer:
         "Our BPC-157 is delivered as an oral capsule formulated with BioPerine to enhance absorption through the digestive tract. The molecule itself is the same pharmaceutical-grade peptide. Injectable BPC reaches systemic circulation faster, but our oral form is safer (no needles, no contamination risk), more practical (no refrigeration), and at this dose, comparably effective for most non-acute use cases — particularly gut and joint applications.",
       category: 'BPC-157',
@@ -586,14 +586,14 @@ Welcome to mehr.`,
     },
     {
       id: 'general-1',
-      question: 'Where are mehr products manufactured?',
+      question: 'Where are MEHR products manufactured?',
       answer:
-        'Every mehr product is manufactured in a cGMP-certified, FDA-registered facility in the United States. We do not import finished product. Every batch is tested by an independent third-party lab for purity, potency, and contaminants. The Certificate of Analysis is published on every product page.',
+        'Every MEHR product is manufactured in a cGMP-certified, FDA-registered facility in the United States. We do not import finished product. Every batch is tested by an independent third-party lab for purity, potency, and contaminants. The Certificate of Analysis is published on every product page.',
       category: 'General',
     },
     {
       id: 'general-2',
-      question: 'Are mehr products vegan? Gluten-free?',
+      question: 'Are MEHR products vegan? Gluten-free?',
       answer:
         'Yes to both. Our capsules are vegetable cellulose. Our nattokinase is fermented from non-GMO soybeans. We use no animal-derived ingredients, no gluten, and no fillers beyond what is listed on the supplement facts panel.',
       category: 'General',
