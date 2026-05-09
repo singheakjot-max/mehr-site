@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Color Tokens ────────────────────────────────────────── */
+    --color-bg: #FFFFFF;
+    --color-bg-soft: #F7F7F5;
+    --color-bg-strong: #0A0A0A;
+    --color-surface: #FFFFFF;
+    --color-surface-raised: #FFFFFF;
+    --color-text: #0A0A0A;
+    --color-text-strong: #000000;
+    --color-text-secondary: #2A2A2A;
+    --color-text-muted: #6B6B6B;
+    --color-text-subtle: #9A9A9A;
+    --color-text-inverse: #FFFFFF;
+    --color-accent: #0A0A0A;
+    --color-accent-fg: #FFFFFF;
+    --color-accent-hover: #2A2A2A;
+    --color-border: #E8E8E5;
+    --color-border-subtle: #F0F0EE;
+    --color-border-strong: #0A0A0A;
+    --color-success: #1F7A3D;
+    --color-success-bg: #ECF7EF;
+    --color-warning: #B7871A;
+    --color-error: #C0392B;
+    --color-star: #0A0A0A;
+    /* Product accent colors — burgundy for Nattokinase, royal blue for BPC-157 */
+    --color-product-natto: #6B1F2A;
+    --color-product-natto-soft: #FAF3F4;
+    --color-product-bpc: #1E2F6B;
+    --color-product-bpc-soft: #F2F4FA;
+
+    /* ── Font Tokens ─────────────────────────────────────────── */
+    --font-display: 'Fraunces', 'Georgia', serif;
+    --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+
+    /* ── Radius Tokens ───────────────────────────────────────── */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    /* ── Shadow Tokens ───────────────────────────────────────── */
+    --shadow-sm: 0 1px 2px 0 rgba(10, 10, 10, 0.04);
+    --shadow-md: 0 4px 12px 0 rgba(10, 10, 10, 0.06);
+    --shadow-lg: 0 8px 24px 0 rgba(10, 10, 10, 0.08);
+    --shadow-xl: 0 16px 48px 0 rgba(10, 10, 10, 0.10);
+
+    /* ── Space Scale ─────────────────────────────────────────── */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+    --space-32: 128px;
+
+    /* ── shadcn/ui compatibility ─────────────────────────────── */
+    --background: 48 20% 98%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 0 0% 4%;
+    --primary-foreground: 48 20% 98%;
+    --secondary: 40 9% 95%;
+    --secondary-foreground: 0 0% 4%;
+    --muted: 40 9% 95%;
+    --muted-foreground: 45 3% 42%;
+    --accent: 40 9% 95%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 4 70% 47%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 11% 90%;
+    --input: 40 11% 90%;
+    --ring: 0 0% 4%;
+    --radius: 8px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+  h2 { font-size: clamp(1.75rem, 3.5vw, 2.75rem); }
+  h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+  h4 { font-size: clamp(1rem, 1.5vw, 1.125rem); }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button {
+    font-family: var(--font-body);
+    cursor: pointer;
+  }
+
+  input, textarea, select {
+    font-family: var(--font-body);
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+
+  .border-default {
+    border-color: var(--color-border);
+  }
+
+  /* ── Scroll Reveal Animation ──────────────────────────────── */
+  .scroll-hidden {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ── Button Styles ───────────────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background-color: var(--color-accent);
+    color: var(--color-accent-fg);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background-color: transparent;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-text-muted);
+    background-color: var(--color-surface);
+  }
+
+  /* ── Container ───────────────────────────────────────────── */
+  .container-main {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: clamp(16px, 4vw, 48px);
+    padding-right: clamp(16px, 4vw, 48px);
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-left: clamp(16px, 4vw, 48px);
+    padding-right: clamp(16px, 4vw, 48px);
+  }
+
+  /* ── Section Spacing ─────────────────────────────────────── */
+  .section-padding {
+    padding-top: clamp(64px, 8vw, 120px);
+    padding-bottom: clamp(64px, 8vw, 120px);
+  }
+
+  /* ── Focus States ────────────────────────────────────────── */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* ── Scrollbar ───────────────────────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
