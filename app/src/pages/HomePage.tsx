@@ -10,6 +10,7 @@ import {
   Star,
   CheckCircle2,
   Sparkles,
+  Sun,
 } from 'lucide-react';
 import SectionLabel from '@/components/SectionLabel';
 import ProductCard from '@/components/ProductCard';
@@ -27,6 +28,185 @@ const staggerContainer = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
+
+/* ───── Category positioning ─────
+   Sets up the brand thesis between the press strip and product grid.
+   "The world's first daily foundational peptides." */
+function CategoryPitchSection() {
+  return (
+    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-soft)' }}>
+      <div className="container-main">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5 }}
+            className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-5"
+            style={{ color: 'var(--color-text-muted)' }}
+          >
+            A new category
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7 }}
+            className="font-display mb-8"
+            style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
+          >
+            The world's first daily<br />foundational <em style={{ fontStyle: 'italic' }}>peptides.</em>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="font-body mx-auto"
+            style={{ fontSize: 'clamp(1rem, 1.4vw, 1.125rem)', lineHeight: 1.7, color: 'var(--color-text-secondary)', maxWidth: '52ch' }}
+          >
+            Peptides used to live in two places: research labs and biohacker forums. We made
+            them as simple to take as a vitamin — pharmaceutical-grade, clinically dosed,
+            third-party tested, and shipped from the USA in 24 hours.
+          </motion.p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───── Daily stack — both products as a bundle pitch ─────
+   Sits between the founder story and reviews. Frames the two products
+   as a complete daily ritual, not isolated SKUs. */
+function DailyStackSection() {
+  const natto = site.products.find((p) => p.slug === 'nattokinase');
+  const bpc = site.products.find((p) => p.slug === 'bpc-157');
+  if (!natto || !bpc) return null;
+
+  return (
+    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <div className="container-main">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: 'var(--color-text-muted)' }}>
+            The daily stack
+          </p>
+          <h2
+            className="font-display mb-5"
+            style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
+          >
+            Two peptides. One <em style={{ fontStyle: 'italic' }}>morning ritual.</em>
+          </h2>
+          <p className="font-body max-w-xl mx-auto" style={{ fontSize: '16px', lineHeight: 1.65, color: 'var(--color-text-muted)' }}>
+            Circulation and recovery — the two compounds your body uses every day to stay
+            resilient. Take both with breakfast. Skip nothing.
+          </p>
+        </motion.div>
+
+        {/* Two product columns side by side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-10">
+          {[
+            { product: natto, accent: '#6B1F2A', soft: '#FAF3F4', role: 'Circulation', stat: '10,800 FU' },
+            { product: bpc, accent: '#1E2F6B', soft: '#F2F4FA', role: 'Recovery', stat: '500mcg' },
+          ].map(({ product, accent, soft, role, stat }, i) => (
+            <motion.div
+              key={product.slug}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+            >
+              <Link
+                to={`/products/${product.slug}`}
+                className="block rounded-2xl overflow-hidden h-full transition-all hover:shadow-md"
+                style={{ backgroundColor: soft, border: `1px solid ${accent}20` }}
+              >
+                <div className="grid grid-cols-5 gap-4 p-5 md:p-7 items-center">
+                  <div className="col-span-2 rounded-lg overflow-hidden" style={{ aspectRatio: '4/5', backgroundColor: 'var(--color-surface)' }}>
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="col-span-3">
+                    <p className="font-body text-[11px] font-semibold uppercase tracking-[0.15em] mb-2" style={{ color: accent }}>
+                      {role}
+                    </p>
+                    <h3 className="font-display mb-1" style={{ fontSize: '20px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                      {product.name.replace('mehr ', '')}
+                    </h3>
+                    <p className="font-display mb-3" style={{ fontSize: '24px', fontWeight: 500, color: accent, letterSpacing: '-0.01em' }}>
+                      {stat}
+                    </p>
+                    <p className="font-body text-[13px] mb-4" style={{ color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
+                      {product.tagline}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 font-body text-[13px] font-medium" style={{ color: 'var(--color-text-strong)' }}>
+                      View product
+                      <ArrowRight size={13} strokeWidth={2} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Ritual cadence row — a simple "what your morning looks like" */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="rounded-xl p-6 md:p-8"
+          style={{ backgroundColor: 'var(--color-bg-soft)', border: '1px solid var(--color-border)' }}
+        >
+          <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+            <div className="flex items-center gap-3">
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: 'var(--color-text-strong)', color: 'var(--color-text-inverse)' }}
+              >
+                <Sun size={18} strokeWidth={1.75} />
+              </div>
+              <div>
+                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'var(--color-text-muted)' }}>
+                  The morning ritual
+                </p>
+                <p className="font-display" style={{ fontSize: '18px', fontWeight: 500, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
+                  Two capsules, one cup of coffee.
+                </p>
+              </div>
+            </div>
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { step: '01', label: 'Wake.', detail: 'Black coffee or water.' },
+                { step: '02', label: 'Take both.', detail: 'Nattokinase + BPC-157.' },
+                { step: '03', label: 'Breakfast.', detail: 'With food, every day.' },
+              ].map((r) => (
+                <div key={r.step} className="flex items-baseline gap-3">
+                  <span className="font-body text-[11px] font-semibold tabular-nums" style={{ color: 'var(--color-text-subtle)' }}>
+                    {r.step}
+                  </span>
+                  <div>
+                    <p className="font-body text-[14px] font-medium" style={{ color: 'var(--color-text-strong)' }}>
+                      {r.label}
+                    </p>
+                    <p className="font-body text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
+                      {r.detail}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 function HeroSection() {
   return (
@@ -335,7 +515,9 @@ function FounderSection() {
 
 function ReviewsCarouselSection() {
   const featuredReviews = site.reviews.slice(0, 3);
-  const avgRating = site.reviews.reduce((s, r) => s + r.rating, 0) / site.reviews.length;
+  const avgRating = site.reviews.length
+    ? site.reviews.reduce((s, r) => s + r.rating, 0) / site.reviews.length
+    : 0;
 
   return (
     <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
@@ -483,10 +665,12 @@ export default function HomePage() {
     <>
       <HeroSection />
       <PressLogosSection />
+      <CategoryPitchSection />
       <WhyUsSection />
       <FeaturedProductsSection />
       <ScienceSection />
       <FounderSection />
+      <DailyStackSection />
       <ReviewsCarouselSection />
       <SubscribeExplainerSection />
       <NewsletterSection />

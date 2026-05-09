@@ -20,7 +20,9 @@ export default function ReviewsPage() {
   const [filter, setFilter] = useState(0);
 
   const allReviews = site.reviews;
-  const avgRating = allReviews.reduce((s, r) => s + r.rating, 0) / allReviews.length;
+  const avgRating = allReviews.length
+    ? allReviews.reduce((s, r) => s + r.rating, 0) / allReviews.length
+    : 0;
   const totalReviews = allReviews.length;
 
   const filtered = filter === 0 ? allReviews : allReviews.filter((r) => r.rating === filter);

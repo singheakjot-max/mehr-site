@@ -85,38 +85,6 @@ function QualityStandards() {
   );
 }
 
-function LabPhotos() {
-  return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="container-main">
-        <SectionLabel label="Our Lab" />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {[
-            'Modern analytical laboratory with HPLC equipment, amber glass bottles on white countertops, cleanroom environment with technicians in lab coats',
-            'Quality control technician examining supplement capsules under magnification, bright overhead lighting, organized workspace with documentation',
-            'Raw material warehouse with climate-controlled storage, labeled containers on stainless steel shelving, industrial clean environment',
-            'Tablet compression machine in operation, white supplement tablets on stainless steel conveyor, pharmaceutical-grade manufacturing line',
-            'Third-party testing laboratory with spectrophotometer equipment, digital displays showing analytical data, scientist reviewing results',
-            'Finished product packaging line with amber glass bottles on conveyor, automated labeling system, final inspection station',
-          ].map((alt, i) => (
-            <div
-              key={i}
-              className="rounded-xl overflow-hidden"
-              style={{ aspectRatio: i === 0 ? '3/2' : '1/1', backgroundColor: 'var(--color-border-subtle)' }}
-            >
-              <img
-                src="/images/placeholder.svg"
-                alt={alt}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function AboutPage() {
   return (
     <div className="pt-28">
@@ -196,7 +164,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <LabPhotos />
       <QualityStandards />
       <Footer />
     </div>

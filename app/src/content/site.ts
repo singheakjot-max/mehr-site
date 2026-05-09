@@ -4,7 +4,7 @@ export const site: SiteConfig = {
   brand: {
     name: 'mehr',
     tagline: 'Daily peptides. Foundational health.',
-    founderName: '[FOUNDER_NAME]',
+    founderName: 'Sahej K.',
     founderTitle: 'Founder',
     founderPortrait: '/images/lifestyle/bpc_person_05.webp',
     founderSignature: '/images/placeholder.svg',
@@ -706,3 +706,7 @@ Welcome to mehr.`,
     },
   ],
 };
+
+// Aggregate per-product reviews into the top-level reviews list.
+// Pages can use site.reviews for the global review aggregate.
+site.reviews = site.products.flatMap((p) => p.reviews);
