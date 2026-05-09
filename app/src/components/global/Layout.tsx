@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useCart } from '@/hooks/useCart';
-import AnnouncementBar from './AnnouncementBar';
 import Header from './Header';
 import CartDrawer from './CartDrawer';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -41,7 +40,6 @@ export default function Layout() {
         itemCount: cart.itemCount,
       }}
     >
-      <AnnouncementBar />
       <ScrollProgress />
       <Header cartCount={cart.itemCount} onOpenCart={cart.openCart} />
       <CartDrawer

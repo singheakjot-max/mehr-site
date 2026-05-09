@@ -28,15 +28,13 @@ export default function Header({ cartCount, onOpenCart }: HeaderProps) {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         backgroundColor: scrolled
-          ? 'rgba(255, 255, 255, 0.95)'
-          : 'rgba(255, 255, 255, 0.6)',
-        backdropFilter: scrolled ? 'blur(12px)' : 'blur(4px)',
-        borderBottom: scrolled
-          ? '1px solid var(--color-border)'
-          : '1px solid transparent',
+          ? 'rgba(255, 255, 255, 0.92)'
+          : 'rgba(255, 255, 255, 1)',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: '1px solid var(--color-border)',
       }}
     >
-      <div className="container-main flex items-center justify-between h-16 md:h-20">
+      <div className="container-main flex items-center justify-between h-16 md:h-[72px]">
         {/* Mobile menu button */}
         <button
           className="md:hidden p-2 -ml-2 focus-ring"
@@ -56,7 +54,7 @@ export default function Header({ cartCount, onOpenCart }: HeaderProps) {
           <img
             src="/images/logo/mehr-logo.png"
             alt="MEHR"
-            className="h-5 md:h-6 w-auto select-none"
+            className="h-7 md:h-9 w-auto select-none"
             style={{ filter: 'brightness(0)' }}
             draggable={false}
           />

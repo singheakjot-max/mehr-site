@@ -3,7 +3,7 @@ import type { SiteConfig } from '@/types';
 export const site: SiteConfig = {
   brand: {
     name: 'MEHR',
-    tagline: 'Daily peptides. Foundational health.',
+    tagline: 'Daily wellness. Backed by science.',
     founderName: 'Sahej K.',
     founderTitle: 'Founder',
     founderPortrait: '/images/lifestyle/bpc_person_05.webp',
@@ -69,9 +69,9 @@ export const site: SiteConfig = {
   ],
 
   founderStoryShort:
-    'I started MEHR because peptides shouldn\'t be locked behind a biohacker subreddit. They should be on every kitchen counter, next to the multivitamin. We make pharmaceutical-grade peptides as easy to take as a daily vitamin — clinically dosed, lab-tested, and shipped from the USA in 24 hours. No proprietary blends. No marketing fluff. Just the foundational compounds your body actually uses, delivered with the same rigor as a prescription.',
+    'I started MEHR because the science of peptides shouldn\'t live in obscure forums. It should sit on your kitchen counter, next to your morning vitamin. We make studies-backed peptides as easy to take as a daily multi — clinically dosed, lab-tested, and shipped from the USA in 24 hours. No proprietary blends, no marketing fluff. Just the daily essentials your body actually uses.',
 
-  founderStory: `I started MEHR because peptides shouldn't be locked behind a biohacker subreddit. They should be on every kitchen counter, next to the multivitamin.
+  founderStory: `I started MEHR because the science of peptides shouldn't live in obscure forums. It should sit on your kitchen counter, next to your morning vitamin.
 
 For decades, peptides have been stuck in two worlds: research labs and underground biohacking forums. The science was overwhelming. The dosing was guesswork. The sourcing was suspect. To get them, you either had to know somebody, or trust a sketchy website that shipped from a country you'd never heard of.
 
@@ -96,7 +96,7 @@ Welcome to MEHR.`,
       id: 'nattokinase',
       slug: 'nattokinase',
       name: 'MEHR Nattokinase',
-      tagline: 'Foundational circulatory support, made daily.',
+      tagline: 'Daily heart health. In one capsule.',
       description:
         'A clinical-dose nattokinase capsule for daily cardiovascular foundation. Fermented from non-GMO soybeans, standardized to 10,800 FU per serving — over 5x the dose of typical supplements. Built to support healthy circulation, blood pressure, and the kind of cardiovascular resilience that compounds over decades.',
       price: 59,
@@ -234,9 +234,9 @@ Welcome to MEHR.`,
       id: 'bpc-157',
       slug: 'bpc-157',
       name: 'MEHR BPC-157',
-      tagline: "World's first daily foundational recovery oral peptide.",
+      tagline: "Daily recovery. In one capsule.",
       description:
-        'A pharmaceutical-grade BPC-157 oral capsule, BioPerine-enhanced for absorption. Designed to deliver the recovery benefits peptides are known for — gut lining repair, joint resilience, tissue healing — without the needles, the cold chain, or the sketchy sourcing. 500mcg per capsule. 99.9% purity. Made in the USA.',
+        'A studies-backed BPC-157 oral capsule, BioPerine-enhanced for absorption. Designed to deliver the recovery benefits peptides are known for — gut lining repair, joint resilience, tissue healing — without the needles, the cold chain, or the sketchy sourcing. 500mcg per capsule. 99.9% purity. Made in the USA.',
       price: 89,
       subscriptionPrice: 74,
       subscriptionDiscount: 17,
@@ -255,14 +255,14 @@ Welcome to MEHR.`,
         'Promotes joint comfort and tendon recovery',
         'Aids whole-body tissue repair after exertion',
         'BioPerine-enhanced for oral bioavailability — no needles',
-        'Pharmaceutical-grade purity, third-party verified',
+        'Studies-backed purity, third-party verified',
       ],
       ingredients: [
         {
           name: 'BPC-157 (Body Protection Compound)',
           amount: '500mcg per capsule',
           description:
-            'A 15-amino-acid peptide naturally found in human gastric juice, with a 30+ year research history showing benefits for tissue repair, gut integrity, and recovery. Manufactured to pharmaceutical-grade purity (99.9%) and delivered as an oral capsule formulated for systemic bioavailability.',
+            'A 15-amino-acid peptide naturally found in human gastric juice, with a 30+ year research history showing benefits for tissue repair, gut integrity, and recovery. Manufactured to lab-verified purity (99.9%) and delivered as an oral capsule formulated for systemic bioavailability.',
           studyRef: 'Current Pharmaceutical Design, 2018',
           studyUrl: 'https://pubmed.ncbi.nlm.nih.gov/29945513/',
         },
@@ -560,7 +560,7 @@ Welcome to MEHR.`,
       id: 'bpc-1',
       question: 'How is MEHR BPC-157 different from injectable BPC-157?',
       answer:
-        "Our BPC-157 is delivered as an oral capsule formulated with BioPerine to enhance absorption through the digestive tract. The molecule itself is the same pharmaceutical-grade peptide. Injectable BPC reaches systemic circulation faster, but our oral form is safer (no needles, no contamination risk), more practical (no refrigeration), and at this dose, comparably effective for most non-acute use cases — particularly gut and joint applications.",
+        "Our BPC-157 is delivered as an oral capsule formulated with BioPerine to enhance absorption through the digestive tract. The molecule itself is the same lab-tested peptide. Injectable BPC reaches systemic circulation faster, but our oral form is safer (no needles, no contamination risk), more practical (no refrigeration), and at this dose, comparably effective for most non-acute use cases — particularly gut and joint applications.",
       category: 'BPC-157',
     },
     {

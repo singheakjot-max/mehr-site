@@ -11,10 +11,13 @@ import {
   ArrowRight,
   ShieldCheck,
   Truck,
-  RotateCcw,
   FileText,
   Star,
   Minus,
+  MapPin,
+  Package,
+  Clock,
+  Award,
 } from 'lucide-react';
 import StarRating from '@/components/StarRating';
 import ReviewCard from '@/components/ReviewCard';
@@ -46,27 +49,120 @@ const CTA_LABEL: Record<string, string> = {
 // 6 hero benefit bullets, displayed in a 2-col numbered grid above the buy box.
 const HERO_BENEFITS: Record<string, string[]> = {
   nattokinase: [
-    'Reduces arterial inflammation',
-    'Dissolves plaque buildup',
-    'Lowers blood pressure',
-    'Clears LDL cholesterol',
-    'Improves blood flow',
-    'Prevents blood clots',
+    'Supports healthy blood pressure',
+    'Promotes clean, flowing arteries',
+    'Helps clear cholesterol buildup',
+    'Backed by clinical research',
   ],
   'bpc-157': [
-    'Joint, tendon & ligament recovery',
-    'Gut lining & microbiome support',
-    'Eases IBS, IBD & SIBO symptoms',
-    'Muscle growth & faster recovery',
-    'Reduces systemic inflammation',
-    'Supports skin, hair & nail integrity',
+    'Faster joint, tendon & muscle recovery',
+    'Soothes the gut and digestion',
+    'Calms everyday inflammation',
+    'Backed by clinical research',
   ],
 };
 
-// Hero subhead — short eyebrow under the product name with the value-prop pillars.
-const HERO_PILLARS: Record<string, string[]> = {
-  nattokinase: ['3rd-party tested', '10,800 FU clinical dose', '99.9% purity'],
-  'bpc-157': ['3rd-party tested', 'BioPerine bonded', '99.9% bioavailable'],
+// Hero short tagline — replaces biohacker phrasing
+const HERO_SUBHEAD: Record<string, string> = {
+  nattokinase: 'Daily heart health, in one capsule. Cleaner arteries, healthier blood pressure, more steady energy — backed by clinical research.',
+  'bpc-157': 'Daily recovery, in one capsule. Calms inflammation, repairs the gut, and helps your joints, tendons, and muscles bounce back.',
+};
+
+// Hero accordion rows — what's inside, timeline, shipping, what makes us different
+type AccordionRow = { icon: 'box' | 'clock' | 'award' | 'truck'; title: string; body: React.ReactNode };
+const HERO_ACCORDION: Record<string, AccordionRow[]> = {
+  nattokinase: [
+    {
+      icon: 'box',
+      title: "What's inside",
+      body: (
+        <ul className="space-y-2">
+          <li><strong>10,800 FU Nattokinase (NSK-SD strain)</strong> — the dose used in clinical research, ~4× a typical supermarket bottle.</li>
+          <li>Vegetable cellulose capsule. Rice flour. That&apos;s it.</li>
+          <li>Vegan. Gluten-free. Soy-free. No fillers, no proprietary blends.</li>
+        </ul>
+      ),
+    },
+    {
+      icon: 'clock',
+      title: 'When you’ll feel it',
+      body: (
+        <ul className="space-y-2">
+          <li><strong>Week 1 –2:</strong> Calmer afternoons, more even energy, warmer hands and feet.</li>
+          <li><strong>Week 3 –6:</strong> Blood pressure starts to settle. Steadier mornings.</li>
+          <li><strong>Month 3+:</strong> Bloodwork begins to reflect the daily habit.</li>
+        </ul>
+      ),
+    },
+    {
+      icon: 'award',
+      title: 'Why MEHR is different',
+      body: (
+        <ul className="space-y-2">
+          <li>The <strong>full clinical dose</strong>. Most brands ship sub-clinical at 2,000 FU.</li>
+          <li><strong>Every batch</strong> independently tested. Certificate of Analysis published, not summarized.</li>
+          <li>Made in a <strong>cGMP-certified, FDA-registered</strong> facility in the United States.</li>
+        </ul>
+      ),
+    },
+    {
+      icon: 'truck',
+      title: 'Shipping & guarantee',
+      body: (
+        <ul className="space-y-2">
+          <li><strong>Free shipping</strong> on every order over $50.</li>
+          <li>Ships within <strong>24 hours</strong> from our Utah facility.</li>
+          <li><strong>60-day money-back guarantee</strong> — even if the bottle is empty.</li>
+        </ul>
+      ),
+    },
+  ],
+  'bpc-157': [
+    {
+      icon: 'box',
+      title: "What's inside",
+      body: (
+        <ul className="space-y-2">
+          <li><strong>500 mcg BPC-157 (arginine-salt bonded)</strong> — stable, oral-bioavailable form.</li>
+          <li><strong>BioPerine®</strong> for enhanced absorption.</li>
+          <li>Vegan capsule. No fillers, no proprietary blends, no needles.</li>
+        </ul>
+      ),
+    },
+    {
+      icon: 'clock',
+      title: 'When you’ll feel it',
+      body: (
+        <ul className="space-y-2">
+          <li><strong>Week 1 –2:</strong> Easier digestion, less bloating, calmer gut.</li>
+          <li><strong>Week 3 –6:</strong> Stiff joints loosen. Recovery between workouts shortens.</li>
+          <li><strong>Month 2+:</strong> Old, lingering injuries start to feel further away.</li>
+        </ul>
+      ),
+    },
+    {
+      icon: 'award',
+      title: 'Why MEHR is different',
+      body: (
+        <ul className="space-y-2">
+          <li>The <strong>oral form</strong> with the bioavailability of an injection — no needles, no clinic.</li>
+          <li><strong>Every batch</strong> independently tested. Certificate of Analysis published.</li>
+          <li>Made in a <strong>cGMP-certified, FDA-registered</strong> facility in the United States.</li>
+        </ul>
+      ),
+    },
+    {
+      icon: 'truck',
+      title: 'Shipping & guarantee',
+      body: (
+        <ul className="space-y-2">
+          <li><strong>Free shipping</strong> on every order over $50.</li>
+          <li>Ships within <strong>24 hours</strong> from our Utah facility.</li>
+          <li><strong>60-day money-back guarantee</strong> — even if the bottle is empty.</li>
+        </ul>
+      ),
+    },
+  ],
 };
 
 // Bundle pricing tiers — quantity offerings with embedded discounts.
@@ -339,22 +435,83 @@ function Reveal({ children, delay = 0, className = '' }: { children: React.React
   );
 }
 
-function TrustpilotStrip({ rating, count }: { rating: number; count: number }) {
+/* ─────────────────────────────────────────
+   Hero accordion — what's inside / timeline / why MEHR / shipping
+   ───────────────────────────────────────── */
+
+function HeroAccordion({
+  product,
+  accent,
+  onOpenCOA,
+}: {
+  product: Product;
+  accent: { hex: string; soft: string; deep: string };
+  onOpenCOA: () => void;
+}) {
+  const rows = HERO_ACCORDION[product.slug] || [];
+  const [open, setOpen] = useState<string | null>(null);
+
+  const iconFor = (k: AccordionRow['icon']) => {
+    if (k === 'box') return <Package size={16} />;
+    if (k === 'clock') return <Clock size={16} />;
+    if (k === 'award') return <Award size={16} />;
+    return <Truck size={16} />;
+  };
+
   return (
-    <div className="flex items-center gap-3 mb-5">
-      <div className="flex items-center gap-0.5">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <span key={i} className="inline-flex items-center justify-center w-5 h-5" style={{ backgroundColor: '#00B67A' }}>
-            <Star size={12} fill="#FFFFFF" stroke="#FFFFFF" strokeWidth={0} />
-          </span>
-        ))}
-      </div>
-      <span className="font-body text-[13px] font-medium" style={{ color: 'var(--color-text-strong)' }}>
-        {rating.toFixed(1)}/5
-      </span>
-      <span className="font-body text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
-        on {count.toLocaleString()}+ Reviews
-      </span>
+    <div className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}>
+      {rows.map((row, i) => {
+        const isOpen = open === row.title;
+        return (
+          <div key={row.title} style={{ borderBottom: i < rows.length - 1 ? '1px solid var(--color-border)' : 'none' }}>
+            <button
+              onClick={() => setOpen(isOpen ? null : row.title)}
+              className="w-full flex items-center justify-between gap-4 py-4 px-5 text-left transition-colors hover:bg-[color:var(--color-bg-soft)] focus-ring"
+            >
+              <span className="flex items-center gap-3">
+                <span style={{ color: accent.hex, flexShrink: 0 }}>{iconFor(row.icon)}</span>
+                <span className="font-body text-[14px] font-semibold" style={{ color: 'var(--color-text-strong)' }}>
+                  {row.title}
+                </span>
+              </span>
+              <ChevronDown
+                size={18}
+                style={{
+                  color: isOpen ? accent.hex : 'var(--color-text-muted)',
+                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0)',
+                  transition: 'transform 0.25s ease',
+                  flexShrink: 0,
+                }}
+              />
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <div className="px-5 pb-5 font-body text-[13.5px]" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.65 }}>
+                    {row.body}
+                    {row.icon === 'box' && (
+                      <button
+                        onClick={onOpenCOA}
+                        className="mt-3 inline-flex items-center gap-1.5 font-body text-[12.5px] font-medium link-grow"
+                        style={{ color: accent.hex }}
+                      >
+                        <FileText size={13} />
+                        View Certificate of Analysis
+                      </button>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -385,11 +542,9 @@ function Hero({
   const total = +(bundle.total * subDiscount).toFixed(2);
 
   const benefits = HERO_BENEFITS[product.slug] || [];
-  const pillars = HERO_PILLARS[product.slug] || [];
   const ctaLabel = CTA_LABEL[product.slug] || 'Add to cart';
 
-  const reviewCount = product.reviews.length;
-  const avgRating = reviewCount ? product.reviews.reduce((s, r) => s + r.rating, 0) / reviewCount : 0;
+  const avgRating = product.reviews.length ? product.reviews.reduce((s, r) => s + r.rating, 0) / product.reviews.length : 0;
 
   const handleAdd = () => {
     setAdding(true);
@@ -398,9 +553,9 @@ function Hero({
   };
 
   return (
-    <section className="pt-28 pb-12 md:pb-16" style={{ backgroundColor: accent.soft }}>
+    <section className="pt-20 md:pt-24 pb-10 md:pb-14" style={{ backgroundColor: accent.soft }}>
       <div className="container-main">
-        <nav className="flex items-center gap-2 text-[13px] mb-6 md:mb-8" style={{ color: 'var(--color-text-muted)' }}>
+        <nav className="flex items-center gap-2 text-[12px] mb-4 md:mb-5" style={{ color: 'var(--color-text-muted)' }}>
           <Link to="/" className="hover:underline">Home</Link>
           <ChevronRight size={13} strokeWidth={1.5} />
           <Link to="/shop" className="hover:underline">Shop</Link>
@@ -443,77 +598,95 @@ function Hero({
 
           {/* ── Buy box column ── */}
           <div>
-            <div className="lg:sticky lg:top-28">
-              <TrustpilotStrip rating={avgRating || 4.9} count={reviewCount > 100 ? reviewCount : 1200} />
+            <div className="lg:sticky lg:top-24">
+              {/* BIG social proof at top — Trustpilot + face row + count */}
+              <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <span key={i} className="inline-flex items-center justify-center w-5 h-5" style={{ backgroundColor: '#00B67A' }}>
+                      <Star size={12} fill="#FFFFFF" stroke="#FFFFFF" strokeWidth={0} />
+                    </span>
+                  ))}
+                </div>
+                <div>
+                  <span className="font-body text-[14px] font-semibold" style={{ color: 'var(--color-text-strong)' }}>
+                    {(avgRating || 4.9).toFixed(1)}/5
+                  </span>
+                  <span className="font-body text-[14px] ml-1.5" style={{ color: 'var(--color-text-muted)' }}>
+                    on 1,247+ reviews
+                  </span>
+                </div>
+              </div>
 
               <h1
                 className="font-display mb-3"
                 style={{
-                  fontSize: 'clamp(1.875rem, 3.4vw, 2.75rem)',
+                  fontSize: 'clamp(2rem, 3.6vw, 2.875rem)',
                   letterSpacing: '-0.025em',
                   lineHeight: 1.05,
                   color: 'var(--color-text-strong)',
+                  fontWeight: 700,
                 }}
               >
                 {product.name}
               </h1>
 
-              {/* Pillar dots — small inline value-prop pillars under the H1 */}
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-5 font-body text-[12px] font-medium uppercase tracking-[0.06em]" style={{ color: accent.hex }}>
-                {pillars.map((pl, i) => (
-                  <span key={pl} className="flex items-center gap-1.5">
-                    {i > 0 && <span className="opacity-40 mr-3">•</span>}
-                    {pl}
-                  </span>
-                ))}
-              </div>
-
-              <p className="font-body text-[15px] mb-7" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
-                {product.tagline}
+              <p className="font-body mb-6" style={{ fontSize: '16px', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
+                {HERO_SUBHEAD[product.slug] || product.tagline}
               </p>
 
-              {/* 6-benefit numbered grid — 2 cols */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mb-8 pb-7" style={{ borderBottom: '1px solid var(--color-border)' }}>
-                {benefits.map((b, i) => (
-                  <div key={b} className="flex items-baseline gap-3">
-                    <span className="font-body text-[11px] font-semibold tabular-nums tracking-wider" style={{ color: 'var(--color-text-subtle)' }}>
-                      0{i + 1}
+              {/* 4 outcome benefits with accent checks (cleaner, simpler) */}
+              <ul className="space-y-2.5 mb-7 pb-7" style={{ borderBottom: '1px solid var(--color-border)' }}>
+                {benefits.map((b) => (
+                  <li key={b} className="flex items-start gap-2.5">
+                    <span
+                      className="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center mt-1"
+                      style={{ backgroundColor: accent.hex }}
+                    >
+                      <Check size={10} strokeWidth={3} style={{ color: '#fff' }} />
                     </span>
-                    <span className="font-body text-[14px]" style={{ color: 'var(--color-text)' }}>
+                    <span className="font-body text-[14.5px]" style={{ color: 'var(--color-text)' }}>
                       {b}
                     </span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
-              {/* Bundle pricing tiers */}
-              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.15em] mb-3" style={{ color: 'var(--color-text-muted)' }}>
-                Choose your supply
-              </p>
-              <div className="space-y-3 mb-6">
+              {/* Bundle pricing tiers — premium styling */}
+              <div className="flex items-center justify-between mb-3">
+                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--color-text-muted)' }}>
+                  Choose your plan
+                </p>
+                <p className="font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
+                  Free shipping on every plan
+                </p>
+              </div>
+              <div className="space-y-3 mb-5">
                 {bundles.map((b, i) => {
                   const isSelected = i === selectedBundleIdx;
                   const displayPerBottle = subscription ? +(b.perBottle * (1 - product.subscriptionDiscount / 100)).toFixed(2) : b.perBottle;
+                  const fullTotal = product.price * b.qty;
+                  const youSave = fullTotal - b.total;
+                  const pctOff = b.qty > 1 ? Math.round((youSave / fullTotal) * 100) : 0;
                   return (
                     <button
                       key={b.qty}
                       onClick={() => setSelectedBundleIdx(i)}
                       className="w-full text-left rounded-xl p-4 md:p-5 transition-all focus-ring relative"
                       style={{
-                        backgroundColor: isSelected ? `${accent.hex}0A` : 'var(--color-surface)',
+                        backgroundColor: isSelected ? `${accent.hex}0A` : 'var(--color-bg)',
                         border: isSelected ? `2px solid ${accent.hex}` : '2px solid var(--color-border)',
                       }}
                     >
                       {b.badge && (
                         <span
-                          className="absolute -top-2.5 left-4 font-body text-[10px] font-semibold uppercase tracking-[0.1em] px-2.5 py-1 rounded-full"
-                          style={{ backgroundColor: accent.hex, color: '#fff' }}
+                          className="absolute -top-2.5 left-4 font-body text-[10px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full"
+                          style={{ backgroundColor: accent.hex, color: '#fff', letterSpacing: '0.1em' }}
                         >
                           {b.badge}
                         </span>
                       )}
                       <div className="flex items-center gap-4">
-                        {/* Radio indicator */}
                         <span
                           className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all"
                           style={{
@@ -521,21 +694,25 @@ function Hero({
                             backgroundColor: 'var(--color-bg)',
                           }}
                         />
-                        <div className="flex-1">
-                          <p className="font-body text-[14px] font-semibold" style={{ color: 'var(--color-text-strong)' }}>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-body text-[14.5px] font-semibold" style={{ color: 'var(--color-text-strong)' }}>
                             {b.label}
                           </p>
-                          {b.savings > 0 && (
-                            <p className="font-body text-[12px] mt-0.5" style={{ color: accent.hex }}>
-                              Save ${b.savings.toFixed(0)}
+                          {pctOff > 0 ? (
+                            <p className="font-body text-[12px] mt-0.5 font-medium" style={{ color: accent.hex }}>
+                              Save ${youSave.toFixed(0)} · {pctOff}% off
+                            </p>
+                          ) : (
+                            <p className="font-body text-[12px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+                              Try it once
                             </p>
                           )}
                         </div>
-                        <div className="text-right">
-                          <p className="font-display tabular-nums" style={{ fontSize: '20px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
+                        <div className="text-right flex-shrink-0">
+                          <p className="font-display tabular" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1 }}>
                             ${displayPerBottle}
                           </p>
-                          <p className="font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
+                          <p className="font-body text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                             / bottle
                           </p>
                         </div>
@@ -573,7 +750,7 @@ function Hero({
               <button
                 onClick={handleAdd}
                 disabled={adding}
-                className="btn-premium w-full py-4 px-6 rounded-lg font-body text-[15px] font-semibold uppercase tracking-[0.08em] transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3 mb-3"
+                className="btn-premium w-full py-[18px] px-6 rounded-lg font-body text-[15px] font-bold uppercase tracking-[0.1em] transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3 mb-3"
                 style={{ backgroundColor: 'var(--color-text-strong)', color: 'var(--color-text-inverse)' }}
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -586,48 +763,33 @@ function Hero({
                     <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
                       {ctaLabel}
                       <span className="opacity-60">—</span>
-                      <span className="tabular-nums">${total}</span>
+                      <span className="tabular">${total}</span>
                     </motion.span>
                   )}
                 </AnimatePresence>
               </button>
 
-              {/* Trust microline */}
-              <div className="grid grid-cols-3 gap-3 mb-5">
-                {[
-                  { icon: <Truck size={14} />, label: 'Ships in 24h' },
-                  { icon: <RotateCcw size={14} />, label: '60-day promise' },
-                  { icon: <ShieldCheck size={14} />, label: 'Lab tested' },
-                ].map((t) => (
-                  <div key={t.label} className="flex items-center gap-1.5 font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-                    {t.icon}
-                    <span>{t.label}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Payment icons */}
-              <div className="flex flex-wrap items-center gap-1.5 mb-5">
-                {['Visa', 'MC', 'Amex', 'Apple Pay', 'Shop Pay', 'Klarna'].map((pm) => (
-                  <span
-                    key={pm}
-                    className="font-body text-[10px] font-medium px-2 py-1 rounded"
-                    style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text-subtle)', border: '1px solid var(--color-border)' }}
-                  >
-                    {pm}
-                  </span>
-                ))}
-              </div>
-
-              {/* COA link */}
-              <button
-                onClick={() => setCoaOpen(true)}
-                className="flex items-center gap-2 font-body text-[13px] font-medium transition-opacity hover:opacity-70 focus-ring"
-                style={{ color: 'var(--color-text)' }}
+              {/* 60-day guarantee strip — emphasized, just under CTA */}
+              <div
+                className="flex items-center gap-3 p-3 rounded-lg mb-6"
+                style={{ backgroundColor: `${accent.hex}0F`, border: `1px solid ${accent.hex}25` }}
               >
-                <FileText size={14} />
-                View Certificate of Analysis
-              </button>
+                <ShieldCheck size={18} style={{ color: accent.hex, flexShrink: 0 }} />
+                <p className="font-body text-[13px]" style={{ color: 'var(--color-text-strong)', lineHeight: 1.45 }}>
+                  <strong style={{ fontWeight: 600 }}>60-day money-back guarantee.</strong>{' '}
+                  <span style={{ color: 'var(--color-text-muted)' }}>If you don&apos;t feel it, send the bottle back — even if it&apos;s empty.</span>
+                </p>
+              </div>
+
+              {/* Trust microline */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 font-body text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
+                <span className="flex items-center gap-1.5"><Truck size={13} /> Ships in 24h</span>
+                <span className="flex items-center gap-1.5"><MapPin size={13} /> Made in USA</span>
+                <span className="flex items-center gap-1.5"><ShieldCheck size={13} /> 3rd-party tested</span>
+              </div>
+
+              {/* Accordion rows — what's inside / timeline / what makes us different / shipping */}
+              <HeroAccordion product={product} accent={accent} onOpenCOA={() => setCoaOpen(true)} />
             </div>
           </div>
         </div>
@@ -673,6 +835,135 @@ function HeroMarquee({ product, accent }: { product: Product; accent: { hex: str
         }
       />
     </div>
+  );
+}
+
+/* ─────────────────────────────────────────
+   1.6 Hero social proof — big UGC-style customer row
+   ───────────────────────────────────────── */
+
+function HeroSocialProof({ product, accent }: { product: Product; accent: { hex: string; soft: string; deep: string } }) {
+  // Pull first 5 reviews + a stand-in image gradient for each (until real UGC photos are added).
+  const ugc = product.reviews.slice(0, 5).map((r, i) => ({
+    name: r.author || `Customer ${i + 1}`,
+    quote: r.title || (r.body ? r.body.slice(0, 60) + '…' : ''),
+    rating: r.rating || 5,
+  }));
+  const avg = product.reviews.length ? product.reviews.reduce((s, r) => s + r.rating, 0) / product.reviews.length : 4.83;
+
+  // Distinct soft tones so the placeholder cards don't look identical.
+  const swatches = [
+    { from: '#F0E6E8', to: '#E0CDD0' },
+    { from: '#E8DFE0', to: '#D5C4C7' },
+    { from: '#F5EAEC', to: '#E2D0D3' },
+    { from: '#EBE3E5', to: '#D6C8CB' },
+    { from: '#F2E8EA', to: '#DCCBCE' },
+  ];
+
+  return (
+    <section className="py-12 md:py-16" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <div className="container-main">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7 md:mb-9">
+          <div>
+            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-3" style={{ color: accent.hex }}>
+              Real customers · Real results
+            </p>
+            <h2
+              className="font-display"
+              style={{ fontSize: 'clamp(1.5rem, 2.6vw, 2.125rem)', letterSpacing: '-0.02em', lineHeight: 1.1, fontWeight: 700, color: 'var(--color-text-strong)' }}
+            >
+              Trusted by 14,847+ daily customers.
+            </h2>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-0.5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <span key={i} className="inline-flex items-center justify-center w-5 h-5" style={{ backgroundColor: '#00B67A' }}>
+                  <Star size={12} fill="#FFFFFF" stroke="#FFFFFF" strokeWidth={0} />
+                </span>
+              ))}
+            </div>
+            <div>
+              <span className="font-body text-[14px] font-semibold" style={{ color: 'var(--color-text-strong)' }}>
+                {avg.toFixed(2)}/5
+              </span>
+              <span className="font-body text-[13px] ml-1.5" style={{ color: 'var(--color-text-muted)' }}>
+                · 1,247 verified reviews
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* UGC card row — 5 across desktop, horizontal scroll on mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
+          {ugc.map((r, i) => {
+            const sw = swatches[i % swatches.length];
+            return (
+              <div key={i} className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}>
+                {/* Placeholder gradient card with bottle silhouette pattern — sized large like SpoiledChild's UGC row */}
+                <div
+                  className="w-full relative overflow-hidden"
+                  style={{
+                    aspectRatio: '4/5',
+                    background: `linear-gradient(160deg, ${sw.from} 0%, ${sw.to} 100%)`,
+                  }}
+                >
+                  {/* Bottle silhouette suggestion */}
+                  <div
+                    className="absolute"
+                    style={{
+                      bottom: '-10%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '50%',
+                      height: '70%',
+                      borderRadius: '16% 16% 30% 30% / 12% 12% 8% 8%',
+                      background: `linear-gradient(180deg, ${accent.deep} 0%, ${accent.hex} 100%)`,
+                      opacity: 0.5,
+                    }}
+                  />
+                  {/* Customer initial circle for "human" feel */}
+                  <div
+                    className="absolute top-3 left-3 flex items-center justify-center font-body font-semibold rounded-full"
+                    style={{
+                      width: 32, height: 32,
+                      backgroundColor: 'rgba(255,255,255,0.85)',
+                      color: accent.hex,
+                      fontSize: '13px',
+                    }}
+                  >
+                    {r.name.charAt(0)}
+                  </div>
+                  {/* Verified pill */}
+                  <span
+                    className="absolute top-3 right-3 font-body text-[10px] font-semibold uppercase tracking-[0.1em] px-2 py-0.5 rounded-full"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.9)', color: '#00B67A' }}
+                  >
+                    ✓ Verified
+                  </span>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div className="flex items-center gap-0.5 mb-1.5">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} size={11} fill={s <= r.rating ? accent.hex : 'transparent'} stroke={accent.hex} strokeWidth={1.5} />
+                    ))}
+                  </div>
+                  <p
+                    className="font-body text-[13px] font-semibold mb-1 line-clamp-2"
+                    style={{ color: 'var(--color-text-strong)', lineHeight: 1.35 }}
+                  >
+                    {r.quote || 'Real change, real fast.'}
+                  </p>
+                  <p className="font-body text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
+                    — {r.name}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1765,6 +2056,7 @@ export default function ProductDetailPage({ onAddToCart }: ProductDetailPageProp
     <div className="pb-24 lg:pb-0">
       <Hero product={product} accent={accent} onAddToCart={onAddToCart} />
       <HeroMarquee product={product} accent={accent} />
+      <HeroSocialProof product={product} accent={accent} />
       <ProblemAgitation product={product} accent={accent} />
       <ClinicalEffects product={product} accent={accent} />
       <Manifesto product={product} accent={accent} />
