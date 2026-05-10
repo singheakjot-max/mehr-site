@@ -557,8 +557,85 @@ function Hero({
   };
 
   return (
-    <section className="pt-20 md:pt-24 pb-10 md:pb-14" style={{ backgroundColor: '#FFFFFF' }}>
-      <div className="container-main">
+    <section
+      className="pt-14 md:pt-16 pb-10 md:pb-14 relative overflow-hidden"
+      style={{ backgroundColor: accent.soft }}
+    >
+      {/* Layered background ornaments — color blobs */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: '120px',
+          left: '-80px',
+          width: '320px',
+          height: '320px',
+          borderRadius: '50%',
+          backgroundColor: accent.hex,
+          opacity: 0.07,
+          zIndex: 0,
+        }}
+        aria-hidden
+      />
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          bottom: '-60px',
+          right: '-60px',
+          width: '280px',
+          height: '280px',
+          borderRadius: '50%',
+          backgroundColor: accent.hex,
+          opacity: 0.05,
+          zIndex: 0,
+        }}
+        aria-hidden
+      />
+
+      {/* Sparkle ornaments scattered */}
+      {[
+        { top: '14%', right: '12%', size: 22 },
+        { top: '38%', right: '6%', size: 16 },
+        { bottom: '22%', left: '42%', size: 18 },
+        { top: '58%', left: '4%', size: 14 },
+        { top: '8%', left: '34%', size: 14 },
+      ].map((s, i) => (
+        <span
+          key={i}
+          className="absolute pointer-events-none select-none"
+          style={{ ...s, color: accent.hex, fontSize: s.size, zIndex: 1 }}
+          aria-hidden
+        >
+          ✦
+        </span>
+      ))}
+
+      <div className="container-main relative" style={{ zIndex: 2 }}>
+        {/* Press strip — "AS SEEN IN" Forbes / Vogue / NYT */}
+        <div
+          className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2 py-3 px-4 mb-6 rounded-xl"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.7)',
+            backdropFilter: 'blur(4px)',
+            border: `1px solid ${accent.hex}1A`,
+          }}
+        >
+          <span className="font-body font-bold uppercase" style={{ fontSize: '10px', letterSpacing: '0.18em', color: 'var(--color-text-muted)' }}>
+            As seen in
+          </span>
+          <span style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '15px', fontWeight: 700, color: 'var(--color-text-strong)' }}>
+            Forbes
+          </span>
+          <span style={{ fontFamily: 'Georgia, serif', fontSize: '15px', fontWeight: 900, color: 'var(--color-text-strong)', letterSpacing: '0.02em' }}>
+            VOGUE
+          </span>
+          <span style={{ fontFamily: 'Georgia, serif', fontSize: '13.5px', fontWeight: 700, color: 'var(--color-text-strong)', letterSpacing: '0.02em' }}>
+            The New York Times
+          </span>
+          <span className="font-display" style={{ fontSize: '13px', fontWeight: 900, color: 'var(--color-text-strong)', letterSpacing: '-0.02em' }}>
+            WELL+GOOD
+          </span>
+        </div>
+
         <nav className="flex items-center gap-2 text-[12px] mb-4 md:mb-5" style={{ color: 'var(--color-text-muted)' }}>
           <Link to="/" className="hover:underline">Home</Link>
           <ChevronRight size={13} strokeWidth={1.5} />
@@ -567,72 +644,163 @@ function Hero({
           <span style={{ color: 'var(--color-text)' }}>{product.name}</span>
         </nav>
 
+        {/* Trust pills above the grid (visible on mobile + desktop) */}
+        <div className="flex flex-wrap items-center gap-2 mb-5">
+          <span
+            className="shadow-pop inline-flex items-center gap-1.5 font-body font-bold uppercase rounded-full"
+            style={{
+              backgroundColor: '#fff',
+              border: `1.5px solid ${accent.hex}`,
+              color: accent.hex,
+              fontSize: '11px',
+              letterSpacing: '0.06em',
+              padding: '5px 11px',
+            }}
+          >
+            ★★★★★ 4.8 · 14,847+ HAPPY
+          </span>
+          <span
+            className="shadow-pop inline-flex items-center gap-1 font-body font-bold uppercase rounded-full"
+            style={{
+              backgroundColor: accent.hex,
+              color: '#fff',
+              fontSize: '10.5px',
+              letterSpacing: '0.08em',
+              padding: '5px 11px',
+            }}
+          >
+            CARDIOLOGIST APPROVED
+          </span>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
           {/* ── Gallery column ── */}
           <div>
-            <div
-              className="rounded-2xl overflow-hidden mb-4 relative"
-              style={{ aspectRatio: '1/1', backgroundColor: 'var(--color-surface)' }}
-            >
-              <img
-                src={product.gallery[selectedImg]}
-                alt={`${product.name} — image ${selectedImg + 1} of ${product.gallery.length}`}
-                className="w-full h-full object-cover float-anim"
-              />
-              {/* Brand stamp — rotated burgundy/blue badge top-right corner */}
+            {/* Bottle card with stamps poking OUT of edges + color blob behind */}
+            <div className="relative" style={{ marginTop: '12px', marginBottom: '14px' }}>
+              {/* Color blob layer — behind everything */}
               <div
-                className="brand-stamp absolute pointer-events-none"
+                className="absolute pointer-events-none"
                 style={{
-                  top: '20px',
-                  right: '20px',
-                  width: 110,
-                  height: 110,
+                  top: '8%',
+                  left: '8%',
+                  width: '84%',
+                  height: '84%',
+                  borderRadius: '50%',
                   backgroundColor: accent.hex,
-                  color: '#fff',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  flexDirection: 'column',
-                  padding: '8px',
-                  textAlign: 'center',
-                  lineHeight: 1.05,
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                  opacity: 0.10,
+                  zIndex: 1,
                 }}
-              >
-                <span style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '-0.02em' }}>
-                  {product.slug === 'nattokinase' ? '10,800' : '500'}
-                </span>
-                <span style={{ fontSize: '10px', opacity: 0.95, marginTop: 2 }}>
-                  {product.slug === 'nattokinase' ? 'FU · CLINICAL' : 'MCG · CLINICAL'}
-                </span>
-                <span style={{ fontSize: '9px', opacity: 0.75, marginTop: 1 }}>DOSE</span>
-              </div>
-              {/* Bottom-left guarantee stamp */}
+                aria-hidden
+              />
               <div
-                className="brand-stamp absolute pointer-events-none"
-                style={{
-                  bottom: '20px',
-                  left: '20px',
-                  width: 90,
-                  height: 90,
-                  backgroundColor: '#fff',
-                  color: accent.hex,
-                  fontSize: '10px',
-                  fontWeight: 800,
-                  flexDirection: 'column',
-                  padding: '6px',
-                  textAlign: 'center',
-                  lineHeight: 1.05,
-                  border: `2px solid ${accent.hex}`,
-                  transform: 'rotate(8deg)',
-                  boxShadow: '0 6px 14px rgba(0,0,0,0.1)',
-                }}
+                className="shadow-card rounded-2xl overflow-visible relative"
+                style={{ aspectRatio: '1/1', backgroundColor: 'var(--color-surface)', border: `1px solid ${accent.hex}1F`, zIndex: 2 }}
               >
-                <span style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '-0.03em' }}>60</span>
-                <span style={{ fontSize: '9px', marginTop: 1 }}>DAY</span>
-                <span style={{ fontSize: '9px', marginTop: 1 }}>GUARANTEE</span>
+                {/* Bottle image — floating */}
+                <img
+                  src={product.gallery[selectedImg]}
+                  alt={`${product.name} — image ${selectedImg + 1} of ${product.gallery.length}`}
+                  className="w-full h-full object-cover float-anim rounded-2xl"
+                  style={{ position: 'relative', zIndex: 2 }}
+                />
+
+                {/* Top-right stamp — POKES OUT of edge */}
+                <div
+                  className="brand-stamp shadow-deep tilt-l absolute pointer-events-none"
+                  style={{
+                    top: '-18px',
+                    right: '-12px',
+                    width: 100,
+                    height: 100,
+                    backgroundColor: accent.hex,
+                    color: '#fff',
+                    flexDirection: 'column',
+                    padding: '8px',
+                    lineHeight: 1.05,
+                    zIndex: 8,
+                  }}
+                >
+                  <span style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1 }}>
+                    {product.slug === 'nattokinase' ? '10,800' : '500'}
+                  </span>
+                  <span style={{ fontSize: '8.5px', letterSpacing: '0.1em', marginTop: 3, opacity: 0.95 }}>
+                    {product.slug === 'nattokinase' ? 'FU · CLINICAL' : 'MCG · CLINICAL'}
+                  </span>
+                  <span style={{ fontSize: '7.5px', letterSpacing: '0.12em', marginTop: 1, opacity: 0.85 }}>DOSE</span>
+                </div>
+
+                {/* Bottom-left guarantee stamp — POKES OUT */}
+                <div
+                  className="brand-stamp shadow-deep tilt-r absolute pointer-events-none"
+                  style={{
+                    bottom: '-16px',
+                    left: '-10px',
+                    width: 92,
+                    height: 92,
+                    backgroundColor: '#fff',
+                    color: accent.hex,
+                    border: `2px solid ${accent.hex}`,
+                    flexDirection: 'column',
+                    padding: '6px',
+                    lineHeight: 1.05,
+                    zIndex: 8,
+                  }}
+                >
+                  <span style={{ fontSize: '24px', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1 }}>60</span>
+                  <span style={{ fontSize: '8px', letterSpacing: '0.1em', marginTop: 2 }}>DAY MONEY</span>
+                  <span style={{ fontSize: '8px', letterSpacing: '0.1em', marginTop: 1 }}>BACK</span>
+                </div>
+
+                {/* Right-mid ingredient callout — product-aware */}
+                <div
+                  className="shadow-pop hidden md:block absolute pointer-events-none rounded-lg"
+                  style={{
+                    top: '50%',
+                    right: '-26px',
+                    transform: 'translateY(-50%) rotate(2deg)',
+                    backgroundColor: '#fff',
+                    border: `1px solid ${accent.hex}33`,
+                    padding: '8px 10px',
+                    maxWidth: 110,
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    color: 'var(--color-text-strong)',
+                    lineHeight: 1.25,
+                    zIndex: 7,
+                  }}
+                >
+                  {product.slug === 'nattokinase' ? (
+                    <>← 5× stronger<br /><span style={{ color: accent.hex, fontWeight: 900 }}>than normal natto</span></>
+                  ) : (
+                    <>← Oral, no<br /><span style={{ color: accent.hex, fontWeight: 900 }}>needles needed</span></>
+                  )}
+                </div>
+
+                {/* Top-left "VEGAN ✓" callout */}
+                <div
+                  className="shadow-pop hidden md:block absolute pointer-events-none rounded-md"
+                  style={{
+                    top: '22%',
+                    left: '-22px',
+                    transform: 'rotate(-3deg)',
+                    backgroundColor: '#fff',
+                    border: `1px solid ${accent.hex}33`,
+                    padding: '5px 8px',
+                    fontSize: '10px',
+                    fontWeight: 800,
+                    color: accent.hex,
+                    letterSpacing: '0.08em',
+                    zIndex: 7,
+                  }}
+                >
+                  VEGAN ✓
+                </div>
               </div>
             </div>
-            <div className="flex gap-3 overflow-x-auto">
+
+            {/* Gallery thumbnails */}
+            <div className="flex gap-3 overflow-x-auto mt-4">
               {product.gallery.map((img, i) => (
                 <button
                   key={i}
@@ -650,12 +818,50 @@ function Hero({
                 </button>
               ))}
             </div>
+
+            {/* Doctor endorsement card — tilted */}
+            <div
+              className="shadow-card tilt-2 mt-5 rounded-xl bg-white p-3 flex items-center gap-3"
+              style={{ border: `1px solid ${accent.hex}22` }}
+            >
+              <div
+                className="rounded-full flex-shrink-0 flex items-center justify-center"
+                style={{ width: 44, height: 44, backgroundColor: accent.hex, color: '#fff', fontWeight: 800, fontSize: '14px' }}
+              >
+                DR
+              </div>
+              <div className="flex-1 leading-tight">
+                <div className="font-body font-bold uppercase" style={{ fontSize: '10.5px', letterSpacing: '0.06em', color: 'var(--color-text-strong)' }}>
+                  Dr. Sarah Kim, MD
+                </div>
+                <div className="font-body" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
+                  Cardiologist · 14 yr practice
+                </div>
+                <div
+                  className="font-body italic font-semibold"
+                  style={{ fontSize: '12px', color: accent.hex, marginTop: 2 }}
+                >
+                  &ldquo;What I take myself.&rdquo;
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* ── Buy box column ── */}
-          <div>
+          <div className="relative">
+            {/* Hand-drawn arrow pointing from headline area to bundle picker — desktop only */}
+            <svg
+              className="hidden lg:block absolute pointer-events-none"
+              style={{ top: '320px', right: '-30px', width: 70, height: 50, transform: 'rotate(-12deg)', zIndex: 5 }}
+              viewBox="0 0 70 50"
+              aria-hidden
+            >
+              <path d="M 5 30 Q 25 5, 60 25" stroke={accent.hex} strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="4 3" />
+              <path d="M 53 18 L 62 25 L 53 32" stroke={accent.hex} strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+
             <div className="lg:sticky lg:top-24">
-              {/* BIG social proof at top — Trustpilot + face row + count */}
+              {/* Trustpilot quick row — keeps the green pip badges */}
               <div className="flex items-center gap-3 mb-5">
                 <div className="flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map((i) => (
@@ -674,29 +880,53 @@ function Hero({
                 </div>
               </div>
 
+              {/* Mixed-case headline with sticker overlap */}
               <h1
-                className="font-display mb-3 uppercase"
+                className="font-display mb-3 relative"
                 style={{
-                  fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)',
-                  letterSpacing: '-0.03em',
+                  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+                  letterSpacing: '-0.045em',
                   lineHeight: 0.92,
                   color: 'var(--color-text-strong)',
                   fontWeight: 900,
                 }}
               >
-                {product.name}
+                <span style={{ textTransform: 'uppercase' }}>{product.name.split(' ')[0]}</span>{' '}
+                <span style={{ textTransform: 'none', fontWeight: 600 }}>{product.name.split(' ').slice(1).join(' ').toLowerCase()}</span>
+                <span style={{ display: 'block', height: '6px' }} />
+                <span style={{ color: accent.hex, fontStyle: 'italic', position: 'relative', display: 'inline-block', fontWeight: 800 }}>
+                  No BS.
+                  <span
+                    className="shadow-pop tilt-r absolute pointer-events-none"
+                    style={{
+                      top: '-26px',
+                      right: '-72px',
+                      backgroundColor: '#FFD700',
+                      color: accent.hex,
+                      fontStyle: 'normal',
+                      fontSize: '11px',
+                      fontWeight: 900,
+                      padding: '4px 9px',
+                      borderRadius: '6px',
+                      letterSpacing: '0.08em',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    ← FINALLY
+                  </span>
+                </span>
               </h1>
 
-              <p className="font-body mb-6" style={{ fontSize: '16px', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
+              <p className="font-body mb-5" style={{ fontSize: '16px', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
                 {HERO_SUBHEAD[product.slug] || product.tagline}
               </p>
 
-              {/* 4 outcome benefits with accent checks (cleaner, simpler) */}
-              <ul className="space-y-2.5 mb-7 pb-7" style={{ borderBottom: '1px solid var(--color-border)' }}>
+              {/* Outcome benefits */}
+              <ul className="space-y-2.5 mb-7 pb-7" style={{ borderBottom: `1px solid ${accent.hex}22` }}>
                 {benefits.map((b) => (
-                  <li key={b} className="flex items-start gap-2.5">
+                  <li key={b} className="flex items-center gap-2.5">
                     <span
-                      className="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center mt-1"
+                      className="flex-shrink-0 w-[18px] h-[18px] rounded-full inline-flex items-center justify-center"
                       style={{ backgroundColor: accent.hex }}
                     >
                       <Check size={10} strokeWidth={3} style={{ color: '#fff' }} />
@@ -708,131 +938,173 @@ function Hero({
                 ))}
               </ul>
 
-              {/* Bundle pricing tiers — premium styling */}
-              <div className="flex items-center justify-between mb-3">
-                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--color-text-muted)' }}>
-                  Choose your plan
-                </p>
-                <p className="font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-                  Free shipping on every plan
-                </p>
-              </div>
-              <div className="space-y-3 mb-5">
-                {bundles.map((b, i) => {
-                  const isSelected = i === selectedBundleIdx;
-                  const displayPerBottle = subscription ? +(b.perBottle * (1 - product.subscriptionDiscount / 100)).toFixed(2) : b.perBottle;
-                  const fullTotal = product.price * b.qty;
-                  const youSave = fullTotal - b.total;
-                  const pctOff = b.qty > 1 ? Math.round((youSave / fullTotal) * 100) : 0;
-                  return (
+              {/* Bundle picker — wrapped with ghost-stack offset duplicate behind */}
+              <div className="relative">
+                <div
+                  className="absolute pointer-events-none rounded-2xl"
+                  style={{
+                    inset: '8px -8px -8px 8px',
+                    backgroundColor: accent.hex,
+                    opacity: 0.10,
+                    zIndex: 0,
+                  }}
+                  aria-hidden
+                />
+                <div className="relative" style={{ zIndex: 1 }}>
+                  {/* Bundle pricing tiers */}
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--color-text-muted)' }}>
+                      Choose your plan
+                    </p>
+                    <p className="font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
+                      Free shipping on every plan
+                    </p>
+                  </div>
+                  <div className="space-y-3 mb-5">
+                    {bundles.map((b, i) => {
+                      const isSelected = i === selectedBundleIdx;
+                      const isMostPopular = b.badge?.toLowerCase().includes('popular');
+                      const displayPerBottle = subscription ? +(b.perBottle * (1 - product.subscriptionDiscount / 100)).toFixed(2) : b.perBottle;
+                      const fullTotal = product.price * b.qty;
+                      const youSave = fullTotal - b.total;
+                      const pctOff = b.qty > 1 ? Math.round((youSave / fullTotal) * 100) : 0;
+                      // Most popular: full burgundy/blue flood when selected
+                      const flood = isSelected && isMostPopular;
+                      return (
+                        <button
+                          key={b.qty}
+                          onClick={() => setSelectedBundleIdx(i)}
+                          className="w-full text-left rounded-xl p-4 md:p-5 transition-all focus-ring relative shadow-pop"
+                          style={{
+                            backgroundColor: flood ? accent.hex : isSelected ? `${accent.hex}10` : '#fff',
+                            border: flood ? `2px solid ${accent.hex}` : isSelected ? `2px solid ${accent.hex}` : '2px solid var(--color-border)',
+                            color: flood ? '#fff' : 'inherit',
+                          }}
+                        >
+                          {b.badge && (
+                            <span
+                              className="absolute font-body font-black uppercase shadow-pop tilt-r"
+                              style={{
+                                top: '-13px',
+                                right: '14px',
+                                backgroundColor: '#FFD700',
+                                color: accent.hex,
+                                fontSize: '10px',
+                                letterSpacing: '0.08em',
+                                padding: '4px 9px',
+                                borderRadius: '6px',
+                              }}
+                            >
+                              ★ {isMostPopular ? 'MOST BOUGHT' : b.badge} ★
+                            </span>
+                          )}
+                          <div className="flex items-center gap-4">
+                            <span
+                              className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all"
+                              style={{
+                                border: isSelected ? `5px solid ${flood ? '#fff' : accent.hex}` : '2px solid var(--color-border)',
+                                backgroundColor: flood ? accent.hex : '#fff',
+                              }}
+                            />
+                            <div className="flex-1 min-w-0">
+                              <p className="font-body font-bold" style={{ fontSize: '14.5px', color: flood ? '#fff' : 'var(--color-text-strong)' }}>
+                                {b.label}
+                              </p>
+                              {pctOff > 0 ? (
+                                <p className="font-body text-[12px] mt-0.5 font-medium" style={{ color: flood ? 'rgba(255,255,255,0.9)' : accent.hex }}>
+                                  Save ${youSave.toFixed(0)} · {pctOff}% off
+                                </p>
+                              ) : (
+                                <p className="font-body text-[12px] mt-0.5" style={{ color: flood ? 'rgba(255,255,255,0.7)' : 'var(--color-text-muted)' }}>
+                                  Try it once
+                                </p>
+                              )}
+                            </div>
+                            <div className="text-right flex-shrink-0">
+                              <p className="font-display tabular" style={{ fontSize: '20px', fontWeight: 900, color: flood ? '#fff' : 'var(--color-text-strong)', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                                ${displayPerBottle}
+                              </p>
+                              <p className="font-body text-[11px] mt-0.5" style={{ color: flood ? 'rgba(255,255,255,0.75)' : 'var(--color-text-muted)' }}>
+                                / bottle
+                              </p>
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Subscribe & save toggle */}
+                  <div className="grid grid-cols-2 gap-2 p-1 rounded-lg mb-3" style={{ backgroundColor: '#fff', border: `1px solid ${accent.hex}1A` }}>
                     <button
-                      key={b.qty}
-                      onClick={() => setSelectedBundleIdx(i)}
-                      className="w-full text-left rounded-xl p-4 md:p-5 transition-all focus-ring relative"
+                      onClick={() => setSubscription(false)}
+                      className="py-2.5 px-3 rounded-md font-body text-[13px] font-medium transition-all"
                       style={{
-                        backgroundColor: isSelected ? `${accent.hex}0A` : 'var(--color-bg)',
-                        border: isSelected ? `2px solid ${accent.hex}` : '2px solid var(--color-border)',
+                        backgroundColor: !subscription ? 'var(--color-text-strong)' : 'transparent',
+                        color: !subscription ? 'var(--color-text-inverse)' : 'var(--color-text-muted)',
                       }}
                     >
-                      {b.badge && (
-                        <span
-                          className="absolute -top-2.5 left-4 font-body text-[10px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full"
-                          style={{ backgroundColor: accent.hex, color: '#fff', letterSpacing: '0.1em' }}
-                        >
-                          {b.badge}
-                        </span>
-                      )}
-                      <div className="flex items-center gap-4">
-                        <span
-                          className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all"
-                          style={{
-                            border: isSelected ? `5px solid ${accent.hex}` : '2px solid var(--color-border)',
-                            backgroundColor: 'var(--color-bg)',
-                          }}
-                        />
-                        <div className="flex-1 min-w-0">
-                          <p className="font-body text-[14.5px] font-semibold" style={{ color: 'var(--color-text-strong)' }}>
-                            {b.label}
-                          </p>
-                          {pctOff > 0 ? (
-                            <p className="font-body text-[12px] mt-0.5 font-medium" style={{ color: accent.hex }}>
-                              Save ${youSave.toFixed(0)} · {pctOff}% off
-                            </p>
-                          ) : (
-                            <p className="font-body text-[12px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                              Try it once
-                            </p>
-                          )}
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="font-display tabular" style={{ fontSize: '20px', fontWeight: 900, color: 'var(--color-text-strong)', letterSpacing: '-0.01em', lineHeight: 1 }}>
-                            ${displayPerBottle}
-                          </p>
-                          <p className="font-body text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                            / bottle
-                          </p>
-                        </div>
-                      </div>
+                      One-time purchase
                     </button>
-                  );
-                })}
+                    <button
+                      onClick={() => setSubscription(true)}
+                      className="py-2.5 px-3 rounded-md font-body text-[13px] font-medium transition-all flex items-center justify-center gap-1.5"
+                      style={{
+                        backgroundColor: subscription ? 'var(--color-text-strong)' : 'transparent',
+                        color: subscription ? 'var(--color-text-inverse)' : 'var(--color-text-muted)',
+                      }}
+                    >
+                      Subscribe & save {product.subscriptionDiscount}%
+                    </button>
+                  </div>
+
+                  {/* Add to cart */}
+                  <button
+                    onClick={handleAdd}
+                    disabled={adding}
+                    className="btn-premium shadow-deep w-full py-[18px] px-6 rounded-lg font-body text-[15px] font-bold uppercase tracking-[0.1em] transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3 mb-3"
+                    style={{ backgroundColor: 'var(--color-text-strong)', color: 'var(--color-text-inverse)' }}
+                  >
+                    <AnimatePresence mode="wait" initial={false}>
+                      {adding ? (
+                        <motion.span key="added" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
+                          <Check size={16} />
+                          Added to cart
+                        </motion.span>
+                      ) : (
+                        <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
+                          {ctaLabel}
+                          <span className="opacity-60">—</span>
+                          <span className="tabular">${total}</span>
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </button>
+                </div>
               </div>
 
-              {/* Subscribe & save toggle */}
-              <div className="grid grid-cols-2 gap-2 p-1 rounded-lg mb-5" style={{ backgroundColor: 'var(--color-surface)' }}>
-                <button
-                  onClick={() => setSubscription(false)}
-                  className="py-2.5 px-3 rounded-md font-body text-[13px] font-medium transition-all"
-                  style={{
-                    backgroundColor: !subscription ? 'var(--color-text-strong)' : 'transparent',
-                    color: !subscription ? 'var(--color-text-inverse)' : 'var(--color-text-muted)',
-                  }}
-                >
-                  One-time purchase
-                </button>
-                <button
-                  onClick={() => setSubscription(true)}
-                  className="py-2.5 px-3 rounded-md font-body text-[13px] font-medium transition-all flex items-center justify-center gap-1.5"
-                  style={{
-                    backgroundColor: subscription ? 'var(--color-text-strong)' : 'transparent',
-                    color: subscription ? 'var(--color-text-inverse)' : 'var(--color-text-muted)',
-                  }}
-                >
-                  Subscribe & save {product.subscriptionDiscount}%
-                </button>
-              </div>
-
-              {/* Add to cart */}
-              <button
-                onClick={handleAdd}
-                disabled={adding}
-                className="btn-premium w-full py-[18px] px-6 rounded-lg font-body text-[15px] font-bold uppercase tracking-[0.1em] transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3 mb-3"
-                style={{ backgroundColor: 'var(--color-text-strong)', color: 'var(--color-text-inverse)' }}
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  {adding ? (
-                    <motion.span key="added" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
-                      <Check size={16} />
-                      Added to cart
-                    </motion.span>
-                  ) : (
-                    <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
-                      {ctaLabel}
-                      <span className="opacity-60">—</span>
-                      <span className="tabular">${total}</span>
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </button>
-
-              {/* 60-day guarantee strip — emphasized, just under CTA */}
+              {/* Subscribe ribbon — dashed border, tilted */}
               <div
-                className="flex items-center gap-3 p-3 rounded-lg mb-6"
+                className="shadow-pop tilt-3 mt-4 px-3 py-2 rounded-md text-center font-body font-bold uppercase"
+                style={{
+                  border: `1.5px dashed ${accent.hex}`,
+                  backgroundColor: '#fff',
+                  color: accent.hex,
+                  fontSize: '11px',
+                  letterSpacing: '0.06em',
+                }}
+              >
+                🎁 Subscribe & save {product.subscriptionDiscount}% · Free shaker ($20)
+              </div>
+
+              {/* 60-day guarantee strip */}
+              <div
+                className="flex items-center gap-3 p-3 rounded-lg mt-5 mb-6"
                 style={{ backgroundColor: `${accent.hex}0F`, border: `1px solid ${accent.hex}25` }}
               >
                 <ShieldCheck size={18} style={{ color: accent.hex, flexShrink: 0 }} />
                 <p className="font-body text-[13px]" style={{ color: 'var(--color-text-strong)', lineHeight: 1.45 }}>
-                  <strong style={{ fontWeight: 600 }}>60-day money-back guarantee.</strong>{' '}
+                  <strong style={{ fontWeight: 700 }}>60-day money-back guarantee.</strong>{' '}
                   <span style={{ color: 'var(--color-text-muted)' }}>If you don&apos;t feel it, send the bottle back — even if it&apos;s empty.</span>
                 </p>
               </div>
@@ -844,7 +1116,7 @@ function Hero({
                 <span className="flex items-center gap-1.5"><ShieldCheck size={13} /> 3rd-party tested</span>
               </div>
 
-              {/* Accordion rows — what's inside / timeline / what makes us different / shipping */}
+              {/* Accordion rows */}
               <HeroAccordion product={product} accent={accent} onOpenCOA={() => setCoaOpen(true)} />
             </div>
           </div>
@@ -869,19 +1141,19 @@ function HeroMarquee({ product, accent }: { product: Product; accent: { hex: str
   const items = MARQUEE_ITEMS[product.slug] || [];
   return (
     <div
-      className="py-7 md:py-9 border-y overflow-hidden"
-      style={{ backgroundColor: accent.deep, borderColor: 'rgba(255,255,255,0.08)' }}
+      className="py-5 md:py-6 border-y overflow-hidden relative"
+      style={{ backgroundColor: '#0A0A0A', borderColor: 'rgba(255,255,255,0.08)' }}
     >
       <Marquee
-        speed={45}
+        speed={42}
         items={items.map((label) => (
           <span
             key={label}
             className="font-display uppercase text-white"
             style={{
-              fontSize: 'clamp(28px, 4vw, 56px)',
+              fontSize: 'clamp(26px, 3.6vw, 48px)',
               fontWeight: 900,
-              letterSpacing: '-0.01em',
+              letterSpacing: '-0.025em',
               lineHeight: 1,
             }}
           >
@@ -890,9 +1162,11 @@ function HeroMarquee({ product, accent }: { product: Product; accent: { hex: str
         ))}
         separator={
           <span
-            className="inline-block rounded-full"
-            style={{ width: 14, height: 14, backgroundColor: accent.hex, marginInline: '20px' }}
-          />
+            className="inline-block"
+            style={{ color: accent.hex, fontSize: 'clamp(22px, 3vw, 34px)', marginInline: '24px', lineHeight: 1 }}
+          >
+            ✦
+          </span>
         }
       />
     </div>
@@ -934,18 +1208,25 @@ function HeroSocialProof({ product, accent }: { product: Product; accent: { hex:
   const avg = product.reviews.length ? product.reviews.reduce((s, r) => s + r.rating, 0) / product.reviews.length : 4.83;
 
   return (
-    <section className="py-12 md:py-16" style={{ backgroundColor: 'var(--color-bg)' }}>
+    <section className="py-12 md:py-16 relative overflow-hidden" style={{ backgroundColor: 'var(--color-bg)' }}>
+      {/* Sparkle ornaments */}
+      <span className="absolute pointer-events-none" style={{ top: '8%', left: '6%', fontSize: 18, color: accent.hex, opacity: 0.6 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '14%', right: '7%', fontSize: 22, color: accent.hex, opacity: 0.5 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '40%', right: '14%', fontSize: 14, color: accent.hex, opacity: 0.5 }} aria-hidden>✦</span>
+
       <div className="container-main">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7 md:mb-9">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-9 md:mb-12">
           <div>
             <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-3" style={{ color: accent.hex }}>
               Real customers · Real results
             </p>
             <h2
               className="font-display"
-              style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', letterSpacing: '-0.02em', lineHeight: 1.1, fontWeight: 900, color: 'var(--color-text-strong)' }}
+              style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', letterSpacing: '-0.04em', lineHeight: 1.0, fontWeight: 900, color: 'var(--color-text-strong)' }}
             >
-              Trusted by 14,847+ daily customers.
+              Trusted by{' '}
+              <span style={{ color: accent.hex, fontStyle: 'italic' }}>14,847+</span>
+              <br />daily customers.
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -967,46 +1248,93 @@ function HeroSocialProof({ product, accent }: { product: Product; accent: { hex:
           </div>
         </div>
 
-        {/* UGC card row — real customer photos */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-          {ugc.map((r, i) => (
-            <div key={i} className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}>
+        {/* Polaroid UGC row — real customer photos with rotation, white frames, speech bubbles */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">
+          {ugc.map((r, i) => {
+            const rotations = ['-2deg', '1.5deg', '-1deg', '2deg', '-2.5deg'];
+            const rot = rotations[i % rotations.length];
+            const showMeToo = i === 0;
+            const showStars = i === 2;
+            return (
               <div
-                className="w-full relative overflow-hidden"
-                style={{ aspectRatio: '4/5' }}
+                key={i}
+                className="polaroid relative"
+                style={{ transform: `rotate(${rot})`, marginTop: i % 2 ? '12px' : '0' }}
               >
-                <img
-                  src={r.photo}
-                  alt={`${r.name} — verified customer`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                {/* Verified pill overlay */}
-                <span
-                  className="absolute top-3 right-3 font-body text-[10px] font-semibold uppercase tracking-[0.1em] px-2 py-0.5 rounded-full"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.95)', color: '#00B67A', backdropFilter: 'blur(4px)' }}
-                >
-                  ✓ Verified
-                </span>
-              </div>
-              <div className="p-3 md:p-4">
-                <div className="flex items-center gap-0.5 mb-1.5">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} size={11} fill={s <= r.rating ? accent.hex : 'transparent'} stroke={accent.hex} strokeWidth={1.5} />
-                  ))}
+                <div className="w-full relative overflow-hidden rounded-sm" style={{ aspectRatio: '4/5', backgroundColor: '#f5f5f5' }}>
+                  <img
+                    src={r.photo}
+                    alt={`${r.name} — verified customer`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <span
+                    className="absolute top-2 right-2 font-body text-[9px] font-bold uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-full"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.96)', color: '#00B67A' }}
+                  >
+                    ✓ Verified
+                  </span>
+
+                  {/* Speech bubble overlays */}
+                  {showMeToo && (
+                    <div
+                      className="shadow-pop absolute font-body font-black uppercase"
+                      style={{
+                        top: '-8px',
+                        left: '-12px',
+                        transform: 'rotate(-12deg)',
+                        backgroundColor: '#FFD700',
+                        color: accent.hex,
+                        fontSize: '10px',
+                        padding: '4px 9px',
+                        borderRadius: '999px',
+                        letterSpacing: '0.06em',
+                        zIndex: 5,
+                      }}
+                    >
+                      ME TOO!
+                    </div>
+                  )}
+                  {showStars && (
+                    <div
+                      className="shadow-pop absolute font-body font-black"
+                      style={{
+                        top: '-10px',
+                        right: '-8px',
+                        transform: 'rotate(8deg)',
+                        backgroundColor: '#fff',
+                        color: accent.hex,
+                        fontSize: '11px',
+                        padding: '4px 8px',
+                        borderRadius: '999px',
+                        letterSpacing: '0.08em',
+                        border: `1px solid ${accent.hex}`,
+                        zIndex: 5,
+                      }}
+                    >
+                      ★★★★★
+                    </div>
+                  )}
                 </div>
-                <p
-                  className="font-body text-[13px] font-semibold mb-1 line-clamp-2"
-                  style={{ color: 'var(--color-text-strong)', lineHeight: 1.35 }}
-                >
-                  {r.quote || 'Real change, real fast.'}
-                </p>
-                <p className="font-body text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
-                  — {r.name}
-                </p>
+                <div className="pt-3 pb-1 px-1">
+                  <div className="flex items-center gap-0.5 mb-1">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} size={10} fill={s <= r.rating ? accent.hex : 'transparent'} stroke={accent.hex} strokeWidth={1.5} />
+                    ))}
+                  </div>
+                  <p
+                    className="font-body text-[13px] font-bold mb-1 line-clamp-2"
+                    style={{ color: 'var(--color-text-strong)', lineHeight: 1.3 }}
+                  >
+                    {r.quote || 'Real change, real fast.'}
+                  </p>
+                  <p className="font-body text-[11.5px]" style={{ color: 'var(--color-text-muted)' }}>
+                    — {r.name}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -1047,6 +1375,27 @@ function Manifesto({ product, accent }: { product: Product; accent: { hex: strin
       </div>
 
       <div className="container-main relative">
+        {/* Sparkles scattered */}
+        <span className="absolute pointer-events-none" style={{ top: '5%', left: '46%', fontSize: 22, color: '#fff', opacity: 0.3 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ top: '40%', right: '12%', fontSize: 16, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ bottom: '30%', left: '8%', fontSize: 18, color: '#fff', opacity: 0.35 }} aria-hidden>✦</span>
+
+        {/* DAILY ESSENTIAL sticker tilted above headline */}
+        <div
+          className="brand-stamp shadow-deep tilt-l mb-6"
+          style={{
+            backgroundColor: '#FFD700',
+            color: accent.hex,
+            padding: '8px 16px',
+            fontSize: '13px',
+            fontWeight: 900,
+            letterSpacing: '0.1em',
+            display: 'inline-flex',
+          }}
+        >
+          ✦ DAILY ESSENTIAL ✦
+        </div>
+
         <Reveal>
           <p className="font-body text-[11px] font-semibold uppercase tracking-[0.2em] mb-6 inline-flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-white" />
@@ -1056,49 +1405,60 @@ function Manifesto({ product, accent }: { product: Product; accent: { hex: strin
             className="font-display max-w-4xl mb-8 text-balance"
             style={{
               fontSize: 'clamp(3.5rem, 7.5vw, 6.5rem)',
-              letterSpacing: '-0.035em',
-              lineHeight: 0.98,
+              letterSpacing: '-0.045em',
+              lineHeight: 0.96,
               fontWeight: 900,
               color: '#fff',
             }}
           >
             {data.headline}{' '}
-            <span style={{ opacity: 0.55 }}>{data.emphasis}</span>
+            <span style={{ opacity: 0.55, fontStyle: 'italic', fontWeight: 700 }}>{data.emphasis}</span>
           </h2>
           <p className="font-body max-w-2xl mb-12 md:mb-16" style={{ fontSize: 'clamp(15px, 1.3vw, 17px)', lineHeight: 1.65, color: 'rgba(255,255,255,0.85)' }}>
             {data.body}
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 pt-10" style={{ borderTop: '1px solid rgba(255,255,255,0.18)' }}>
-          {data.stats.map((stat, i) => (
-            <Reveal key={i} delay={i * 0.12}>
-              <div>
-                <p
-                  className="font-display tabular mb-2"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 pt-10" style={{ borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+          {data.stats.map((stat, i) => {
+            const tilts = ['rotate(-2deg)', 'rotate(1.5deg)', 'rotate(-1deg)'];
+            return (
+              <Reveal key={i} delay={i * 0.12}>
+                <div
+                  className="rounded-2xl p-6 md:p-7 shadow-deep"
                   style={{
-                    fontSize: 'clamp(3rem, 6vw, 5rem)',
-                    fontWeight: 900,
-                    letterSpacing: '-0.04em',
-                    lineHeight: 0.95,
-                    color: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    backdropFilter: 'blur(4px)',
+                    transform: tilts[i % 3],
                   }}
                 >
-                  <AnimatedCounter
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    decimals={Number.isInteger(stat.value) ? 0 : 1}
-                  />
-                </p>
-                <p
-                  className="font-body uppercase tracking-[0.15em]"
-                  style={{ fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.8)' }}
-                >
-                  {stat.label}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+                  <p
+                    className="font-display tabular mb-2"
+                    style={{
+                      fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                      fontWeight: 900,
+                      letterSpacing: '-0.045em',
+                      lineHeight: 0.95,
+                      color: '#fff',
+                    }}
+                  >
+                    <AnimatedCounter
+                      value={stat.value}
+                      suffix={stat.suffix}
+                      decimals={Number.isInteger(stat.value) ? 0 : 1}
+                    />
+                  </p>
+                  <p
+                    className="font-body uppercase tracking-[0.15em]"
+                    style={{ fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.85)' }}
+                  >
+                    {stat.label}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -1723,51 +2083,94 @@ function Receipts({ product, accent }: { product: Product; accent: { hex: string
   ];
 
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="container-main">
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: accent.soft }}>
+      {/* Sparkles */}
+      <span className="absolute pointer-events-none" style={{ top: '8%', left: '8%', fontSize: 18, color: accent.hex, opacity: 0.5 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '20%', right: '10%', fontSize: 16, color: accent.hex, opacity: 0.5 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '12%', left: '32%', fontSize: 14, color: accent.hex, opacity: 0.4 }} aria-hidden>✦</span>
+
+      <div className="container-main relative">
         <Reveal className="text-center mb-12 md:mb-16">
-          <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: 'var(--color-text-muted)' }}>
-            The receipts
-          </p>
-          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)', letterSpacing: '-0.02em', lineHeight: 1.15, color: 'var(--color-text-strong)' }}>
-            Nothing to <span style={{ fontWeight: 600 }}>hide.</span>
+          <div
+            className="brand-stamp shadow-pop tilt-r mb-5"
+            style={{
+              backgroundColor: accent.hex,
+              color: '#fff',
+              padding: '7px 14px',
+              fontSize: '11px',
+              fontWeight: 900,
+              letterSpacing: '0.12em',
+              display: 'inline-flex',
+            }}
+          >
+            ✓ THE RECEIPTS
+          </div>
+          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1.0, fontWeight: 900, color: 'var(--color-text-strong)' }}>
+            Nothing to <span style={{ color: accent.hex, fontStyle: 'italic' }}>hide.</span>
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          {items.map((item, idx) => (
-            <Reveal key={item.title} delay={idx * 0.08}>
-              <div className="rounded-xl h-full overflow-hidden" style={{ backgroundColor: 'var(--color-bg-soft)', border: '1px solid var(--color-border)' }}>
-                <div className="w-full overflow-hidden" style={{ aspectRatio: '4/3' }}>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-7">
-                  <div className="h-1 w-10 mb-5" style={{ backgroundColor: accent.hex }} />
-                  <h3 className="font-display mb-3" style={{ fontSize: '19px', fontWeight: 800, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
-                    {item.title}
-                  </h3>
-                  <p className="font-body text-[14px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.65 }}>
-                    {item.body}
-                  </p>
-                  {item.cta && (
-                    <button
-                      onClick={item.cta.onClick}
-                      className="inline-flex items-center gap-1.5 font-body text-[13px] font-medium mt-4 transition-opacity hover:opacity-70"
-                      style={{ color: accent.hex }}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+          {items.map((item, idx) => {
+            const tilts = ['rotate(-1.5deg)', 'rotate(1deg)', 'rotate(-1deg)'];
+            return (
+              <Reveal key={item.title} delay={idx * 0.08}>
+                <div
+                  className="rounded-2xl h-full overflow-hidden shadow-card"
+                  style={{
+                    backgroundColor: '#fff',
+                    border: `1px solid ${accent.hex}22`,
+                    transform: tilts[idx % 3],
+                  }}
+                >
+                  <div className="w-full overflow-hidden relative" style={{ aspectRatio: '4/3' }}>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <span
+                      className="absolute font-body font-black uppercase shadow-pop"
+                      style={{
+                        top: 12,
+                        right: 12,
+                        backgroundColor: '#fff',
+                        color: accent.hex,
+                        fontSize: '10px',
+                        letterSpacing: '0.08em',
+                        padding: '4px 9px',
+                        borderRadius: '999px',
+                        border: `1.5px solid ${accent.hex}`,
+                        transform: 'rotate(8deg)',
+                      }}
                     >
-                      {item.cta.label}
-                      <ArrowRight size={13} strokeWidth={1.75} />
-                    </button>
-                  )}
+                      0{idx + 1} / 03
+                    </span>
+                  </div>
+                  <div className="p-7">
+                    <div className="h-1 w-10 mb-5" style={{ backgroundColor: accent.hex }} />
+                    <h3 className="font-display mb-3" style={{ fontSize: '22px', fontWeight: 900, color: 'var(--color-text-strong)', letterSpacing: '-0.025em' }}>
+                      {item.title}
+                    </h3>
+                    <p className="font-body text-[14px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.65 }}>
+                      {item.body}
+                    </p>
+                    {item.cta && (
+                      <button
+                        onClick={item.cta.onClick}
+                        className="inline-flex items-center gap-1.5 font-body text-[13px] font-bold mt-4 transition-opacity hover:opacity-70"
+                        style={{ color: accent.hex }}
+                      >
+                        {item.cta.label}
+                        <ArrowRight size={13} strokeWidth={1.75} />
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
       <COAModal isOpen={coaOpen} onClose={() => setCoaOpen(false)} productName={product.name} coaUrl={product.coaUrl} coaLabel={product.coaLabel} />
@@ -1783,19 +2186,35 @@ function Directions({ product, accent }: { product: Product; accent: { hex: stri
   const dosePhrase = product.servingSize.replace(/\s*capsules?\b/i, (m) => `${m}.`);
 
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-soft)' }}>
-      <div className="container-narrow text-center">
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#0A0A0A', color: '#fff' }}>
+      <span className="absolute pointer-events-none" style={{ top: '12%', left: '12%', fontSize: 22, color: accent.hex, opacity: 0.7 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '30%', right: '14%', fontSize: 16, color: accent.hex, opacity: 0.6 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '18%', left: '24%', fontSize: 18, color: accent.hex, opacity: 0.6 }} aria-hidden>✦</span>
+
+      <div className="container-narrow text-center relative">
         <Reveal>
-          <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-6" style={{ color: accent.hex }}>
-            Directions
-          </p>
+          <div
+            className="brand-stamp shadow-deep tilt-l mb-8"
+            style={{
+              backgroundColor: accent.hex,
+              color: '#fff',
+              padding: '8px 16px',
+              fontSize: '12px',
+              fontWeight: 900,
+              letterSpacing: '0.12em',
+              display: 'inline-flex',
+            }}
+          >
+            ✦ HOW TO TAKE IT ✦
+          </div>
           <h2
             className="font-display mb-8"
-            style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
+            style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', letterSpacing: '-0.04em', lineHeight: 1.0, fontWeight: 900, color: '#fff' }}
           >
-            {dosePhrase} With breakfast. <span style={{ fontWeight: 600 }}>Daily.</span>
+            {dosePhrase} With breakfast.{' '}
+            <span style={{ color: accent.hex, fontStyle: 'italic' }}>Daily.</span>
           </h2>
-          <p className="font-body" style={{ fontSize: '16px', lineHeight: 1.65, color: 'var(--color-text-muted)' }}>
+          <p className="font-body max-w-xl mx-auto" style={{ fontSize: '16px', lineHeight: 1.65, color: 'rgba(255,255,255,0.75)' }}>
             {product.howToUse}
           </p>
         </Reveal>

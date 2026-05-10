@@ -34,8 +34,8 @@
     --color-product-bpc-soft: #F2F4FA;
 
     /* ── Font Tokens ─────────────────────────────────────────── */
-    --font-display: 'Big Shoulders Display', 'Impact', 'Helvetica Neue', sans-serif;
-    --font-ui: 'Space Grotesk', 'Inter', sans-serif;
+    --font-display: 'Inter', 'Helvetica Neue', sans-serif;
+    --font-ui: 'Inter', 'Helvetica Neue', sans-serif;
     --font-body: 'Inter', 'Helvetica Neue', sans-serif;
 
     /* ── Radius Tokens ───────────────────────────────────────── */
@@ -137,7 +137,7 @@
   .font-display {
     font-family: var(--font-display);
     font-optical-sizing: auto;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
   }
 
   .font-ui {
@@ -148,7 +148,35 @@
     font-family: var(--font-body);
   }
 
-  /* ── Brand Stamps — rotated circular badges (SpoiledChild move) ─── */
+  /* ── Layered Shadows — for the "popout" effect across cards ───── */
+  .shadow-pop {
+    box-shadow: 0 6px 14px rgba(58, 15, 24, 0.18), 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .shadow-card {
+    box-shadow: 0 8px 20px rgba(58, 15, 24, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  .shadow-deep {
+    box-shadow: 0 14px 30px rgba(58, 15, 24, 0.22);
+  }
+  .shadow-pop-blue {
+    box-shadow: 0 6px 14px rgba(15, 26, 63, 0.20), 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .shadow-card-blue {
+    box-shadow: 0 8px 20px rgba(15, 26, 63, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  .shadow-deep-blue {
+    box-shadow: 0 14px 30px rgba(15, 26, 63, 0.25);
+  }
+
+  /* ── Tilt utilities (for stickers, polaroids, ribbons) ───────── */
+  .tilt-l { transform: rotate(-9deg); }
+  .tilt-r { transform: rotate(8deg); }
+  .tilt-2 { transform: rotate(-2deg); }
+  .tilt-3 { transform: rotate(3deg); }
+  .tilt-12 { transform: rotate(-12deg); }
+  .tilt-8 { transform: rotate(8deg); }
+
+  /* ── Brand Stamps — rotated circular badges ───────────────────── */
   .brand-stamp {
     display: inline-flex;
     align-items: center;
@@ -157,10 +185,9 @@
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    font-family: var(--font-ui);
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 800;
     line-height: 1;
-    transform: rotate(-8deg);
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
@@ -178,14 +205,29 @@
     animation: stamp-spin 22s linear infinite;
   }
 
-  /* ── Floating bottle animation ───────────────────────────── */
+  /* ── Floating bottle animation ──────────────────────────────── */
   @keyframes float-bottle {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-14px) rotate(0.5deg); }
+    50% { transform: translateY(-12px) rotate(0.4deg); }
   }
 
   .float-anim {
     animation: float-bottle 7s ease-in-out infinite;
+  }
+
+  /* ── Wiggle animation for stickers/badges ──────────────────── */
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-9deg); }
+    50% { transform: rotate(-5deg); }
+  }
+  .wiggle-anim {
+    animation: wiggle 3.5s ease-in-out infinite;
+  }
+
+  /* ── Marquee scroll animation ─────────────────────────────── */
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
   /* ── Squiggle hand-drawn underline ────────────────────────── */
@@ -206,6 +248,18 @@
   }
   .squiggle-underline-blue::after {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M0 4 Q 25 0, 50 4 T 100 4 T 150 4 T 200 4' stroke='%231E2F6B' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>");
+  }
+
+  /* ── Polaroid frame for UGC cards ──────────────────────────── */
+  .polaroid {
+    background: #fff;
+    padding: 6px 6px 12px;
+    border-radius: 4px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    transition: transform 0.3s ease;
+  }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.04);
   }
 
   .text-muted {
