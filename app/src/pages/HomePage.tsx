@@ -34,41 +34,118 @@ const staggerContainer = {
    "The world's first daily foundational peptides." */
 function CategoryPitchSection() {
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-soft)' }}>
-      <div className="container-main">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5 }}
-            className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] mb-5"
-            style={{ color: 'var(--color-text-muted)' }}
+    <section
+      className="section-padding relative overflow-hidden"
+      style={{ backgroundColor: '#0A0A0A', color: '#fff' }}
+    >
+      {/* Giant ghost outline number */}
+      <div
+        className="absolute inset-0 pointer-events-none flex items-center justify-end opacity-[0.05]"
+        aria-hidden
+      >
+        <span
+          className="font-display pr-[3vw]"
+          style={{
+            fontSize: 'clamp(20rem, 50vw, 50rem)',
+            fontWeight: 800,
+            letterSpacing: '-0.05em',
+            lineHeight: 0.8,
+            color: '#fff',
+            WebkitTextStroke: '1.5px #fff',
+          }}
+        >
+          01
+        </span>
+      </div>
+
+      {/* Sparkles */}
+      <span className="absolute pointer-events-none" style={{ top: '12%', left: '12%', fontSize: 22, color: '#FFD700', opacity: 0.6 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '40%', right: '8%', fontSize: 16, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '22%', left: '40%', fontSize: 18, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
+
+      <div className="container-main relative">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <div
+            className="brand-stamp shadow-deep tilt-l mb-7 inline-flex"
+            style={{
+              backgroundColor: '#FFD700',
+              color: '#0A0A0A',
+              padding: '7px 14px',
+              fontSize: '11px',
+              fontWeight: 800,
+              letterSpacing: '0.12em',
+            }}
           >
-            A new category
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7 }}
-            className="font-display mb-8"
-            style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-strong)' }}
+            ✦ A NEW CATEGORY ✦
+          </div>
+
+          <h2
+            className="font-display max-w-4xl mb-7 text-balance"
+            style={{
+              fontSize: 'clamp(3rem, 7vw, 6rem)',
+              letterSpacing: '-0.045em',
+              lineHeight: 0.95,
+              fontWeight: 700,
+              color: '#fff',
+            }}
           >
-            The world's first daily<br />foundational <span style={{ fontWeight: 600 }}>peptides.</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="font-body mx-auto"
-            style={{ fontSize: 'clamp(1rem, 1.4vw, 1.125rem)', lineHeight: 1.7, color: 'var(--color-text-secondary)', maxWidth: '52ch' }}
-          >
-            Peptides used to live in two places: research labs and biohacker forums. We made
-            them as simple to take as a vitamin — pharmaceutical-grade, clinically dosed,
-            third-party tested, and shipped from the USA in 24 hours.
-          </motion.p>
+            The world&apos;s first{' '}
+            <span style={{ fontStyle: 'italic', fontWeight: 600, color: '#FFD700' }}>daily</span>{' '}
+            foundational{' '}
+            <span style={{ fontStyle: 'italic', fontWeight: 600 }}>peptides.</span>
+          </h2>
+
+          <p className="font-body max-w-2xl mb-12" style={{ fontSize: 'clamp(15px, 1.3vw, 17px)', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
+            Peptides used to live in two places: research labs and biohacker forums.
+            We made them as simple to take as a vitamin — pharmaceutical-grade,
+            clinically dosed, third-party tested, shipped from the USA in 24h.
+          </p>
+        </motion.div>
+
+        {/* 3 stat cards with tilts */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 pt-10" style={{ borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+          {[
+            { value: '10,800', suffix: ' FU', label: 'Clinical natto dose' },
+            { value: '500', suffix: ' MCG', label: 'Pharmaceutical BPC' },
+            { value: '24', suffix: 'h', label: 'Ships from the USA' },
+          ].map((stat, i) => {
+            const tilts = ['rotate(-2deg)', 'rotate(1.5deg)', 'rotate(-1deg)'];
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="rounded-2xl p-6 md:p-7 shadow-deep"
+                style={{
+                  backgroundColor: 'rgba(255,255,255,0.07)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(4px)',
+                  transform: tilts[i % 3],
+                }}
+              >
+                <p
+                  className="font-display tabular mb-2"
+                  style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, letterSpacing: '-0.045em', lineHeight: 0.95, color: '#fff' }}
+                >
+                  {stat.value}
+                  <span style={{ fontSize: '0.55em', fontWeight: 600 }}>{stat.suffix}</span>
+                </p>
+                <p
+                  className="font-body uppercase tracking-[0.15em]"
+                  style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.85)' }}
+                >
+                  {stat.label}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -212,42 +289,22 @@ function HeroSection() {
   return (
     <section
       className="relative pt-6 md:pt-10 pb-12 md:pb-16 overflow-hidden"
-      style={{ backgroundColor: '#FAF3F4' }}
+      style={{ backgroundColor: '#F7F5F0' }}
     >
-      {/* Color blob background */}
+      {/* Both product accents as balanced soft blobs */}
       <div
         className="absolute pointer-events-none hidden md:block"
-        style={{
-          top: '120px',
-          left: '-100px',
-          width: '320px',
-          height: '320px',
-          borderRadius: '50%',
-          backgroundColor: '#6B1F2A',
-          opacity: 0.06,
-          zIndex: 0,
-        }}
+        style={{ top: '100px', left: '-100px', width: '300px', height: '300px', borderRadius: '50%', backgroundColor: '#6B1F2A', opacity: 0.06, zIndex: 0 }}
         aria-hidden
       />
       <div
         className="absolute pointer-events-none hidden md:block"
-        style={{
-          bottom: '-60px',
-          right: '-80px',
-          width: '300px',
-          height: '300px',
-          borderRadius: '50%',
-          backgroundColor: '#1E2F6B',
-          opacity: 0.05,
-          zIndex: 0,
-        }}
+        style={{ bottom: '-80px', right: '-80px', width: '320px', height: '320px', borderRadius: '50%', backgroundColor: '#1E2F6B', opacity: 0.06, zIndex: 0 }}
         aria-hidden
       />
 
-      {/* Sparkles */}
-      <span className="absolute pointer-events-none hidden md:block" style={{ top: '14%', right: '10%', fontSize: 22, color: '#6B1F2A', opacity: 0.55, zIndex: 1 }} aria-hidden>✦</span>
-      <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '6%', fontSize: 16, color: '#1E2F6B', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
-      <span className="absolute pointer-events-none hidden md:block" style={{ top: '40%', left: '42%', fontSize: 14, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none hidden md:block" style={{ top: '14%', right: '10%', fontSize: 22, color: '#0A0A0A', opacity: 0.25, zIndex: 1 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '6%', fontSize: 16, color: '#0A0A0A', opacity: 0.2, zIndex: 1 }} aria-hidden>✦</span>
 
       <div className="container-main w-full relative" style={{ zIndex: 2 }}>
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -256,30 +313,30 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Yellow tagline sticker BESIDE not over */}
-            <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex items-center gap-2.5 mb-5">
               <span
                 className="brand-stamp shadow-pop"
                 style={{
-                  backgroundColor: '#FFD700',
-                  color: '#6B1F2A',
-                  fontSize: '11px',
-                  fontWeight: 900,
-                  padding: '5px 11px',
-                  letterSpacing: '0.08em',
-                  transform: 'rotate(-4deg)',
+                  backgroundColor: '#0A0A0A',
+                  color: '#fff',
+                  fontSize: '10.5px',
+                  fontWeight: 700,
+                  padding: '5px 10px',
+                  letterSpacing: '0.1em',
+                  transform: 'rotate(-2deg)',
                 }}
               >
-                ✦ FINALLY
+                ✦ NEW CATEGORY
               </span>
               <span className="font-body italic" style={{ fontSize: '13px', color: '#6B6B6B', fontWeight: 500 }}>
                 daily peptides
               </span>
             </div>
 
-            <h1 className="font-display mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.75rem)', lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A', fontWeight: 900 }}>
+            <h1 className="font-display mb-4" style={{ fontSize: 'clamp(2.75rem, 6.5vw, 5.25rem)', lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A', fontWeight: 700, fontVariationSettings: '"opsz" 80' }}>
               Peptides.<br />
-              <span style={{ color: '#6B1F2A', fontStyle: 'italic', fontWeight: 800 }}>Now daily.</span>
+              <span style={{ fontStyle: 'italic', fontWeight: 700, color: '#6B1F2A' }}>Now</span>{' '}
+              <span style={{ fontStyle: 'italic', fontWeight: 700, color: '#1E2F6B' }}>daily.</span>
             </h1>
 
             <p className="font-body mb-6 max-w-md" style={{ fontSize: '16px', lineHeight: 1.55, color: '#2A2A2A' }}>
@@ -297,7 +354,6 @@ function HeroSection() {
               </Link>
             </div>
 
-            {/* Single horizontal trust row */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-0.5">
@@ -311,7 +367,7 @@ function HeroSection() {
                 <span className="font-body" style={{ fontSize: '12.5px', color: '#6B6B6B' }}>14,847+ reviews</span>
               </div>
               <span style={{ width: 1, height: 14, backgroundColor: '#E8E8E5' }} aria-hidden className="hidden sm:inline-block" />
-              <span className="inline-flex items-center gap-1.5 font-body font-bold uppercase" style={{ fontSize: '10.5px', letterSpacing: '0.08em', color: '#6B1F2A' }}>
+              <span className="inline-flex items-center gap-1.5 font-body font-bold uppercase" style={{ fontSize: '10.5px', letterSpacing: '0.08em', color: '#0A0A0A' }}>
                 <ShieldCheck size={12} strokeWidth={2.5} />
                 Cardiologist approved
               </span>
@@ -325,19 +381,9 @@ function HeroSection() {
             className="relative"
           >
             <Link to="/products/bpc-157" className="block group relative">
-              {/* Color blob behind bottle */}
               <div
                 className="absolute pointer-events-none"
-                style={{
-                  top: '8%',
-                  left: '8%',
-                  width: '84%',
-                  height: '84%',
-                  borderRadius: '50%',
-                  backgroundColor: '#1E2F6B',
-                  opacity: 0.10,
-                  zIndex: 1,
-                }}
+                style={{ top: '8%', left: '8%', width: '84%', height: '84%', borderRadius: '50%', backgroundColor: '#1E2F6B', opacity: 0.08, zIndex: 1 }}
                 aria-hidden
               />
               <div
@@ -350,8 +396,6 @@ function HeroSection() {
                   className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 float-anim"
                   style={{ position: 'relative', zIndex: 2 }}
                 />
-
-                {/* Brand stamp poking out */}
                 <div
                   className="brand-stamp shadow-deep tilt-l absolute pointer-events-none"
                   style={{
@@ -367,13 +411,13 @@ function HeroSection() {
                     zIndex: 8,
                   }}
                 >
-                  <span style={{ fontSize: '14px', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1 }}>NEW</span>
+                  <span style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1 }}>NEW</span>
                   <span style={{ fontSize: '8px', letterSpacing: '0.1em', marginTop: 3, opacity: 0.95 }}>DAILY</span>
                   <span style={{ fontSize: '7px', letterSpacing: '0.12em', marginTop: 1, opacity: 0.85 }}>PEPTIDE</span>
                 </div>
               </div>
               <div className="mt-3 text-center">
-                <p className="font-display" style={{ fontSize: '14px', fontWeight: 800, color: '#0A0A0A', textTransform: 'uppercase', letterSpacing: '-0.01em' }}>
+                <p className="font-display" style={{ fontSize: '15px', fontWeight: 700, color: '#0A0A0A', letterSpacing: '-0.01em' }}>
                   Body Protection Compound
                 </p>
                 <p className="font-body" style={{ fontSize: '12.5px', color: '#6B6B6B' }}>
@@ -387,6 +431,7 @@ function HeroSection() {
     </section>
   );
 }
+
 
 function PressLogosSection() {
   return (
@@ -428,37 +473,93 @@ function WhyUsSection() {
   };
 
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="container-main">
-        <SectionLabel label="Why MEHR" />
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FAF3F4' }}>
+      {/* Sparkles */}
+      <span className="absolute pointer-events-none" style={{ top: '12%', left: '8%', fontSize: 22, color: '#6B1F2A', opacity: 0.5 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '20%', right: '12%', fontSize: 16, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '15%', left: '40%', fontSize: 18, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+
+      <div className="container-main relative">
         <motion.div
-          className="grid md:grid-cols-3 gap-8 md:gap-12"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <div
+            className="brand-stamp shadow-pop tilt-r mb-5 inline-flex"
+            style={{
+              backgroundColor: '#6B1F2A',
+              color: '#fff',
+              padding: '6px 13px',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+            }}
+          >
+            ✦ WHY MEHR ✦
+          </div>
+          <h2
+            className="font-display"
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
+          >
+            Three things we{' '}
+            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>refuse</span>{' '}
+            to compromise on.
+          </h2>
+        </motion.div>
+
+        <motion.div
+          className="grid md:grid-cols-3 gap-5 md:gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {site.whyUsCards.map((card) => (
-            <motion.div
-              key={card.headline}
-              variants={fadeUp}
-              className="text-center p-8 rounded-xl"
-              style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
-            >
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-5"
-                style={{ backgroundColor: 'var(--color-border-subtle)', color: 'var(--color-text)' }}
+          {site.whyUsCards.map((card, i) => {
+            const tilts = ['rotate(-1.5deg)', 'rotate(1deg)', 'rotate(-1deg)'];
+            return (
+              <motion.div
+                key={card.headline}
+                variants={fadeUp}
+                className="rounded-2xl p-7 md:p-8 shadow-card relative"
+                style={{
+                  backgroundColor: '#fff',
+                  border: '1px solid rgba(107, 31, 42, 0.15)',
+                  transform: tilts[i % 3],
+                }}
               >
-                {iconMap[card.icon]}
-              </div>
-              <h3 className="font-display mb-3" style={{ fontSize: '20px', color: 'var(--color-text)' }}>
-                {card.headline}
-              </h3>
-              <p className="font-body" style={{ fontSize: '15px', lineHeight: 1.6, color: 'var(--color-text-muted)' }}>
-                {card.proof}
-              </p>
-            </motion.div>
-          ))}
+                <span
+                  className="absolute font-body font-bold uppercase shadow-pop"
+                  style={{
+                    top: '-13px',
+                    left: '20px',
+                    backgroundColor: '#6B1F2A',
+                    color: '#fff',
+                    fontSize: '10px',
+                    letterSpacing: '0.1em',
+                    padding: '4px 9px',
+                    borderRadius: '999px',
+                  }}
+                >
+                  0{i + 1} / 03
+                </span>
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-5"
+                  style={{ backgroundColor: '#6B1F2A', color: '#fff' }}
+                >
+                  {iconMap[card.icon]}
+                </div>
+                <h3 className="font-display mb-3" style={{ fontSize: '22px', fontWeight: 700, letterSpacing: '-0.02em', color: '#0A0A0A' }}>
+                  {card.headline}
+                </h3>
+                <p className="font-body" style={{ fontSize: '14.5px', lineHeight: 1.55, color: '#2A2A2A' }}>
+                  {card.proof}
+                </p>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
@@ -469,29 +570,52 @@ function FeaturedProductsSection() {
   const featured = site.products.slice(0, 4);
 
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-surface)' }}>
-      <div className="container-main">
-        <SectionLabel label="Featured Products" />
-        <div className="flex items-end justify-between mb-10">
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
+      <span className="absolute pointer-events-none" style={{ top: '12%', right: '8%', fontSize: 20, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '10%', left: '6%', fontSize: 16, color: '#1E2F6B', opacity: 0.4 }} aria-hidden>✦</span>
+
+      <div className="container-main relative">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14"
+        >
           <div>
-            <h2 className="font-display mb-2" style={{ color: 'var(--color-text)' }}>
-              Formulas backed by evidence
+            <div
+              className="brand-stamp shadow-pop tilt-l mb-4 inline-flex"
+              style={{
+                backgroundColor: '#0A0A0A',
+                color: '#fff',
+                padding: '6px 13px',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+              }}
+            >
+              ✦ THE LINEUP ✦
+            </div>
+            <h2
+              className="font-display"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
+            >
+              Two products.{' '}
+              <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>Both</span>{' '}
+              <span style={{ color: '#1E2F6B', fontStyle: 'italic' }}>essentials.</span>
             </h2>
-            <p className="font-body" style={{ fontSize: '16px', color: 'var(--color-text-muted)' }}>
-              Every ingredient dosed at clinically effective levels. No proprietary blends.
+            <p className="font-body mt-4 max-w-md" style={{ fontSize: '15.5px', lineHeight: 1.55, color: '#2A2A2A' }}>
+              Every ingredient dosed at clinically effective levels. No proprietary blends. No filler.
             </p>
           </div>
-          <Link
-            to="/shop"
-            className="btn-secondary hidden md:inline-flex"
-          >
+          <Link to="/shop" className="btn-secondary hidden md:inline-flex shadow-pop">
             View All
             <ArrowRight size={16} />
           </Link>
-        </div>
+        </motion.div>
 
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -519,35 +643,68 @@ function ScienceSection() {
   const featuredStudies = site.studies.slice(0, 3);
 
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="container-main">
-        <SectionLabel label="The Science" />
-        <div className="text-center mb-12">
-          <h2 className="font-display mb-4" style={{ color: 'var(--color-text)' }}>
-            We don&apos;t claim — we cite
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FAF3F4' }}>
+      <span className="absolute pointer-events-none" style={{ top: '12%', left: '8%', fontSize: 22, color: '#6B1F2A', opacity: 0.5 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '40%', right: '10%', fontSize: 16, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '20%', left: '40%', fontSize: 14, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+
+      <div className="container-main relative">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-14"
+        >
+          <div
+            className="brand-stamp shadow-pop tilt-r mb-5 inline-flex"
+            style={{
+              backgroundColor: '#6B1F2A',
+              color: '#fff',
+              padding: '6px 13px',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+            }}
+          >
+            ✦ THE SCIENCE ✦
+          </div>
+          <h2
+            className="font-display"
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
+          >
+            We don&apos;t claim — we{' '}
+            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>cite.</span>
           </h2>
-          <p className="font-body max-w-xl mx-auto" style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
-            Every ingredient in every product is linked to peer-reviewed human clinical trials.
-            No rodent studies passed off as human evidence. No retracted papers. Just real science.
+          <p className="font-body max-w-xl mx-auto mt-5" style={{ fontSize: '15.5px', color: '#2A2A2A', lineHeight: 1.55 }}>
+            Every ingredient is linked to peer-reviewed human clinical trials.
+            No rodent studies. No retracted papers. Just real science.
           </p>
-        </div>
+        </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-3 gap-6"
+          className="grid md:grid-cols-3 gap-5 md:gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {featuredStudies.map((study) => (
-            <motion.div key={study.id} variants={fadeUp}>
-              <StudyCard study={study} />
-            </motion.div>
-          ))}
+          {featuredStudies.map((study, i) => {
+            const tilts = ['rotate(-1.5deg)', 'rotate(1deg)', 'rotate(-1deg)'];
+            return (
+              <motion.div
+                key={study.id}
+                variants={fadeUp}
+                style={{ transform: tilts[i % 3] }}
+              >
+                <StudyCard study={study} />
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         <div className="text-center mt-10">
-          <Link to="/science" className="btn-secondary">
+          <Link to="/science" className="btn-secondary shadow-pop">
             View All Studies
             <ArrowRight size={16} />
           </Link>
@@ -559,29 +716,63 @@ function ScienceSection() {
 
 function FounderSection() {
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-surface)' }}>
-      <div className="container-main">
-        <SectionLabel label="Our Story" />
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#F2F4FA' }}>
+      {/* Sparkles + ornaments */}
+      <span className="absolute pointer-events-none" style={{ top: '8%', right: '6%', fontSize: 22, color: '#1E2F6B', opacity: 0.5 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '15%', left: '6%', fontSize: 16, color: '#1E2F6B', opacity: 0.4 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '40%', left: '46%', fontSize: 14, color: '#1E2F6B', opacity: 0.4 }} aria-hidden>✦</span>
+
+      <div className="container-main relative">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="relative"
           >
+            {/* Polaroid-style frame, slight tilt */}
             <div
-              className="rounded-2xl overflow-hidden"
+              className="polaroid relative"
               style={{
-                aspectRatio: '4/5',
-                backgroundColor: 'var(--color-border-subtle)',
-                boxShadow: 'var(--shadow-md)',
+                transform: 'rotate(-2deg)',
+                padding: '14px 14px 28px',
+                maxWidth: '440px',
               }}
             >
-              <img
-                src={site.brand.founderPortrait}
-                alt={`${site.brand.founderName} — Founder portrait, 3/4 view, warm neutral background, wearing a navy blazer, professional but approachable expression, natural light from left`}
-                className="w-full h-full object-cover"
-              />
+              <div
+                className="overflow-hidden rounded-sm"
+                style={{ aspectRatio: '4/5', backgroundColor: 'var(--color-border-subtle)' }}
+              >
+                <img
+                  src={site.brand.founderPortrait}
+                  alt={`${site.brand.founderName} — Founder portrait`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-center mt-3">
+                <p className="font-body italic" style={{ fontSize: '13px', color: '#0A0A0A' }}>
+                  &mdash; {site.brand.founderName}, founder
+                </p>
+              </div>
+              {/* Sticker overlay */}
+              <span
+                className="absolute font-body font-bold uppercase shadow-pop"
+                style={{
+                  top: '-12px',
+                  right: '-10px',
+                  backgroundColor: '#1E2F6B',
+                  color: '#fff',
+                  fontSize: '10px',
+                  letterSpacing: '0.1em',
+                  padding: '5px 10px',
+                  borderRadius: '999px',
+                  transform: 'rotate(8deg)',
+                  zIndex: 5,
+                }}
+              >
+                ✦ FOUNDER
+              </span>
             </div>
           </motion.div>
 
@@ -591,12 +782,29 @@ function FounderSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-display mb-6" style={{ color: 'var(--color-text)' }}>
-              Built by a scientist<br />who was tired of the hype.
+            <div
+              className="brand-stamp shadow-pop tilt-l mb-5 inline-flex"
+              style={{
+                backgroundColor: '#1E2F6B',
+                color: '#fff',
+                padding: '6px 13px',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+              }}
+            >
+              ✦ OUR STORY ✦
+            </div>
+            <h2
+              className="font-display mb-6"
+              style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
+            >
+              Built by a scientist who was{' '}
+              <span style={{ color: '#1E2F6B', fontStyle: 'italic' }}>tired of the hype.</span>
             </h2>
             <div
-              className="font-body space-y-4 mb-8"
-              style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}
+              className="font-body space-y-4 mb-7"
+              style={{ fontSize: '15.5px', lineHeight: 1.65, color: '#2A2A2A' }}
             >
               {site.founderStoryShort.split('. ').slice(0, 4).map((s, i, arr) => (
                 <p key={i}>
@@ -604,7 +812,7 @@ function FounderSection() {
                 </p>
               ))}
             </div>
-            <Link to="/about" className="btn-secondary">
+            <Link to="/about" className="btn-secondary shadow-pop">
               Read Our Story
               <ArrowRight size={16} />
             </Link>
@@ -622,37 +830,74 @@ function ReviewsCarouselSection() {
     : 0;
 
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="container-main">
-        <SectionLabel label="Customer Reviews" />
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Star size={24} fill="var(--color-star)" stroke="var(--color-star)" />
-            <span className="font-display" style={{ fontSize: '28px', color: 'var(--color-text)' }}>
-              {avgRating.toFixed(1)}
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
+      <span className="absolute pointer-events-none" style={{ top: '12%', right: '8%', fontSize: 22, color: '#0A0A0A', opacity: 0.25 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '15%', left: '6%', fontSize: 16, color: '#0A0A0A', opacity: 0.2 }} aria-hidden>✦</span>
+
+      <div className="container-main relative">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-14"
+        >
+          <div
+            className="brand-stamp shadow-pop tilt-l mb-5 inline-flex"
+            style={{
+              backgroundColor: '#0A0A0A',
+              color: '#fff',
+              padding: '6px 13px',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+            }}
+          >
+            ✦ REAL HUMANS · REAL RESULTS ✦
+          </div>
+          <h2
+            className="font-display mb-5"
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
+          >
+            What people{' '}
+            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>actually say.</span>
+          </h2>
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center gap-0.5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <span key={i} className="inline-flex items-center justify-center w-5 h-5" style={{ backgroundColor: '#00B67A' }}>
+                  <Star size={12} fill="#FFFFFF" stroke="#FFFFFF" strokeWidth={0} />
+                </span>
+              ))}
+            </div>
+            <span className="font-display" style={{ fontSize: '20px', fontWeight: 700, color: '#0A0A0A' }}>
+              {avgRating.toFixed(1)}/5
+            </span>
+            <span className="font-body" style={{ fontSize: '13px', color: '#6B6B6B' }}>
+              · {site.reviews.length}+ verified
             </span>
           </div>
-          <p className="font-body" style={{ fontSize: '15px', color: 'var(--color-text-muted)' }}>
-            Based on {site.reviews.length}+ verified reviews
-          </p>
-        </div>
+        </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-3 gap-6"
+          className="grid md:grid-cols-3 gap-5 md:gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {featuredReviews.map((review) => (
-            <motion.div key={review.id} variants={fadeUp}>
-              <ReviewCard review={review} />
-            </motion.div>
-          ))}
+          {featuredReviews.map((review, i) => {
+            const tilts = ['rotate(-1.5deg)', 'rotate(1deg)', 'rotate(-1deg)'];
+            return (
+              <motion.div key={review.id} variants={fadeUp} style={{ transform: tilts[i % 3] }} className="shadow-card rounded-2xl">
+                <ReviewCard review={review} />
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         <div className="text-center mt-10">
-          <Link to="/reviews" className="btn-secondary">
+          <Link to="/reviews" className="btn-secondary shadow-pop">
             Read All Reviews
             <ArrowRight size={16} />
           </Link>

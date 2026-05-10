@@ -97,15 +97,31 @@ export default function ReviewsPage() {
         </div>
       </section>
 
-      <div className="container-main pt-10 pb-20">
+      <div className="container-main pt-10 pb-20 relative">
 
         <div className="grid lg:grid-cols-3 gap-10">
           {/* Sidebar */}
-          <div className="space-y-8">
+          <div className="space-y-8 lg:sticky lg:top-24 lg:self-start">
             {/* Distribution */}
-            <div>
-              <h3 className="font-display mb-4" style={{ fontSize: '18px', color: 'var(--color-text)' }}>
-                Rating Breakdown
+            <div className="rounded-2xl p-6 shadow-card" style={{ backgroundColor: '#fff', border: '1px solid #6B1F2A22' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <span
+                  className="brand-stamp shadow-pop"
+                  style={{
+                    backgroundColor: '#6B1F2A',
+                    color: '#fff',
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    padding: '4px 10px',
+                    letterSpacing: '0.1em',
+                    transform: 'rotate(-2deg)',
+                  }}
+                >
+                  ✦ BREAKDOWN
+                </span>
+              </div>
+              <h3 className="font-display mb-4" style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.02em', color: '#0A0A0A' }}>
+                Rating breakdown
               </h3>
               <div className="space-y-2">
                 {distribution.map((d) => {
@@ -116,17 +132,17 @@ export default function ReviewsPage() {
                       onClick={() => setFilter(filter === d.stars ? 0 : d.stars)}
                       className="w-full flex items-center gap-3 focus-ring rounded-md p-1 -ml-1 transition-colors hover:bg-black/[0.02]"
                     >
-                      <span className="font-body w-8 text-right flex-shrink-0" style={{ fontSize: '14px', color: 'var(--color-text)' }}>
+                      <span className="font-body w-8 text-right flex-shrink-0" style={{ fontSize: '14px', color: '#0A0A0A', fontWeight: 600 }}>
                         {d.stars}
                       </span>
-                      <Star size={14} fill="var(--color-star)" stroke="var(--color-star)" />
-                      <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-border-subtle)' }}>
+                      <Star size={14} fill="#6B1F2A" stroke="#6B1F2A" />
+                      <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#FAF3F4' }}>
                         <div
                           className="h-full rounded-full transition-all duration-500"
-                          style={{ width: `${pct}%`, backgroundColor: 'var(--color-star)' }}
+                          style={{ width: `${pct}%`, backgroundColor: '#6B1F2A' }}
                         />
                       </div>
-                      <span className="font-body w-8 flex-shrink-0" style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>
+                      <span className="font-body w-8 flex-shrink-0" style={{ fontSize: '13px', color: '#6B6B6B' }}>
                         {d.count}
                       </span>
                     </button>
@@ -137,7 +153,7 @@ export default function ReviewsPage() {
                 <button
                   onClick={() => setFilter(0)}
                   className="font-body mt-4 flex items-center gap-1 focus-ring transition-opacity hover:opacity-70"
-                  style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}
+                  style={{ fontSize: '13px', color: '#6B1F2A', fontWeight: 600 }}
                 >
                   <X size={14} /> Clear filter
                 </button>
@@ -145,19 +161,35 @@ export default function ReviewsPage() {
             </div>
 
             {/* By Product */}
-            <div>
-              <h3 className="font-display mb-4" style={{ fontSize: '18px', color: 'var(--color-text)' }}>
-                Reviews by Product
+            <div className="rounded-2xl p-6 shadow-card" style={{ backgroundColor: '#fff', border: '1px solid #1E2F6B22' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <span
+                  className="brand-stamp shadow-pop"
+                  style={{
+                    backgroundColor: '#1E2F6B',
+                    color: '#fff',
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    padding: '4px 10px',
+                    letterSpacing: '0.1em',
+                    transform: 'rotate(2deg)',
+                  }}
+                >
+                  ✦ BY PRODUCT
+                </span>
+              </div>
+              <h3 className="font-display mb-4" style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.02em', color: '#0A0A0A' }}>
+                Reviews by product
               </h3>
               <div className="space-y-3">
                 {productReviews.map(([slug, data]) => (
                   <div key={slug} className="flex items-center justify-between">
-                    <span className="font-body" style={{ fontSize: '14px', color: 'var(--color-text)' }}>
+                    <span className="font-body" style={{ fontSize: '14px', color: '#0A0A0A', fontWeight: 500 }}>
                       {data.name}
                     </span>
-                    <div className="flex items-center gap-2">
-                      <Star size={12} fill="var(--color-star)" stroke="var(--color-star)" />
-                      <span className="font-body" style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>
+                    <div className="flex items-center gap-1.5">
+                      <Star size={12} fill="#6B1F2A" stroke="#6B1F2A" />
+                      <span className="font-body" style={{ fontSize: '13px', color: '#6B6B6B' }}>
                         {data.avg.toFixed(1)} ({data.count})
                       </span>
                     </div>
@@ -167,18 +199,21 @@ export default function ReviewsPage() {
             </div>
           </div>
 
-          {/* Review cards */}
+          {/* Review cards — layered with tilts */}
           <motion.div
-            className="lg:col-span-2 space-y-6"
+            className="lg:col-span-2 space-y-5"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
           >
-            {filtered.map((review) => (
-              <motion.div key={review.id} variants={fadeUp}>
-                <ReviewCard review={review} />
-              </motion.div>
-            ))}
+            {filtered.map((review, i) => {
+              const tilts = ['rotate(-0.8deg)', 'rotate(0.5deg)', 'rotate(-0.5deg)', 'rotate(0.8deg)'];
+              return (
+                <motion.div key={review.id} variants={fadeUp} style={{ transform: tilts[i % 4] }} className="shadow-card rounded-2xl">
+                  <ReviewCard review={review} />
+                </motion.div>
+              );
+            })}
             {filtered.length === 0 && (
               <p className="font-body text-center py-12" style={{ color: 'var(--color-text-muted)' }}>
                 No reviews with {filter} stars yet.

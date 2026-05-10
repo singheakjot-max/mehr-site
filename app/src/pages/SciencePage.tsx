@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { site } from '@/content/site';
 import StudyCard from '@/components/StudyCard';
-import SectionLabel from '@/components/SectionLabel';
+// import SectionLabel from '@/components/SectionLabel';
 import Footer from '@/components/global/Footer';
 
 const fadeUp = {
@@ -53,36 +53,96 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* Studies Grid */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--color-surface)' }}>
-        <div className="container-main">
-          <SectionLabel label="Clinical Evidence" />
+      {/* Studies Grid — black flood */}
+      <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#0A0A0A', color: '#fff' }}>
+        <span className="absolute pointer-events-none" style={{ top: '8%', left: '8%', fontSize: 22, color: '#FFD700', opacity: 0.55 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ top: '40%', right: '8%', fontSize: 16, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ bottom: '15%', left: '40%', fontSize: 14, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
+
+        <div className="container-main relative">
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6 }}
+            className="mb-12 md:mb-14"
+          >
+            <div
+              className="brand-stamp shadow-deep tilt-l mb-5 inline-flex"
+              style={{
+                backgroundColor: '#FFD700',
+                color: '#0A0A0A',
+                padding: '6px 13px',
+                fontSize: '11px',
+                fontWeight: 800,
+                letterSpacing: '0.12em',
+              }}
+            >
+              ✦ THE PROOF ✦
+            </div>
+            <h2
+              className="font-display"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#fff' }}
+            >
+              Studies, not{' '}
+              <span style={{ color: '#FFD700', fontStyle: 'italic' }}>vibes.</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
           >
-            {site.studies.map((study) => (
-              <motion.div key={study.id} variants={fadeUp}>
-                <StudyCard study={study} />
-              </motion.div>
-            ))}
+            {site.studies.map((study, i) => {
+              const tilts = ['rotate(-1.5deg)', 'rotate(1deg)', 'rotate(-1deg)'];
+              return (
+                <motion.div key={study.id} variants={fadeUp} style={{ transform: tilts[i % 3] }} className="shadow-deep">
+                  <StudyCard study={study} />
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
 
-      {/* Methodology */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-        <div className="container-main">
-          <SectionLabel label="Our Methodology" />
-          <h2 className="font-display text-center mb-4" style={{ color: 'var(--color-text)' }}>
-            How we evaluate ingredients
-          </h2>
-          <p className="font-body text-center mb-12 max-w-lg mx-auto" style={{ fontSize: '15px', color: 'var(--color-text-muted)' }}>
-            Our 5-step evaluation process ensures only ingredients with robust human evidence make it into our formulas.
-          </p>
+      {/* Methodology — burgundy soft */}
+      <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FAF3F4' }}>
+        <span className="absolute pointer-events-none" style={{ top: '15%', right: '10%', fontSize: 20, color: '#6B1F2A', opacity: 0.5 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ bottom: '20%', left: '6%', fontSize: 16, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+
+        <div className="container-main relative">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <div
+              className="brand-stamp shadow-pop tilt-r mb-5 inline-flex"
+              style={{
+                backgroundColor: '#6B1F2A',
+                color: '#fff',
+                padding: '6px 13px',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+              }}
+            >
+              ✦ HOW WE PICK INGREDIENTS ✦
+            </div>
+            <h2
+              className="font-display"
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
+            >
+              Five filters before{' '}
+              <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>anything</span>{' '}
+              makes it in.
+            </h2>
+          </motion.div>
 
           <div className="max-w-3xl mx-auto">
             {site.methodologySteps.map((step, i) => (
@@ -91,32 +151,33 @@ export default function SciencePage() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex gap-6 mb-8 last:mb-0"
+                transition={{ delay: i * 0.08 }}
+                className="flex gap-5 mb-7 last:mb-0"
               >
                 <div className="flex flex-col items-center">
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-display font-medium"
+                    className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-display shadow-pop"
                     style={{
-                      backgroundColor: 'var(--color-accent)',
-                      color: 'var(--color-accent-fg)',
-                      fontSize: '15px',
+                      backgroundColor: '#6B1F2A',
+                      color: '#fff',
+                      fontSize: '17px',
+                      fontWeight: 700,
                     }}
                   >
                     {step.step}
                   </div>
                   {i < site.methodologySteps.length - 1 && (
                     <div
-                      className="w-px flex-1 mt-2"
-                      style={{ backgroundColor: 'var(--color-border)' }}
+                      className="w-0.5 flex-1 mt-2"
+                      style={{ backgroundColor: '#6B1F2A', opacity: 0.25 }}
                     />
                   )}
                 </div>
-                <div className="pb-8">
-                  <h3 className="font-display mb-2" style={{ fontSize: '18px', color: 'var(--color-text)' }}>
+                <div className="pb-7">
+                  <h3 className="font-display mb-2" style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.02em', color: '#0A0A0A' }}>
                     {step.title}
                   </h3>
-                  <p className="font-body" style={{ fontSize: '15px', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+                  <p className="font-body" style={{ fontSize: '15px', color: '#2A2A2A', lineHeight: 1.55 }}>
                     {step.description}
                   </p>
                 </div>
@@ -126,49 +187,80 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* Testing Process */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--color-surface)' }}>
-        <div className="container-main">
-          <SectionLabel label="Testing Process" />
-          <h2 className="font-display text-center mb-4" style={{ color: 'var(--color-text)' }}>
-            5-step quality assurance
-          </h2>
-          <p className="font-body text-center mb-12 max-w-lg mx-auto" style={{ fontSize: '15px', color: 'var(--color-text-muted)' }}>
-            Every batch undergoes comprehensive analytical testing before it reaches your door.
-          </p>
+      {/* Testing Process — white with cards */}
+      <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
+        <span className="absolute pointer-events-none" style={{ top: '12%', left: '8%', fontSize: 18, color: '#0A0A0A', opacity: 0.25 }} aria-hidden>✦</span>
+
+        <div className="container-main relative">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <div
+              className="brand-stamp shadow-pop tilt-l mb-5 inline-flex"
+              style={{
+                backgroundColor: '#0A0A0A',
+                color: '#fff',
+                padding: '6px 13px',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+              }}
+            >
+              ✦ TESTING PROCESS ✦
+            </div>
+            <h2
+              className="font-display"
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
+            >
+              Five tests before{' '}
+              <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>your door.</span>
+            </h2>
+          </motion.div>
 
           <motion.div
-            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {site.testingProcess.map((step) => (
-              <motion.div
-                key={step.step}
-                variants={fadeUp}
-                className="p-6 rounded-xl text-center"
-                style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-display"
+            {site.testingProcess.map((step, i) => {
+              const tilts = ['rotate(-1.5deg)', 'rotate(1deg)', 'rotate(-1deg)', 'rotate(1.5deg)', 'rotate(-1deg)'];
+              return (
+                <motion.div
+                  key={step.step}
+                  variants={fadeUp}
+                  className="p-6 rounded-2xl text-center shadow-card"
                   style={{
-                    backgroundColor: 'var(--color-accent)',
-                    color: 'var(--color-accent-fg)',
-                    fontSize: '18px',
+                    backgroundColor: '#FAF3F4',
+                    border: '1px solid rgba(107, 31, 42, 0.15)',
+                    transform: tilts[i % 5],
                   }}
                 >
-                  {step.step}
-                </div>
-                <h3 className="font-display mb-2" style={{ fontSize: '16px', color: 'var(--color-text)' }}>
-                  {step.title}
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-display shadow-pop"
+                    style={{
+                      backgroundColor: '#6B1F2A',
+                      color: '#fff',
+                      fontSize: '17px',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {step.step}
+                  </div>
+                  <h3 className="font-display mb-2" style={{ fontSize: '17px', fontWeight: 700, letterSpacing: '-0.02em', color: '#0A0A0A' }}>
+                    {step.title}
                 </h3>
                 <p className="font-body" style={{ fontSize: '13px', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
                   {step.description}
                 </p>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </section>
