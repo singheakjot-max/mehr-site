@@ -4,7 +4,7 @@ import Footer from '@/components/global/Footer';
 
 export default function ContactPage() {
   return (
-    <div className="pt-28 pb-20">
+    <div className="pb-20">
       <div className="container-main">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">

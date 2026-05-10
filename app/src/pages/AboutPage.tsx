@@ -87,7 +87,7 @@ function QualityStandards() {
 
 export default function AboutPage() {
   return (
-    <div className="pt-20">
+    <div>
       {/* Hero — color flooded with personality */}
       <section
         className="pt-8 md:pt-12 pb-10 md:pb-14 relative overflow-hidden"

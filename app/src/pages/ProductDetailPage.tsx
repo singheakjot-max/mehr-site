@@ -751,43 +751,22 @@ function Hero({
                 </span>
               </div>
 
-              {/* H1 — mixed-case, NO sticker overlapping */}
+              {/* H1 — clean, full product name, italic No BS line */}
               <h1
-                className="font-display mb-3"
+                className="font-display mb-4"
                 style={{
-                  fontSize: 'clamp(2.25rem, 5.5vw, 4.25rem)',
-                  letterSpacing: '-0.04em',
-                  lineHeight: 0.95,
+                  fontSize: 'clamp(2.25rem, 5vw, 4rem)',
+                  letterSpacing: '-0.035em',
+                  lineHeight: 0.98,
                   color: 'var(--color-text-strong)',
                   fontWeight: 900,
                 }}
               >
-                <span style={{ textTransform: 'uppercase' }}>{product.name.split(' ')[0]}</span>{' '}
-                <span style={{ textTransform: 'none', fontWeight: 700 }}>{product.name.split(' ').slice(1).join(' ').toLowerCase()}</span>
-                <span style={{ display: 'block' }}>
-                  <span style={{ color: accent.hex, fontStyle: 'italic', fontWeight: 800 }}>No BS.</span>
+                {product.name}
+                <span style={{ display: 'block', color: accent.hex, fontStyle: 'italic', fontWeight: 800, marginTop: 2 }}>
+                  No BS.
                 </span>
               </h1>
-
-              {/* "FINALLY" tagline — sticker BESIDE text on its own row, never overlapping */}
-              <div className="flex items-center gap-2.5 mb-4">
-                <span
-                  className="brand-stamp shadow-pop tilt-r"
-                  style={{
-                    backgroundColor: '#FFD700',
-                    color: accent.hex,
-                    fontSize: '11px',
-                    fontWeight: 900,
-                    padding: '5px 11px',
-                    letterSpacing: '0.08em',
-                  }}
-                >
-                  ← Finally
-                </span>
-                <span className="font-body italic" style={{ fontSize: '13px', color: 'var(--color-text-muted)', fontWeight: 500 }}>
-                  someone said it
-                </span>
-              </div>
 
               <p className="font-body mb-5" style={{ fontSize: '15.5px', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
                 {HERO_SUBHEAD[product.slug] || product.tagline}
@@ -2434,39 +2413,6 @@ function Related({ product }: { product: Product }) {
 }
 
 /* ─────────────────────────────────────────
-   15. Sticky mobile bar
-   ───────────────────────────────────────── */
-
-function StickyMobileBar({ product, onAddToCart }: { product: Product; onAddToCart: (productId: string, quantity: number, subscription: boolean) => void }) {
-  const [adding, setAdding] = useState(false);
-  return (
-    <div
-      className="fixed bottom-0 left-0 right-0 z-40 lg:hidden p-3"
-      style={{ backgroundColor: 'var(--color-bg)', borderTop: '1px solid var(--color-border)', boxShadow: 'var(--shadow-lg)' }}
-    >
-      <div className="flex items-center gap-3">
-        <div className="flex-1">
-          <p className="font-body text-[11px]" style={{ color: 'var(--color-text-muted)' }}>{product.name}</p>
-          <p className="font-display" style={{ fontSize: '18px', fontWeight: 800, color: 'var(--color-text-strong)' }}>${product.price}</p>
-        </div>
-        <button
-          onClick={() => {
-            setAdding(true);
-            onAddToCart(product.id, 1, false);
-            setTimeout(() => setAdding(false), 900);
-          }}
-          disabled={adding}
-          className="px-6 py-3.5 rounded-lg font-body text-[14px] font-medium flex items-center gap-2"
-          style={{ backgroundColor: 'var(--color-text-strong)', color: 'var(--color-text-inverse)' }}
-        >
-          {adding ? <><Check size={16} /> Added</> : 'Add to cart'}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────
    Page
    ───────────────────────────────────────── */
 
@@ -2476,7 +2422,7 @@ export default function ProductDetailPage({ onAddToCart }: ProductDetailPageProp
 
   if (!product) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center pt-28">
+      <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-display mb-4" style={{ color: 'var(--color-text)' }}>Product Not Found</h1>
           <Link to="/shop" className="btn-secondary">Back to shop</Link>
@@ -2507,7 +2453,6 @@ export default function ProductDetailPage({ onAddToCart }: ProductDetailPageProp
       <FAQ product={product} accent={accent} />
       <Related product={product} />
       <Footer />
-      <StickyMobileBar product={product} onAddToCart={onAddToCart} />
     </div>
   );
 }

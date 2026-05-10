@@ -95,7 +95,7 @@ Welcome to MEHR.`,
     {
       id: 'nattokinase',
       slug: 'nattokinase',
-      name: 'MEHR Nattokinase',
+      name: 'Nattokinase',
       tagline: 'Daily heart health. In one capsule.',
       description:
         'A clinical-dose nattokinase capsule for daily cardiovascular foundation. Fermented from non-GMO soybeans, standardized to 10,800 FU per serving — over 5x the dose of typical supplements. Built to support healthy circulation, blood pressure, and the kind of cardiovascular resilience that compounds over decades.',
@@ -235,7 +235,7 @@ Welcome to MEHR.`,
     {
       id: 'bpc-157',
       slug: 'bpc-157',
-      name: 'MEHR BPC-157',
+      name: 'Body Protection Compound (BPC-157)',
       tagline: "Daily recovery. In one capsule.",
       description:
         'A studies-backed BPC-157 oral capsule, BioPerine-enhanced for absorption. Designed to deliver the recovery benefits peptides are known for — gut lining repair, joint resilience, tissue healing — without the needles, the cold chain, or the sketchy sourcing. 500mcg per capsule. 99.9% purity. Made in the USA.',

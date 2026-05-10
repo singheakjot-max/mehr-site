@@ -72,7 +72,7 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="pt-28 pb-20">
+    <div className="pb-20">
       <div className="container-main">
         <SectionLabel label="Shop" />
         <h1 className="font-display mb-4" style={{ color: 'var(--color-text)' }}>

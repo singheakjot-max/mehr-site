@@ -48,7 +48,7 @@ export default function ReviewsPage() {
   }, []);
 
   return (
-    <div className="pt-20">
+    <div>
       {/* Hero — color flooded with personality */}
       <section
         className="pt-8 md:pt-12 pb-8 md:pb-10 relative overflow-hidden"

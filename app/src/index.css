@@ -33,8 +33,17 @@
     --color-product-bpc: #1E2F6B;
     --color-product-bpc-soft: #F2F4FA;
 
+    /* Header height — used by Layout main padding to prevent overlap */
+    --header-height: 64px;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --header-height: 72px;
+    }
+
     /* ── Font Tokens ─────────────────────────────────────────── */
-    --font-display: 'Inter', 'Helvetica Neue', sans-serif;
+    --font-display: 'Outfit', 'Inter', 'Helvetica Neue', sans-serif;
     --font-ui: 'Inter', 'Helvetica Neue', sans-serif;
     --font-body: 'Inter', 'Helvetica Neue', sans-serif;
 

@@ -52,7 +52,9 @@ export default function Layout() {
         onUpdateQuantity={cart.updateQuantity}
         onRemove={cart.removeItem}
       />
-      <Outlet />
+      <main style={{ paddingTop: 'var(--header-height, 64px)' }}>
+        <Outlet />
+      </main>
     </CartContext.Provider>
   );
 }

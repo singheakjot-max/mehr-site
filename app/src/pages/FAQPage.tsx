@@ -22,7 +22,7 @@ export default function FAQPage() {
       : site.faqs.filter((f) => f.category === activeCategory);
 
   return (
-    <div className="pt-28 pb-20">
+    <div className="pb-20">
       <div className="container-narrow">
         <SectionLabel label="FAQ" />
 

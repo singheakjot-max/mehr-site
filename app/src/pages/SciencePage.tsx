@@ -16,7 +16,7 @@ const staggerContainer = {
 
 export default function SciencePage() {
   return (
-    <div className="pt-20">
+    <div>
       {/* Hero — Obvi-style color flood */}
       <section
         className="pt-8 md:pt-12 pb-10 md:pb-14 relative overflow-hidden"

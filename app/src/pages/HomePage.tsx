@@ -346,7 +346,7 @@ function HeroSection() {
               >
                 <img
                   src="/images/bpc/bpc_front_bottle.webp"
-                  alt="MEHR BPC-157"
+                  alt="Body Protection Compound"
                   className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 float-anim"
                   style={{ position: 'relative', zIndex: 2 }}
                 />
@@ -374,7 +374,7 @@ function HeroSection() {
               </div>
               <div className="mt-3 text-center">
                 <p className="font-display" style={{ fontSize: '14px', fontWeight: 800, color: '#0A0A0A', textTransform: 'uppercase', letterSpacing: '-0.01em' }}>
-                  MEHR BPC-157
+                  Body Protection Compound
                 </p>
                 <p className="font-body" style={{ fontSize: '12.5px', color: '#6B6B6B' }}>
                   From $74.00/mo
