@@ -20,21 +20,21 @@ export default function SciencePage() {
       {/* Hero — Obvi-style color flood */}
       <section
         className="pt-8 md:pt-12 pb-10 md:pb-14 relative overflow-hidden"
-        style={{ backgroundColor: '#FAF3F4' }}
+        style={{ backgroundColor: '#F7F5F0' }}
       >
         {/* Sparkles */}
-        <span className="absolute pointer-events-none hidden md:block" style={{ top: '15%', left: '10%', fontSize: 22, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none hidden md:block" style={{ top: '60%', right: '12%', fontSize: 18, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 16, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '15%', left: '10%', fontSize: 22, color: '#0A0A0A', opacity: 0.25, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '60%', right: '12%', fontSize: 18, color: '#0A0A0A', opacity: 0.25, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 16, color: '#0A0A0A', opacity: 0.2, zIndex: 1 }} aria-hidden>✦</span>
 
         <div className="container-narrow text-center relative" style={{ zIndex: 2 }}>
           <div
             className="brand-stamp shadow-pop tilt-r mb-5 inline-flex"
             style={{
-              backgroundColor: '#6B1F2A',
+              backgroundColor: '#0A0A0A',
               color: '#fff',
               fontSize: '11px',
-              fontWeight: 900,
+              fontWeight: 700,
               padding: '6px 13px',
               letterSpacing: '0.1em',
             }}
@@ -43,7 +43,7 @@ export default function SciencePage() {
           </div>
           <h1 className="font-display mb-5" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 900, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}>
             Evidence{' '}
-            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>over marketing.</span>
+            <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>over marketing.</span>
           </h1>
           <p className="font-body mx-auto max-w-2xl" style={{ fontSize: '15.5px', lineHeight: 1.6, color: '#2A2A2A' }}>
             Every ingredient is linked to peer-reviewed human clinical trials.
@@ -55,7 +55,7 @@ export default function SciencePage() {
 
       {/* Studies Grid — black flood */}
       <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#0A0A0A', color: '#fff' }}>
-        <span className="absolute pointer-events-none" style={{ top: '8%', left: '8%', fontSize: 22, color: '#FFD700', opacity: 0.55 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ top: '8%', left: '8%', fontSize: 22, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
         <span className="absolute pointer-events-none" style={{ top: '40%', right: '8%', fontSize: 16, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
         <span className="absolute pointer-events-none" style={{ bottom: '15%', left: '40%', fontSize: 14, color: '#fff', opacity: 0.4 }} aria-hidden>✦</span>
 
@@ -70,7 +70,7 @@ export default function SciencePage() {
             <div
               className="brand-stamp shadow-deep tilt-l mb-5 inline-flex"
               style={{
-                backgroundColor: '#FFD700',
+                backgroundColor: '#fff',
                 color: '#0A0A0A',
                 padding: '6px 13px',
                 fontSize: '11px',
@@ -85,7 +85,7 @@ export default function SciencePage() {
               style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#fff' }}
             >
               Studies, not{' '}
-              <span style={{ color: '#FFD700', fontStyle: 'italic' }}>vibes.</span>
+              <span style={{ color: '#fff', fontStyle: 'italic' }}>vibes.</span>
             </h2>
           </motion.div>
 
@@ -109,9 +109,9 @@ export default function SciencePage() {
       </section>
 
       {/* Methodology — burgundy soft */}
-      <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FAF3F4' }}>
-        <span className="absolute pointer-events-none" style={{ top: '15%', right: '10%', fontSize: 20, color: '#6B1F2A', opacity: 0.5 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none" style={{ bottom: '20%', left: '6%', fontSize: 16, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+      <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#F7F5F0' }}>
+        <span className="absolute pointer-events-none" style={{ top: '15%', right: '10%', fontSize: 20, color: '#0A0A0A', opacity: 0.25 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ bottom: '20%', left: '6%', fontSize: 16, color: '#0A0A0A', opacity: 0.2 }} aria-hidden>✦</span>
 
         <div className="container-main relative">
           <motion.div
@@ -124,7 +124,7 @@ export default function SciencePage() {
             <div
               className="brand-stamp shadow-pop tilt-r mb-5 inline-flex"
               style={{
-                backgroundColor: '#6B1F2A',
+                backgroundColor: '#0A0A0A',
                 color: '#fff',
                 padding: '6px 13px',
                 fontSize: '11px',
@@ -139,7 +139,7 @@ export default function SciencePage() {
               style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
             >
               Five filters before{' '}
-              <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>anything</span>{' '}
+              <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>anything</span>{' '}
               makes it in.
             </h2>
           </motion.div>
@@ -158,7 +158,7 @@ export default function SciencePage() {
                   <div
                     className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-display shadow-pop"
                     style={{
-                      backgroundColor: '#6B1F2A',
+                      backgroundColor: '#0A0A0A',
                       color: '#fff',
                       fontSize: '17px',
                       fontWeight: 700,
@@ -169,7 +169,7 @@ export default function SciencePage() {
                   {i < site.methodologySteps.length - 1 && (
                     <div
                       className="w-0.5 flex-1 mt-2"
-                      style={{ backgroundColor: '#6B1F2A', opacity: 0.25 }}
+                      style={{ backgroundColor: '#0A0A0A', opacity: 0.20 }}
                     />
                   )}
                 </div>
@@ -217,7 +217,7 @@ export default function SciencePage() {
               style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
             >
               Five tests before{' '}
-              <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>your door.</span>
+              <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>your door.</span>
             </h2>
           </motion.div>
 
@@ -236,15 +236,15 @@ export default function SciencePage() {
                   variants={fadeUp}
                   className="p-6 rounded-2xl text-center shadow-card"
                   style={{
-                    backgroundColor: '#FAF3F4',
-                    border: '1px solid rgba(107, 31, 42, 0.15)',
+                    backgroundColor: '#F7F5F0',
+                    border: '1px solid rgba(10, 10, 10, 0.10)',
                     transform: tilts[i % 5],
                   }}
                 >
                   <div
                     className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-display shadow-pop"
                     style={{
-                      backgroundColor: '#6B1F2A',
+                      backgroundColor: '#0A0A0A',
                       color: '#fff',
                       fontSize: '17px',
                       fontWeight: 700,

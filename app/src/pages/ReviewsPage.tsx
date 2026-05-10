@@ -52,20 +52,20 @@ export default function ReviewsPage() {
       {/* Hero — color flooded with personality */}
       <section
         className="pt-8 md:pt-12 pb-8 md:pb-10 relative overflow-hidden"
-        style={{ backgroundColor: '#FAF3F4' }}
+        style={{ backgroundColor: '#F7F5F0' }}
       >
-        <span className="absolute pointer-events-none hidden md:block" style={{ top: '15%', left: '8%', fontSize: 22, color: '#6B1F2A', opacity: 0.55, zIndex: 1 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none hidden md:block" style={{ top: '50%', right: '10%', fontSize: 18, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 14, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '15%', left: '8%', fontSize: 22, color: '#0A0A0A', opacity: 0.25, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '50%', right: '10%', fontSize: 18, color: '#0A0A0A', opacity: 0.25, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 14, color: '#0A0A0A', opacity: 0.2, zIndex: 1 }} aria-hidden>✦</span>
 
         <div className="container-main text-center relative" style={{ zIndex: 2 }}>
           <div
             className="brand-stamp shadow-pop tilt-l mb-5 inline-flex"
             style={{
-              backgroundColor: '#6B1F2A',
+              backgroundColor: '#0A0A0A',
               color: '#fff',
               fontSize: '11px',
-              fontWeight: 900,
+              fontWeight: 700,
               padding: '6px 13px',
               letterSpacing: '0.1em',
             }}
@@ -74,7 +74,7 @@ export default function ReviewsPage() {
           </div>
           <h1 className="font-display mb-5" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.75rem)', fontWeight: 900, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}>
             What people{' '}
-            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>actually say.</span>
+            <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>actually say.</span>
           </h1>
           <div className="flex items-center justify-center gap-3 mb-3">
             <div className="flex items-center gap-0.5">
@@ -103,12 +103,12 @@ export default function ReviewsPage() {
           {/* Sidebar */}
           <div className="space-y-8 lg:sticky lg:top-24 lg:self-start">
             {/* Distribution */}
-            <div className="rounded-2xl p-6 shadow-card" style={{ backgroundColor: '#fff', border: '1px solid #6B1F2A22' }}>
+            <div className="rounded-2xl p-6 shadow-card" style={{ backgroundColor: '#fff', border: '1px solid #0A0A0A1A' }}>
               <div className="flex items-center gap-2 mb-4">
                 <span
                   className="brand-stamp shadow-pop"
                   style={{
-                    backgroundColor: '#6B1F2A',
+                    backgroundColor: '#0A0A0A',
                     color: '#fff',
                     fontSize: '10px',
                     fontWeight: 700,
@@ -135,11 +135,11 @@ export default function ReviewsPage() {
                       <span className="font-body w-8 text-right flex-shrink-0" style={{ fontSize: '14px', color: '#0A0A0A', fontWeight: 600 }}>
                         {d.stars}
                       </span>
-                      <Star size={14} fill="#6B1F2A" stroke="#6B1F2A" />
-                      <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#FAF3F4' }}>
+                      <Star size={14} fill="#0A0A0A" stroke="#0A0A0A" />
+                      <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#F7F5F0' }}>
                         <div
                           className="h-full rounded-full transition-all duration-500"
-                          style={{ width: `${pct}%`, backgroundColor: '#6B1F2A' }}
+                          style={{ width: `${pct}%`, backgroundColor: '#0A0A0A' }}
                         />
                       </div>
                       <span className="font-body w-8 flex-shrink-0" style={{ fontSize: '13px', color: '#6B6B6B' }}>
@@ -153,7 +153,7 @@ export default function ReviewsPage() {
                 <button
                   onClick={() => setFilter(0)}
                   className="font-body mt-4 flex items-center gap-1 focus-ring transition-opacity hover:opacity-70"
-                  style={{ fontSize: '13px', color: '#6B1F2A', fontWeight: 600 }}
+                  style={{ fontSize: '13px', color: '#0A0A0A', fontWeight: 600 }}
                 >
                   <X size={14} /> Clear filter
                 </button>
@@ -161,12 +161,12 @@ export default function ReviewsPage() {
             </div>
 
             {/* By Product */}
-            <div className="rounded-2xl p-6 shadow-card" style={{ backgroundColor: '#fff', border: '1px solid #1E2F6B22' }}>
+            <div className="rounded-2xl p-6 shadow-card" style={{ backgroundColor: '#fff', border: '1px solid #0A0A0A1A' }}>
               <div className="flex items-center gap-2 mb-4">
                 <span
                   className="brand-stamp shadow-pop"
                   style={{
-                    backgroundColor: '#1E2F6B',
+                    backgroundColor: '#0A0A0A',
                     color: '#fff',
                     fontSize: '10px',
                     fontWeight: 700,
@@ -188,7 +188,7 @@ export default function ReviewsPage() {
                       {data.name}
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <Star size={12} fill="#6B1F2A" stroke="#6B1F2A" />
+                      <Star size={12} fill="#0A0A0A" stroke="#0A0A0A" />
                       <span className="font-body" style={{ fontSize: '13px', color: '#6B6B6B' }}>
                         {data.avg.toFixed(1)} ({data.count})
                       </span>

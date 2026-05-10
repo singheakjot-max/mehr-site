@@ -39,10 +39,10 @@ function QualityStandards() {
   ];
 
   return (
-    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FAF3F4' }}>
-      <span className="absolute pointer-events-none" style={{ top: '12%', right: '8%', fontSize: 22, color: '#6B1F2A', opacity: 0.5 }} aria-hidden>✦</span>
-      <span className="absolute pointer-events-none" style={{ top: '40%', left: '6%', fontSize: 16, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
-      <span className="absolute pointer-events-none" style={{ bottom: '15%', left: '40%', fontSize: 14, color: '#6B1F2A', opacity: 0.4 }} aria-hidden>✦</span>
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#F7F5F0' }}>
+      <span className="absolute pointer-events-none" style={{ top: '12%', right: '8%', fontSize: 22, color: '#0A0A0A', opacity: 0.25 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ top: '40%', left: '6%', fontSize: 16, color: '#0A0A0A', opacity: 0.2 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none" style={{ bottom: '15%', left: '40%', fontSize: 14, color: '#0A0A0A', opacity: 0.2 }} aria-hidden>✦</span>
 
       <div className="container-main relative">
         <motion.div
@@ -55,7 +55,7 @@ function QualityStandards() {
           <div
             className="brand-stamp shadow-pop tilt-r mb-5 inline-flex"
             style={{
-              backgroundColor: '#6B1F2A',
+              backgroundColor: '#0A0A0A',
               color: '#fff',
               padding: '6px 13px',
               fontSize: '11px',
@@ -70,7 +70,7 @@ function QualityStandards() {
             style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
           >
             Built to{' '}
-            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>pharmaceutical</span>{' '}
+            <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>pharmaceutical</span>{' '}
             standards.
           </h2>
           <p className="font-body text-center max-w-lg mx-auto mt-5" style={{ fontSize: '15.5px', color: '#2A2A2A', lineHeight: 1.55 }}>
@@ -95,7 +95,7 @@ function QualityStandards() {
                 className="p-7 rounded-2xl flex gap-5 shadow-card relative"
                 style={{
                   backgroundColor: '#fff',
-                  border: '1px solid rgba(107, 31, 42, 0.15)',
+                  border: '1px solid rgba(10, 10, 10, 0.10)',
                   transform: tilts[i % 4],
                 }}
               >
@@ -104,7 +104,7 @@ function QualityStandards() {
                   style={{
                     top: '-12px',
                     left: '20px',
-                    backgroundColor: '#6B1F2A',
+                    backgroundColor: '#0A0A0A',
                     color: '#fff',
                     fontSize: '10px',
                     letterSpacing: '0.1em',
@@ -116,7 +116,7 @@ function QualityStandards() {
                 </span>
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 shadow-pop"
-                  style={{ backgroundColor: '#6B1F2A', color: '#fff' }}
+                  style={{ backgroundColor: '#0A0A0A', color: '#fff' }}
                 >
                   {s.icon}
                 </div>
@@ -143,20 +143,20 @@ export default function AboutPage() {
       {/* Hero — color flooded with personality */}
       <section
         className="pt-8 md:pt-12 pb-10 md:pb-14 relative overflow-hidden"
-        style={{ backgroundColor: '#FAF3F4' }}
+        style={{ backgroundColor: '#F7F5F0' }}
       >
-        <span className="absolute pointer-events-none hidden md:block" style={{ top: '12%', left: '8%', fontSize: 22, color: '#6B1F2A', opacity: 0.55, zIndex: 1 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none hidden md:block" style={{ top: '40%', right: '10%', fontSize: 18, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 14, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '12%', left: '8%', fontSize: 22, color: '#0A0A0A', opacity: 0.25, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '40%', right: '10%', fontSize: 18, color: '#0A0A0A', opacity: 0.25, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 14, color: '#0A0A0A', opacity: 0.2, zIndex: 1 }} aria-hidden>✦</span>
 
         <div className="container-main relative" style={{ zIndex: 2 }}>
           <div
             className="brand-stamp shadow-pop tilt-r mb-6 inline-flex"
             style={{
-              backgroundColor: '#6B1F2A',
+              backgroundColor: '#0A0A0A',
               color: '#fff',
               fontSize: '11px',
-              fontWeight: 900,
+              fontWeight: 700,
               padding: '6px 13px',
               letterSpacing: '0.1em',
             }}
@@ -167,10 +167,10 @@ export default function AboutPage() {
             <div>
               <h1 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.75rem)', fontWeight: 900, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}>
                 Built by{' '}
-                <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>scientists.</span>
+                <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>scientists.</span>
                 <br />
                 For people who{' '}
-                <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>read labels.</span>
+                <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>read labels.</span>
               </h1>
             </div>
             <div>
@@ -190,9 +190,9 @@ export default function AboutPage() {
       </section>
 
       {/* Founder — navy soft */}
-      <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#F2F4FA' }}>
-        <span className="absolute pointer-events-none" style={{ top: '8%', left: '8%', fontSize: 22, color: '#1E2F6B', opacity: 0.5 }} aria-hidden>✦</span>
-        <span className="absolute pointer-events-none" style={{ bottom: '15%', right: '10%', fontSize: 16, color: '#1E2F6B', opacity: 0.4 }} aria-hidden>✦</span>
+      <section className="section-padding relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
+        <span className="absolute pointer-events-none" style={{ top: '8%', left: '8%', fontSize: 22, color: '#0A0A0A', opacity: 0.25 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none" style={{ bottom: '15%', right: '10%', fontSize: 16, color: '#0A0A0A', opacity: 0.2 }} aria-hidden>✦</span>
 
         <div className="container-main relative">
           <motion.div
@@ -205,7 +205,7 @@ export default function AboutPage() {
             <div
               className="brand-stamp shadow-pop tilt-l mb-5 inline-flex"
               style={{
-                backgroundColor: '#1E2F6B',
+                backgroundColor: '#0A0A0A',
                 color: '#fff',
                 padding: '6px 13px',
                 fontSize: '11px',
@@ -220,7 +220,7 @@ export default function AboutPage() {
               style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}
             >
               The story behind{' '}
-              <span style={{ color: '#1E2F6B', fontStyle: 'italic' }}>the brand.</span>
+              <span style={{ color: '#0A0A0A', fontStyle: 'italic' }}>the brand.</span>
             </h2>
           </motion.div>
 
@@ -248,7 +248,7 @@ export default function AboutPage() {
                   style={{
                     top: '-12px',
                     right: '-10px',
-                    backgroundColor: '#1E2F6B',
+                    backgroundColor: '#0A0A0A',
                     color: '#fff',
                     fontSize: '10px',
                     letterSpacing: '0.1em',
@@ -264,7 +264,7 @@ export default function AboutPage() {
               <a
                 href={`mailto:${site.promises.contactEmail}`}
                 className="font-body flex items-center gap-2 mt-3 focus-ring transition-opacity hover:opacity-70"
-                style={{ fontSize: '13px', color: '#1E2F6B', fontWeight: 600 }}
+                style={{ fontSize: '13px', color: '#0A0A0A', fontWeight: 600 }}
               >
                 ✉ {site.promises.contactEmail}
               </a>
