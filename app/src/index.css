@@ -34,7 +34,8 @@
     --color-product-bpc-soft: #F2F4FA;
 
     /* ── Font Tokens ─────────────────────────────────────────── */
-    --font-display: 'Space Grotesk', 'Inter', sans-serif;
+    --font-display: 'Big Shoulders Display', 'Impact', 'Helvetica Neue', sans-serif;
+    --font-ui: 'Space Grotesk', 'Inter', sans-serif;
     --font-body: 'Inter', 'Helvetica Neue', sans-serif;
 
     /* ── Radius Tokens ───────────────────────────────────────── */
@@ -135,10 +136,76 @@
 @layer components {
   .font-display {
     font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+
+  .font-ui {
+    font-family: var(--font-ui);
   }
 
   .font-body {
     font-family: var(--font-body);
+  }
+
+  /* ── Brand Stamps — rotated circular badges (SpoiledChild move) ─── */
+  .brand-stamp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    line-height: 1;
+    transform: rotate(-8deg);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .brand-stamp:hover {
+    transform: rotate(-4deg) scale(1.08);
+  }
+
+  /* Spinning circular text stamp */
+  @keyframes stamp-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .brand-stamp-spin {
+    animation: stamp-spin 22s linear infinite;
+  }
+
+  /* ── Floating bottle animation ───────────────────────────── */
+  @keyframes float-bottle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-14px) rotate(0.5deg); }
+  }
+
+  .float-anim {
+    animation: float-bottle 7s ease-in-out infinite;
+  }
+
+  /* ── Squiggle hand-drawn underline ────────────────────────── */
+  .squiggle-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .squiggle-underline::after {
+    content: '';
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: -0.06em;
+    height: 0.18em;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M0 4 Q 25 0, 50 4 T 100 4 T 150 4 T 200 4' stroke='%236B1F2A' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .squiggle-underline-blue::after {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M0 4 Q 25 0, 50 4 T 100 4 T 150 4 T 200 4' stroke='%231E2F6B' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>");
   }
 
   .text-muted {
