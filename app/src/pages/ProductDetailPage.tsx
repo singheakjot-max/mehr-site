@@ -553,7 +553,7 @@ function Hero({
   };
 
   return (
-    <section className="pt-20 md:pt-24 pb-10 md:pb-14" style={{ backgroundColor: accent.soft }}>
+    <section className="pt-20 md:pt-24 pb-10 md:pb-14" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="container-main">
         <nav className="flex items-center gap-2 text-[12px] mb-4 md:mb-5" style={{ color: 'var(--color-text-muted)' }}>
           <Link to="/" className="hover:underline">Home</Link>
@@ -843,22 +843,34 @@ function HeroMarquee({ product, accent }: { product: Product; accent: { hex: str
    ───────────────────────────────────────── */
 
 function HeroSocialProof({ product, accent }: { product: Product; accent: { hex: string; soft: string; deep: string } }) {
-  // Pull first 5 reviews + a stand-in image gradient for each (until real UGC photos are added).
+  // Map product to real UGC customer photos.
+  const UGC_PHOTOS: Record<string, string[]> = {
+    nattokinase: [
+      '/images/mehr_nattokinase_images/hf_20260506_221151_c4e8747a-6143-482d-b568-01f6a4dfc358.webp',
+      '/images/mehr_nattokinase_images/hf_20260506_221418_6d72c525-9b27-42cb-afff-f438647406ad.webp',
+      '/images/mehr_nattokinase_images/hf_20260506_221805_f9fb87fe-334f-45a5-8f4a-6a5e358e3c4c.webp',
+      '/images/mehr_nattokinase_images/hf_20260506_222107_94b6458f-8cee-413c-b278-118653ca0099.webp',
+      '/images/mehr_nattokinase_images/hf_20260507_073354_8ec8667a-55e9-429b-9c02-2e686af7c8f4.webp',
+    ],
+    'bpc-157': [
+      '/images/mehr_bpc157_images/image_06.webp',
+      '/images/mehr_bpc157_images/image_28.webp',
+      '/images/mehr_bpc157_images/image_22.webp',
+      '/images/mehr_bpc157_images/image_24.webp',
+      '/images/mehr_bpc157_images/image_19.webp',
+    ],
+  };
+
+  const photos = UGC_PHOTOS[product.slug] || [];
+
+  // Use real reviews + map to real photos.
   const ugc = product.reviews.slice(0, 5).map((r, i) => ({
     name: r.author || `Customer ${i + 1}`,
     quote: r.title || (r.body ? r.body.slice(0, 60) + '…' : ''),
     rating: r.rating || 5,
+    photo: photos[i] || photos[0],
   }));
   const avg = product.reviews.length ? product.reviews.reduce((s, r) => s + r.rating, 0) / product.reviews.length : 4.83;
-
-  // Distinct soft tones so the placeholder cards don't look identical.
-  const swatches = [
-    { from: '#F0E6E8', to: '#E0CDD0' },
-    { from: '#E8DFE0', to: '#D5C4C7' },
-    { from: '#F5EAEC', to: '#E2D0D3' },
-    { from: '#EBE3E5', to: '#D6C8CB' },
-    { from: '#F2E8EA', to: '#DCCBCE' },
-  ];
 
   return (
     <section className="py-12 md:py-16" style={{ backgroundColor: 'var(--color-bg)' }}>
@@ -894,73 +906,46 @@ function HeroSocialProof({ product, accent }: { product: Product; accent: { hex:
           </div>
         </div>
 
-        {/* UGC card row — 5 across desktop, horizontal scroll on mobile */}
+        {/* UGC card row — real customer photos */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-          {ugc.map((r, i) => {
-            const sw = swatches[i % swatches.length];
-            return (
-              <div key={i} className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}>
-                {/* Placeholder gradient card with bottle silhouette pattern — sized large like SpoiledChild's UGC row */}
-                <div
-                  className="w-full relative overflow-hidden"
-                  style={{
-                    aspectRatio: '4/5',
-                    background: `linear-gradient(160deg, ${sw.from} 0%, ${sw.to} 100%)`,
-                  }}
+          {ugc.map((r, i) => (
+            <div key={i} className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}>
+              <div
+                className="w-full relative overflow-hidden"
+                style={{ aspectRatio: '4/5' }}
+              >
+                <img
+                  src={r.photo}
+                  alt={`${r.name} — verified customer`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {/* Verified pill overlay */}
+                <span
+                  className="absolute top-3 right-3 font-body text-[10px] font-semibold uppercase tracking-[0.1em] px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.95)', color: '#00B67A', backdropFilter: 'blur(4px)' }}
                 >
-                  {/* Bottle silhouette suggestion */}
-                  <div
-                    className="absolute"
-                    style={{
-                      bottom: '-10%',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      width: '50%',
-                      height: '70%',
-                      borderRadius: '16% 16% 30% 30% / 12% 12% 8% 8%',
-                      background: `linear-gradient(180deg, ${accent.deep} 0%, ${accent.hex} 100%)`,
-                      opacity: 0.5,
-                    }}
-                  />
-                  {/* Customer initial circle for "human" feel */}
-                  <div
-                    className="absolute top-3 left-3 flex items-center justify-center font-body font-semibold rounded-full"
-                    style={{
-                      width: 32, height: 32,
-                      backgroundColor: 'rgba(255,255,255,0.85)',
-                      color: accent.hex,
-                      fontSize: '13px',
-                    }}
-                  >
-                    {r.name.charAt(0)}
-                  </div>
-                  {/* Verified pill */}
-                  <span
-                    className="absolute top-3 right-3 font-body text-[10px] font-semibold uppercase tracking-[0.1em] px-2 py-0.5 rounded-full"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.9)', color: '#00B67A' }}
-                  >
-                    ✓ Verified
-                  </span>
-                </div>
-                <div className="p-3 md:p-4">
-                  <div className="flex items-center gap-0.5 mb-1.5">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} size={11} fill={s <= r.rating ? accent.hex : 'transparent'} stroke={accent.hex} strokeWidth={1.5} />
-                    ))}
-                  </div>
-                  <p
-                    className="font-body text-[13px] font-semibold mb-1 line-clamp-2"
-                    style={{ color: 'var(--color-text-strong)', lineHeight: 1.35 }}
-                  >
-                    {r.quote || 'Real change, real fast.'}
-                  </p>
-                  <p className="font-body text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
-                    — {r.name}
-                  </p>
-                </div>
+                  ✓ Verified
+                </span>
               </div>
-            );
-          })}
+              <div className="p-3 md:p-4">
+                <div className="flex items-center gap-0.5 mb-1.5">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <Star key={s} size={11} fill={s <= r.rating ? accent.hex : 'transparent'} stroke={accent.hex} strokeWidth={1.5} />
+                  ))}
+                </div>
+                <p
+                  className="font-body text-[13px] font-semibold mb-1 line-clamp-2"
+                  style={{ color: 'var(--color-text-strong)', lineHeight: 1.35 }}
+                >
+                  {r.quote || 'Real change, real fast.'}
+                </p>
+                <p className="font-body text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
+                  — {r.name}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -1217,11 +1202,27 @@ function Mechanism({ product, accent }: { product: Product; accent: { hex: strin
   const data = MECHANISM[product.slug];
   if (!data) return null;
 
+  const mechanismBg = product.slug === 'nattokinase'
+    ? '/images/mehr_nattokinase_images/hf_20260509_201927_79c3d4c7-e7a3-455c-b90d-75dffe288e0d.webp'
+    : '/images/mehr_bpc157_images/hf_20260509_202131_1203afcf-4a7a-40ab-9fc3-3ddc8bbd7b77.webp';
+
   return (
     <section
       className="section-padding relative overflow-hidden"
       style={{ backgroundColor: accent.deep, color: '#fff' }}
     >
+      {/* Atmospheric mechanism bg image — sits behind everything at low opacity */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${mechanismBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.18,
+          mixBlendMode: 'screen',
+        }}
+        aria-hidden
+      />
       {/* Radial backlight */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -1352,23 +1353,51 @@ function Transformation({ product, accent }: { product: Product; accent: { hex: 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {data.stages.map((stage, i) => {
             const style = stateStyle(stage.state);
+            // Stage illustrations: BPC has gut barrier, Natto has artery progression
+            const NATTO_STAGE_IMAGES = [
+              '/images/mehr_nattokinase_images/01-artery-inflammation-tunnel.webp',
+              '/images/mehr_nattokinase_images/03-cholesterol-blockage.webp',
+              '/images/mehr_nattokinase_images/04-clear-blood-flow.webp',
+            ];
+            const stageImage = product.slug === 'bpc-157' && i < 3
+              ? `/images/mehr_bpc157_images/gut_barrier_stage_${i + 1}.webp`
+              : product.slug === 'nattokinase' && i < 3
+              ? NATTO_STAGE_IMAGES[i]
+              : null;
             return (
               <Reveal key={stage.n} delay={i * 0.1}>
                 <div
                   className="rounded-2xl overflow-hidden h-full flex flex-col"
                   style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
                 >
-                  {/* Stage banner */}
-                  <div
-                    className="px-7 py-4 flex items-center gap-3"
-                    style={{ borderBottom: `3px solid ${style.ring}` }}
-                  >
-                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: style.ring }} />
-                    <span className="font-body text-[11px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'var(--color-text)' }}>
-                      {stage.n}
-                    </span>
-                  </div>
+                  {/* Stage illustration (BPC only) or banner */}
+                  {stageImage ? (
+                    <div className="w-full overflow-hidden" style={{ aspectRatio: '4/3', backgroundColor: '#F8F4EC' }}>
+                      <img
+                        src={stageImage}
+                        alt={stage.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="px-7 py-4 flex items-center gap-3"
+                      style={{ borderBottom: `3px solid ${style.ring}` }}
+                    >
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: style.ring }} />
+                      <span className="font-body text-[11px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'var(--color-text)' }}>
+                        {stage.n}
+                      </span>
+                    </div>
+                  )}
                   <div className="p-7 md:p-8 flex-1 flex flex-col">
+                    <div className="flex items-center gap-3 mb-5">
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: style.ring }} />
+                      <span className="font-body text-[11px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'var(--color-text-muted)' }}>
+                        {stage.n}
+                      </span>
+                    </div>
                     <h3
                       className="font-display mb-5"
                       style={{ fontSize: '24px', fontWeight: 600, color: stage.state === 'healed' ? accent.hex : 'var(--color-text-strong)', letterSpacing: '-0.01em' }}
@@ -1611,19 +1640,24 @@ function Ingredients({ product, accent }: { product: Product; accent: { hex: str
 function Receipts({ product, accent }: { product: Product; accent: { hex: string; soft: string; deep: string } }) {
   const [coaOpen, setCoaOpen] = useState(false);
 
-  const items: Array<{ title: string; body: string; cta?: { label: string; onClick: () => void } }> = [
+  // Universal process imagery (same files in both product folders).
+  const baseFolder = product.slug === 'nattokinase' ? 'mehr_nattokinase_images' : 'mehr_bpc157_images';
+  const items: Array<{ title: string; body: string; image: string; cta?: { label: string; onClick: () => void } }> = [
     {
       title: 'Made in USA',
       body: 'Manufactured in a cGMP-certified, FDA-registered facility in Utah. Inspected and audited annually.',
+      image: `/images/${baseFolder}/hf_20260509_224610_e476b3fe-9bf5-4199-9c7b-bdc2cfc49758.webp`,
     },
     {
       title: '3rd-party tested',
       body: "Every batch independently tested for identity, potency, and contaminants. We publish the actual COA — not a marketing summary.",
+      image: `/images/${baseFolder}/hf_20260509_223555_25d89c20-5077-4405-95b7-eef4b34bb859.webp`,
       cta: { label: 'View Certificate of Analysis', onClick: () => setCoaOpen(true) },
     },
     {
       title: 'Heavy metals tested',
       body: 'Lead < 0.5 ppm (limit: 10). Cadmium < 0.1 ppm (limit: 4.1). Mercury < 0.1 ppm (limit: 2). All passing, every batch.',
+      image: `/images/${baseFolder}/hf_20260509_223133_fc94a788-a32c-4934-b15b-1aad571c732d.webp`,
     },
   ];
 
@@ -1642,24 +1676,34 @@ function Receipts({ product, accent }: { product: Product; accent: { hex: string
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {items.map((item, idx) => (
             <Reveal key={item.title} delay={idx * 0.08}>
-              <div className="p-7 rounded-xl h-full" style={{ backgroundColor: 'var(--color-bg-soft)', border: '1px solid var(--color-border)' }}>
-                <div className="h-1 w-10 mb-5" style={{ backgroundColor: accent.hex }} />
-                <h3 className="font-display mb-3" style={{ fontSize: '19px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
-                  {item.title}
-                </h3>
-                <p className="font-body text-[14px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.65 }}>
-                  {item.body}
-                </p>
-                {item.cta && (
-                  <button
-                    onClick={item.cta.onClick}
-                    className="inline-flex items-center gap-1.5 font-body text-[13px] font-medium mt-4 transition-opacity hover:opacity-70"
-                    style={{ color: accent.hex }}
-                  >
-                    {item.cta.label}
-                    <ArrowRight size={13} strokeWidth={1.75} />
-                  </button>
-                )}
+              <div className="rounded-xl h-full overflow-hidden" style={{ backgroundColor: 'var(--color-bg-soft)', border: '1px solid var(--color-border)' }}>
+                <div className="w-full overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-7">
+                  <div className="h-1 w-10 mb-5" style={{ backgroundColor: accent.hex }} />
+                  <h3 className="font-display mb-3" style={{ fontSize: '19px', fontWeight: 600, color: 'var(--color-text-strong)', letterSpacing: '-0.01em' }}>
+                    {item.title}
+                  </h3>
+                  <p className="font-body text-[14px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.65 }}>
+                    {item.body}
+                  </p>
+                  {item.cta && (
+                    <button
+                      onClick={item.cta.onClick}
+                      className="inline-flex items-center gap-1.5 font-body text-[13px] font-medium mt-4 transition-opacity hover:opacity-70"
+                      style={{ color: accent.hex }}
+                    >
+                      {item.cta.label}
+                      <ArrowRight size={13} strokeWidth={1.75} />
+                    </button>
+                  )}
+                </div>
               </div>
             </Reveal>
           ))}
