@@ -35,12 +35,6 @@
 
     /* Header height — used by Layout main padding to prevent overlap */
     --header-height: 64px;
-  }
-
-  @media (min-width: 768px) {
-    :root {
-      --header-height: 72px;
-    }
 
     /* ── Font Tokens ─────────────────────────────────────────── */
     --font-display: 'Bricolage Grotesque', 'Inter', 'Helvetica Neue', sans-serif;
@@ -96,6 +90,12 @@
     --input: 40 11% 90%;
     --ring: 0 0% 4%;
     --radius: 8px;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --header-height: 72px;
+    }
   }
 
   body {
