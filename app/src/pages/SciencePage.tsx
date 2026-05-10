@@ -16,18 +16,39 @@ const staggerContainer = {
 
 export default function SciencePage() {
   return (
-    <div className="pt-28">
-      {/* Hero */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-        <div className="container-narrow text-center">
-          <SectionLabel label="Science" />
-          <h1 className="font-display mb-6" style={{ color: 'var(--color-text)' }}>
-            Evidence over marketing.
+    <div className="pt-20">
+      {/* Hero — Obvi-style color flood */}
+      <section
+        className="pt-8 md:pt-12 pb-10 md:pb-14 relative overflow-hidden"
+        style={{ backgroundColor: '#FAF3F4' }}
+      >
+        {/* Sparkles */}
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '15%', left: '10%', fontSize: 22, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '60%', right: '12%', fontSize: 18, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 16, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
+
+        <div className="container-narrow text-center relative" style={{ zIndex: 2 }}>
+          <div
+            className="brand-stamp shadow-pop tilt-r mb-5 inline-flex"
+            style={{
+              backgroundColor: '#6B1F2A',
+              color: '#fff',
+              fontSize: '11px',
+              fontWeight: 900,
+              padding: '6px 13px',
+              letterSpacing: '0.1em',
+            }}
+          >
+            ✦ THE SCIENCE ✦
+          </div>
+          <h1 className="font-display mb-5" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 900, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}>
+            Evidence{' '}
+            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>over marketing.</span>
           </h1>
-          <p className="font-body" style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-text-muted)' }}>
-            Every ingredient in every product is linked to peer-reviewed human clinical trials.
+          <p className="font-body mx-auto max-w-2xl" style={{ fontSize: '15.5px', lineHeight: 1.6, color: '#2A2A2A' }}>
+            Every ingredient is linked to peer-reviewed human clinical trials.
             We prioritize randomized controlled trials, systematic reviews, and meta-analyses.
-            No rodent studies. No retracted papers. No industry-funded studies with conflicts of interest.
+            No rodent studies. No retracted papers. No industry-funded conflicts.
           </p>
         </div>
       </section>

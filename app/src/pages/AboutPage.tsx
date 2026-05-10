@@ -87,27 +87,49 @@ function QualityStandards() {
 
 export default function AboutPage() {
   return (
-    <div className="pt-28">
-      {/* Hero */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--color-bg)' }}>
-        <div className="container-main">
-          <SectionLabel label="About" />
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+    <div className="pt-20">
+      {/* Hero — color flooded with personality */}
+      <section
+        className="pt-8 md:pt-12 pb-10 md:pb-14 relative overflow-hidden"
+        style={{ backgroundColor: '#FAF3F4' }}
+      >
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '12%', left: '8%', fontSize: 22, color: '#6B1F2A', opacity: 0.55, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '40%', right: '10%', fontSize: 18, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 14, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
+
+        <div className="container-main relative" style={{ zIndex: 2 }}>
+          <div
+            className="brand-stamp shadow-pop tilt-r mb-6 inline-flex"
+            style={{
+              backgroundColor: '#6B1F2A',
+              color: '#fff',
+              fontSize: '11px',
+              fontWeight: 900,
+              padding: '6px 13px',
+              letterSpacing: '0.1em',
+            }}
+          >
+            ✦ ABOUT MEHR ✦
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             <div>
-              <h1 className="font-display mb-6" style={{ color: 'var(--color-text)' }}>
-                Built by scientists.<br />
-                For people who read labels.
+              <h1 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.75rem)', fontWeight: 900, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}>
+                Built by{' '}
+                <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>scientists.</span>
+                <br />
+                For people who{' '}
+                <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>read labels.</span>
               </h1>
             </div>
             <div>
-              <p className="font-body mb-4" style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
+              <p className="font-body mb-4" style={{ fontSize: '15.5px', lineHeight: 1.6, color: '#2A2A2A' }}>
                 MEHR was started by a founder who refused to accept that peptides
                 — among the most-studied compounds in modern human biology — should remain locked
                 behind biohacker forums and sketchy international suppliers.
               </p>
-              <p className="font-body" style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
-                Today, MEHR is on a mission to put pharmaceutical-grade peptides next to the multivitamin —
-                clinically dosed, third-party tested, manufactured in the USA, and shipped within 24 hours.
+              <p className="font-body" style={{ fontSize: '15.5px', lineHeight: 1.6, color: '#2A2A2A' }}>
+                Today, MEHR puts pharmaceutical-grade peptides next to the multivitamin —
+                clinically dosed, third-party tested, made in the USA, shipped in 24 hours.
                 Every formula starts with the literature. Every batch is verified. Every label prints the truth.
               </p>
             </div>

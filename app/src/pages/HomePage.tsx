@@ -16,7 +16,7 @@ import SectionLabel from '@/components/SectionLabel';
 import ProductCard from '@/components/ProductCard';
 import StudyCard from '@/components/StudyCard';
 import ReviewCard from '@/components/ReviewCard';
-import TrustStrip from '@/components/TrustStrip';
+// import TrustStrip from '@/components/TrustStrip';
 import Footer from '@/components/global/Footer';
 
 const fadeUp = {
@@ -210,35 +210,85 @@ function DailyStackSection() {
 
 function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="container-main w-full">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section
+      className="relative pt-6 md:pt-10 pb-12 md:pb-16 overflow-hidden"
+      style={{ backgroundColor: '#FAF3F4' }}
+    >
+      {/* Color blob background */}
+      <div
+        className="absolute pointer-events-none hidden md:block"
+        style={{
+          top: '120px',
+          left: '-100px',
+          width: '320px',
+          height: '320px',
+          borderRadius: '50%',
+          backgroundColor: '#6B1F2A',
+          opacity: 0.06,
+          zIndex: 0,
+        }}
+        aria-hidden
+      />
+      <div
+        className="absolute pointer-events-none hidden md:block"
+        style={{
+          bottom: '-60px',
+          right: '-80px',
+          width: '300px',
+          height: '300px',
+          borderRadius: '50%',
+          backgroundColor: '#1E2F6B',
+          opacity: 0.05,
+          zIndex: 0,
+        }}
+        aria-hidden
+      />
+
+      {/* Sparkles */}
+      <span className="absolute pointer-events-none hidden md:block" style={{ top: '14%', right: '10%', fontSize: 22, color: '#6B1F2A', opacity: 0.55, zIndex: 1 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '6%', fontSize: 16, color: '#1E2F6B', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
+      <span className="absolute pointer-events-none hidden md:block" style={{ top: '40%', left: '42%', fontSize: 14, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
+
+      <div className="container-main w-full relative" style={{ zIndex: 2 }}>
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
-              style={{ backgroundColor: 'var(--color-border-subtle)' }}
-            >
-              <Sparkles size={14} style={{ color: 'var(--color-text-muted)' }} />
-              <span className="font-body uppercase tracking-widest" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
-                The world&rsquo;s first daily peptides
+            {/* Yellow tagline sticker BESIDE not over */}
+            <div className="flex items-center gap-2.5 mb-4">
+              <span
+                className="brand-stamp shadow-pop"
+                style={{
+                  backgroundColor: '#FFD700',
+                  color: '#6B1F2A',
+                  fontSize: '11px',
+                  fontWeight: 900,
+                  padding: '5px 11px',
+                  letterSpacing: '0.08em',
+                  transform: 'rotate(-4deg)',
+                }}
+              >
+                ✦ FINALLY
+              </span>
+              <span className="font-body italic" style={{ fontSize: '13px', color: '#6B6B6B', fontWeight: 500 }}>
+                daily peptides
               </span>
             </div>
 
-            <h1 className="font-display mb-6" style={{ fontSize: 'clamp(2.75rem, 6vw, 4.5rem)', lineHeight: 1.05, letterSpacing: '-0.02em', color: 'var(--color-text)' }}>
-              Peptides.<br /><span style={{ fontWeight: 700 }}>Now daily.</span>
+            <h1 className="font-display mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.75rem)', lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A', fontWeight: 900 }}>
+              Peptides.<br />
+              <span style={{ color: '#6B1F2A', fontStyle: 'italic', fontWeight: 800 }}>Now daily.</span>
             </h1>
 
-            <p className="font-body mb-8 max-w-md" style={{ fontSize: '17px', lineHeight: 1.6, color: 'var(--color-text-muted)' }}>
-              Foundational health, evolved. Pharmaceutical-grade peptides made as easy as a daily vitamin.
-              Made in the USA. Shipped in 24 hours.
+            <p className="font-body mb-6 max-w-md" style={{ fontSize: '16px', lineHeight: 1.55, color: '#2A2A2A' }}>
+              Foundational health, evolved. Pharmaceutical-grade peptides as easy as a daily vitamin.
+              Made in the USA. Shipped in 24h.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Link to="/shop" className="btn-primary">
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <Link to="/shop" className="btn-primary shadow-deep">
                 Shop the daily essentials
                 <ArrowRight size={16} />
               </Link>
@@ -247,7 +297,25 @@ function HeroSection() {
               </Link>
             </div>
 
-            <TrustStrip size="sm" />
+            {/* Single horizontal trust row */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <span key={i} className="inline-flex items-center justify-center w-4 h-4" style={{ backgroundColor: '#00B67A' }}>
+                      <Star size={9} fill="#FFFFFF" stroke="#FFFFFF" strokeWidth={0} />
+                    </span>
+                  ))}
+                </div>
+                <span className="font-body font-bold" style={{ fontSize: '13px', color: '#0A0A0A' }}>4.8</span>
+                <span className="font-body" style={{ fontSize: '12.5px', color: '#6B6B6B' }}>14,847+ reviews</span>
+              </div>
+              <span style={{ width: 1, height: 14, backgroundColor: '#E8E8E5' }} aria-hidden className="hidden sm:inline-block" />
+              <span className="inline-flex items-center gap-1.5 font-body font-bold uppercase" style={{ fontSize: '10.5px', letterSpacing: '0.08em', color: '#6B1F2A' }}>
+                <ShieldCheck size={12} strokeWidth={2.5} />
+                Cardiologist approved
+              </span>
+            </div>
           </motion.div>
 
           <motion.div
@@ -256,25 +324,59 @@ function HeroSection() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="relative"
           >
-            <Link to="/products/bpc-157" className="block group">
+            <Link to="/products/bpc-157" className="block group relative">
+              {/* Color blob behind bottle */}
               <div
-                className="rounded-2xl overflow-hidden"
+                className="absolute pointer-events-none"
                 style={{
-                  aspectRatio: '4/5',
-                  backgroundColor: '#FFFFFF',
+                  top: '8%',
+                  left: '8%',
+                  width: '84%',
+                  height: '84%',
+                  borderRadius: '50%',
+                  backgroundColor: '#1E2F6B',
+                  opacity: 0.10,
+                  zIndex: 1,
                 }}
+                aria-hidden
+              />
+              <div
+                className="rounded-2xl overflow-visible relative shadow-card"
+                style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', border: '1px solid #1E2F6B1F', zIndex: 2 }}
               >
                 <img
                   src="/images/bpc/bpc_front_bottle.webp"
-                  alt="MEHR BPC-157 — premium frosted blue glass bottle with silver foil label, hero product photography"
-                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                  alt="MEHR BPC-157"
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 float-anim"
+                  style={{ position: 'relative', zIndex: 2 }}
                 />
+
+                {/* Brand stamp poking out */}
+                <div
+                  className="brand-stamp shadow-deep tilt-l absolute pointer-events-none"
+                  style={{
+                    top: '-16px',
+                    right: '-10px',
+                    width: 88,
+                    height: 88,
+                    backgroundColor: '#1E2F6B',
+                    color: '#fff',
+                    flexDirection: 'column',
+                    padding: '8px',
+                    lineHeight: 1.05,
+                    zIndex: 8,
+                  }}
+                >
+                  <span style={{ fontSize: '14px', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1 }}>NEW</span>
+                  <span style={{ fontSize: '8px', letterSpacing: '0.1em', marginTop: 3, opacity: 0.95 }}>DAILY</span>
+                  <span style={{ fontSize: '7px', letterSpacing: '0.12em', marginTop: 1, opacity: 0.85 }}>PEPTIDE</span>
+                </div>
               </div>
-              <div className="mt-4 text-center">
-                <p className="font-display" style={{ fontSize: '16px', color: 'var(--color-text)' }}>
+              <div className="mt-3 text-center">
+                <p className="font-display" style={{ fontSize: '14px', fontWeight: 800, color: '#0A0A0A', textTransform: 'uppercase', letterSpacing: '-0.01em' }}>
                   MEHR BPC-157
                 </p>
-                <p className="font-body" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>
+                <p className="font-body" style={{ fontSize: '12.5px', color: '#6B6B6B' }}>
                   From $74.00/mo
                 </p>
               </div>

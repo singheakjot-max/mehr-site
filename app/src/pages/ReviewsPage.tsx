@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { site } from '@/content/site';
 import { Star, X } from 'lucide-react';
 import ReviewCard from '@/components/ReviewCard';
-import SectionLabel from '@/components/SectionLabel';
+// import SectionLabel from '@/components/SectionLabel';
 import Footer from '@/components/global/Footer';
 
 const fadeUp = {
@@ -48,25 +48,56 @@ export default function ReviewsPage() {
   }, []);
 
   return (
-    <div className="pt-28 pb-20">
-      <div className="container-main">
-        <SectionLabel label="Reviews" />
+    <div className="pt-20">
+      {/* Hero — color flooded with personality */}
+      <section
+        className="pt-8 md:pt-12 pb-8 md:pb-10 relative overflow-hidden"
+        style={{ backgroundColor: '#FAF3F4' }}
+      >
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '15%', left: '8%', fontSize: 22, color: '#6B1F2A', opacity: 0.55, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ top: '50%', right: '10%', fontSize: 18, color: '#6B1F2A', opacity: 0.5, zIndex: 1 }} aria-hidden>✦</span>
+        <span className="absolute pointer-events-none hidden md:block" style={{ bottom: '20%', left: '40%', fontSize: 14, color: '#6B1F2A', opacity: 0.4, zIndex: 1 }} aria-hidden>✦</span>
 
-        {/* Summary */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Star size={28} fill="var(--color-star)" stroke="var(--color-star)" />
-            <span className="font-display" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--color-text)' }}>
-              {avgRating.toFixed(1)}
+        <div className="container-main text-center relative" style={{ zIndex: 2 }}>
+          <div
+            className="brand-stamp shadow-pop tilt-l mb-5 inline-flex"
+            style={{
+              backgroundColor: '#6B1F2A',
+              color: '#fff',
+              fontSize: '11px',
+              fontWeight: 900,
+              padding: '6px 13px',
+              letterSpacing: '0.1em',
+            }}
+          >
+            ✦ REAL HUMANS · REAL RESULTS ✦
+          </div>
+          <h1 className="font-display mb-5" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.75rem)', fontWeight: 900, lineHeight: 0.95, letterSpacing: '-0.04em', color: '#0A0A0A' }}>
+            What people{' '}
+            <span style={{ color: '#6B1F2A', fontStyle: 'italic' }}>actually say.</span>
+          </h1>
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="flex items-center gap-0.5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <span key={i} className="inline-flex items-center justify-center w-5 h-5" style={{ backgroundColor: '#00B67A' }}>
+                  <Star size={12} fill="#FFFFFF" stroke="#FFFFFF" strokeWidth={0} />
+                </span>
+              ))}
+            </div>
+            <span className="font-display" style={{ fontSize: '24px', fontWeight: 900, color: '#0A0A0A', letterSpacing: '-0.02em' }}>
+              {avgRating.toFixed(1)}/5
+            </span>
+            <span className="font-body" style={{ fontSize: '14px', color: '#6B6B6B' }}>
+              · {totalReviews} verified
             </span>
           </div>
-          <p className="font-body mb-2" style={{ fontSize: '16px', color: 'var(--color-text-muted)' }}>
-            Based on {totalReviews} verified reviews
-          </p>
-          <p className="font-body" style={{ fontSize: '14px', color: 'var(--color-text-subtle)' }}>
-            Every review is from a verified purchaser
+          <p className="font-body" style={{ fontSize: '13px', color: '#6B6B6B' }}>
+            Every review is from a verified purchaser. We don&apos;t pay for reviews. Ever.
           </p>
         </div>
+      </section>
+
+      <div className="container-main pt-10 pb-20">
 
         <div className="grid lg:grid-cols-3 gap-10">
           {/* Sidebar */}
